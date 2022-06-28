@@ -21,3 +21,23 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+*.class
+.settings/
+.checkstyle
+target/
+tck/bin/
+.project
+build/
+.classpath
+.factorypath
+test-output
+/*.log
+.idea
+*.iml
+*.iwl
+*.ipr
+.vscode/
+# Ignore a release.conf for perform_release/* script usage
+release.conf
+**.DS_Store
+*.cache/
