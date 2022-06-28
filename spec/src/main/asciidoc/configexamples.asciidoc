@@ -1,0 +1,540 @@
+//
+// Copyright (c) 2016-2017 Contributors to the Eclipse Foundation
+//
+// See the NOTICE file(s) distributed with this work for additional
+// information regarding copyright ownership.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// You may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// Contributors:
+// Mark Struberg
+// Emily Jiang
+
+[[configexamples]]
+== Config Usage Examples
+
+
+An application can obtain its configuration programmatically via the `ConfigProvider`.
+In CDI enabled beans it can also get injected via `@Inject Config`.
+An application can then access its configured values via this `Config` instance.
+
+=== Simple Programmatic Example
+
+[source, java]
+----
+public class ConfigUsageSample {
+
+    public void useTheConfig() {
+        // get access to the Config instance
+        Config config = ConfigProvider.getConfig();
+
+        String serverUrl = config.getValue("acme.myprj.some.url", String.class);
+        callToServer(serverUrl);
+
+        // or
+        ConfigValue configServerUrl = config.getConfigValue("acme.myprj.some.url");
+        callToServer(configServerUrl.getValue());
+    }
+}
+----
+
+If you need to access a different server then you can e.g. change the configuration via a Java `-D` system property:
+
+[source, text]
+----
+$> java -Dacme.myprj.some.url=http://other.server/other/endpoint -jar some.jar
+----
+
+Note that this is only one example how to possibly configure your application.
+Another example is to register <<custom_configsources, Custom ConfigSources>> to e.g. pick up values from a database table, etc.
+
+If a config value is a comma(`,`) separated string, this value can be automatically converted to a multiple element array with `\` as the escape character.
+When specifying the property `myPets=dog,cat,dog\\,cat` in a config source, the following code snippet can be used to obtain an array.
+----
+ String[] myPets = config.getValue("myPets", String[].class);
+ //myPets = {"dog", "cat", "dog,cat"}
+----
+
+
+=== Simple Dependency Injection Example
+
+MicroProfile Config also provides ways to inject configured values into your beans using the `@Inject` and the `@ConfigProperty` qualifier.
+The `@Inject` annotation declares an injection point. When using this on a passivation capable bean, refer to https://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#passivating_scope[CDI Specification^]
+for more details on how to make the injection point to be passivation capable.
+[source, java]
+----
+@ApplicationScoped
+public class InjectedConfigUsageSample {
+
+    @Inject
+    private Config config;
+
+    //The property myprj.some.url must exist with a non-empty value, otherwise a
+    //DeploymentException will be thrown.
+    @Inject
+    @ConfigProperty(name="myprj.some.url")
+    private String someUrl;
+
+    // You can also inject a configuration using the ConfigValue metadata object. The
+    // configured value will not lead to a DeploymentException if the value is missing.
+    // A default value can also be specified like any other configuration.
+    @Inject
+    @ConfigProperty(name="myprj.another.url")
+    private ConfigValue anotherUrl;
+
+    //The following code injects an Optional value of myprj.some.port property.
+    //Contrary to natively injecting the configured value, this will not lead to a
+    //DeploymentException if the value is missing.
+    @Inject
+    @ConfigProperty(name="myprj.some.port")
+    private Optional<Integer> somePort;
+
+    // You can also use the specialized Optional classes like OptionalInt,
+    // OptionalDouble, or OptionalLong to perform the injection. The configured value
+    // will not lead to a DeploymentException if the value is missing.
+    @Inject
+    @ConfigProperty(name="myprj.some.port")
+    private OptionalInt somePort;
+
+    //Injects a Provider for the value of myprj.some.dynamic.timeout property to
+    //resolve the property dynamically. Each invocation to Provider#get() will
+    //resolve the latest value from underlying Config.
+    //The existence of configured values will get checked during start-up.
+    //Instances of Provider<T> are guaranteed to be Serializable.
+    @Inject
+    @ConfigProperty(name="myprj.some.dynamic.timeout", defaultValue="100")
+    private jakarta.inject.Provider<Long> timeout;
+
+    //Injects a Supplier for the value of myprj.some.supplier.timeout property to
+    //resolve the property dynamically. Each invocation to Supplier#get() will
+    //resolve the latest value from underlying Config.
+    @Inject
+    @ConfigProperty(name="myprj.some.supplier.timeout", defaultValue="100")
+    private java.util.function.Supplier<Long> timeout;
+
+    //The following code injects an Array, List or Set for the `myPets` property,
+    //where its value is a comma separated value ( myPets=dog,cat,dog\\,cat)
+    @Inject @ConfigProperty(name="myPets") private String[] myArrayPets;
+    @Inject @ConfigProperty(name="myPets") private List<String> myListPets;
+    @Inject @ConfigProperty(name="myPets") private Set<String> mySetPets;
+}
+----
+
+=== Config value conversion rules
+
+The table below defines the conversion rules, including some special edge case scenarios.
+
+[cols="1,1,1,2a",options="header"]
+|===
+|Input String
+|Output type
+|Method
+|behaviour
+
+| "foo,bar"
+| String
+| getValue
+| "foo,bar"
+
+| "foo,bar"
+| String[]
+| getValue
+| {"foo", "bar"}
+
+| "foo,bar"
+| String
+| getOptionalValue
+| Optional.of("foo,bar")
+
+| "foo,bar"
+| String[]
+| getOptionalValue
+| Optional.of({"foo","bar"})
+
+| "foo,bar"
+| String
+| getOptionalValues
+| Optional.of("foo", "bar")
+
+| "foo,"
+| String
+| getValue
+| "foo,"
+
+| "foo,"
+| String[]
+| getValue
+| {"foo"}
+
+| "foo,"
+| String
+| getOptionalValue
+| Optional.of("foo,")
+
+| "foo,"
+| String[]
+| getOptionalValue
+| Optional.of({"foo"})
+
+| "foo,"
+| String
+| getOptionalValues
+| Optional.of("foo")
+
+| ",bar"
+| String
+| getValue
+| ",bar"
+
+| ",bar"
+| String[]
+| getValue
+| {"bar"}
+
+| ",bar"
+| String
+| getOptionalValue
+| Optional.of(",bar")
+
+| ",bar"
+| String[]
+| getOptionalValue
+| Optional.of({"bar"})
+
+| ",bar"
+| String
+| getOptionalValues
+| Optional.of("bar")
+
+| " " (space)
+| String
+| getValue
+| " "
+
+| " "(space)
+| String[]
+| getValue
+| {" "}
+
+| " "(space)
+| String
+| getOptionalValue
+| Optional.of(" ")
+
+| " "(space)
+| String[]
+| getOptionalValue
+| Optional.of({" "})
+
+| " "(space)
+| String
+| getOptionalValues
+| Optional.of(" ")
+
+| missing
+| String
+| getValue
+| throws `NoSuchElementException`
+
+| missing
+| String[]
+| getValue
+| throws `NoSuchElementException`
+
+| missing
+| String
+| getOptionalValue
+| Optional.empty()
+
+| missing
+| String[]
+| getOptionalValue
+| Optional.empty()
+
+| missing
+| String
+| getOptionalValues
+| Optional.empty()
+
+| ""
+| String
+| getValue
+| throws `NoSuchElementException`
+
+| ""
+| String[]
+| getValue
+| throws `NoSuchElementException`
+
+
+| ""
+| String
+| getOptionalValue
+| Optional.empty()
+
+| ""
+| String[]
+| getOptionalValue
+| Optional.empty()
+
+| ""
+| String
+| getOptionalValues
+| Optional.empty()
+
+| ","
+| String
+| getValue
+| ","
+
+| ","
+| String[]
+| getValue
+| throws `NoSuchElementException`
+
+| ","
+| String
+| getOptionalValue
+| Optional.of(",")
+
+| ","
+| String[]
+| getOptionalValue
+| Optional.empty()
+
+| ","
+| String
+| getOptionalValues
+| Optional.empty()
+
+| "\,"
+| String
+| getValue
+| "\,"
+
+| "\,"
+| String[]
+| getValue
+| {","}
+
+
+| "\,"
+| String
+| getOptionalValue
+| Optional.of("\,")
+
+| "\,"
+| String[]
+| getOptionalValue
+| Optional.of({","})
+
+| "\,"
+| String
+| getOptionalValues
+| Optional.of(List.of(","))
+
+| ",,"
+| String
+| getValue
+| ",,"
+
+| ",,"
+| String[]
+| getValue
+| throws `NoSuchElementException`
+
+| ",,"
+| String
+| getOptionalValue
+| Optional.of(",,")
+
+| ",,"
+| String[]
+| getOptionalValue
+| Optional.empty()
+
+| ",,"
+| String
+| getOptionalValues
+| Optional.empty()
+
+
+|===
+
+=== Remove config properties
+Sometimes, there is a need to remove a property. This can be done by setting an empty value or a value causing the corresponding converter returning `null` in a config source. 
+When injecting a property that has been deleted, `DeploymentException` will be thrown unless the return type is `Optional`. 
+
+=== Aggregate related properties into a CDI bean
+
+When injecting a number of related configuration properties, it can be tedious to repeat the statement of `ConfigProperty` in scatter places.
+Since they are related, it makes more sense to aggregate them into a single property class.
+
+MicroProfile Config provides a way to look up a number of configuration properties starting with the same prefix using the `@ConfigProperties` annotation, e.g. `ConfigProperties(prefix="myPrefix")`.
+When annotating a class with `@ConfigProperties` or `@ConfigProperties(prefix="myPrefix")`, any of its fields, regardless of the visibility, maps to a configuration property via the following mapping rules.
+
+* If the `prefix` is present, the field `x` maps to the configuration property `<prefix>.x`.
+* If the `prefix` is absent, the field `x` maps to the property name `x`.
+
+If the field name `x` needs to be different from the config property name `y`, use `@ConfigProperty(name="y")` to perform the transformation.
+If the prefix is present, the field `x` maps to the configuration property `<prefix>.y`, otherwise `y`.
+
+Considering the following config sources:
+
+[source, text]
+----
+config_ordinal = 120
+server.host = localhost
+server.port=9080
+server.endpoint=query
+server.old.location=London
+----
+
+[source, text]
+----
+config_ordinal = 150
+client.host = myHost
+client.port=9081
+client.endpoint=shelf
+client.old.location=Dublin
+host = anotherHost
+port=9082
+endpoint=book
+old.location=Berlin
+----
+
+In order to retrieve the above properties in a single property class, you can use the `@ConfigProperties` annotation with a prefix.
+
+[source, java]
+----
+
+@ConfigProperties(prefix="server")
+@Dependent
+public class Details {
+    public String host; // the value of the configuration property server.host
+    public int port;   // the value of the configuration property server.port
+    private String endpoint; //the value of the configuration property server.endpoint
+    public @ConfigProperty(name="old.location")
+    String location; //the value of the configuration property server.old.location
+    public String getEndpoint() {
+        return endpoint;
+    }
+}
+----
+
+You can then use one of the following to retrieve the properties.
+
+==== Programmatic lookup of the bean annotated with `@ConfigProperties`
+
+Since the class with `@ConfigProperties` is a CDI bean, you can use the programmatic lookup provided by CDI, e.g.
+
+[source, java]
+----
+Details details = CDI.current().select(Details.class, ConfigProperties.Literal.NO_PREFIX).get();
+----
+
+==== Inject the bean annotated with `@ConfigProperties`
+
+[source, java]
+----
+@Inject
+@ConfigProperties
+Details serverDetails;
+----
+
+The `serverDetails` will contain the following info, as the prefix is `server`:
+
+[source, properties]
+----
+serverDetails.host -> server.host -> localhost
+serverDetails.port -> server.port -> 9080
+serverDetails.endpoint -> server.endpoint -> query
+serverDetails.getLocation() -> server.old.location -> London
+----
+
+Specify the prefix attribute on the annotation `@ConfigProperties` when injecting the bean.
+
+In this case, the prefix associated with `@ConfigProperties` on this injection point overrides the prefix specified on the bean class.
+
+[source, java]
+----
+@Inject
+@ConfigProperties(prefix="client")
+Details clientDetails;
+----
+
+The prefix `client` overrides the prefix `server` on the `ServerDetails` bean. Therefore, this will retrieve the following properties.
+
+[source, properties]
+----
+clientDetails.host -> client.host -> myHost
+clientDetails.port -> client.port -> 9081
+clientDetails.endpoint -> client.endpoint -> shelf
+clientDetails.getLocation() -> client.old.location -> Dublin
+----
+
+If `@ConfigProperties` has no associated prefix at the injection point, it defaults to the prefix set in the `Details`
+class, `server`.
+
+[source, java]
+----
+@Inject
+@ConfigProperties
+Details details;
+----
+
+Therefore, this will retrieve the following properties.
+
+[source, properties]
+----
+details.host -> server.host -> localhost
+details.port -> server.port -> 9080
+details.endpoint -> server.endpoint -> query
+details.getLocation() -> server.old.location -> London
+----
+
+If `@ConfigProperties` specifies an empty prefix at the injection point:
+
+[source, java]
+----
+@Inject
+@ConfigProperties(prefix = "")
+Details details;
+----
+
+It overrides the prefix set on the bean class `server` with an empty string `""`
+
+[source, properties]
+----
+details.host -> host -> anotherHost
+details.port -> port -> 9082
+details.endpoint -> endpoint -> book
+details.getLocation() -> old.location -> Berlin
+----
+
+==== ConfigProperties bean class validation
+
+The configuration properties class should contain a zero-arg constructor. Otherwise, the behaviour is unspecified.
+When performing property lookup, a `DeploymentException` will be thrown for the following scenarios:
+
+1. The property is missing and neither default value nor the property return type is optional.
+Use one of the following to fix the problem.
+** Define a value for the property
+** Supply a default value when defining the field.
+** Use `@ConfigProperty` to provide a default value.
+** Use `Optional<T>` or `OptionalInt`, `OptionalDouble`, `OptionalLong` as the type.
+
+2. The property value cannot be converted to the specified type
+
+If any of the property cannot be found and there is neither default value nor property is not optional, `java.util.NoSuchElementException` will be thrown.
+In order to avoid this, you can supply a default value when defining the field. Alternatively, you can use `@ConfigProperty` to provide a default value.
+You can also use `Optional<T>` or OptionalInt, OptionalDouble, OptionalLong as the type. If any property values cannot be converted to the specified type, `java.lang.IllegalArgumentException` will be thrown.
