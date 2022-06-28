@@ -83,4 +83,4 @@
  * @author <a href="mailto:struberg@apache.org">Mark Struberg</a>
  */
 @org.osgi.annotation.versioning.Version("3.0.0")
-package org.eclipse.microprofile.config;
+package jakarta.data;
