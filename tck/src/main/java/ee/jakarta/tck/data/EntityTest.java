@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package jakarta.data.tck;
+package ee.jakarta.tck.data;
 
 /**
  * Test sample
