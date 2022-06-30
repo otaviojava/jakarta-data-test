@@ -100,7 +100,6 @@ public interface Template {
      * @param <K>         the id type
      * @return the entity instance otherwise {@link Optional#empty()}
      * @throws NullPointerException when either the entityClass or id are null
-     * @throws IdNotFoundException  when the entityClass does not have the Id annotation
      */
     <T, K> Optional<T> find(Class<T> entityClass, K id);
 
@@ -112,7 +111,6 @@ public interface Template {
      * @param <T>         the entity class type
      * @param <K>         the id type
      * @throws NullPointerException when either the entityClass or id are null
-     * @throws IdNotFoundException  when the entityClass does not have the Id annotation
      */
     <T, K> void delete(Class<T> entityClass, K id);
 }
