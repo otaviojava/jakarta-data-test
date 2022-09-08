@@ -44,7 +44,7 @@ import java.util.Optional;
  * @param <T>  the bean type
  * @param <K> the K type
  */
-public interface Repository<T, K> {
+public interface DataRepository<T, K> {
 
     /**
      * Saves entity
