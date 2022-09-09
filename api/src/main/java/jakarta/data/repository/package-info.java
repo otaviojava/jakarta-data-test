@@ -13,4 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * In DDD, a repository is an object that participates in the domain but abstracts away storage
+ * and infrastructure details. Most systems have persistent storage,
+ * like a database, for its full functioning. Applying repositories happens
+ * by integrating and synchronizing with existing aggregate objects in the system.
+ */
 package jakarta.data.repository;
