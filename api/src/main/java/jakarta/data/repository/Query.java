@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jakarta.data;
+package jakarta.data.repository;
 
 
 import java.lang.annotation.ElementType;

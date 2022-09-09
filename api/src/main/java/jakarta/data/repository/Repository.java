@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jakarta.data;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
+package jakarta.data.repository;
 
 /**
- * Defines a param to a {@link Query} query.
+ * Indicates that an annotated class is a "Repository", originally defined by
+ * Domain-Driven Design (Evans, 2003) as "a mechanism for encapsulating storage,
+ * retrieval, and search behavior which emulates a collection of objects".
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
-public @interface Param {
-
-    String value();
+public @interface Repository {
 }
