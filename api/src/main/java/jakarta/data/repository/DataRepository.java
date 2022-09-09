@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2022 Otavio Santana, Nathan Rauh and others
+ * Copyright (c) Otavio Santana and others
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,10 +15,5 @@
  */
 package jakarta.data.repository;
 
-/**
- * Indicates that an annotated class is a "Repository", originally defined by
- * Domain-Driven Design (Evans, 2003) as "a mechanism for encapsulating storage,
- * retrieval, and search behavior which emulates a collection of objects".
- */
-public @interface Repository {
+public interface DataRepository<T, K> {
 }
