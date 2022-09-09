@@ -40,10 +40,10 @@ import java.util.Optional;
  * <p><b>OrderBy____Desc</b></p>
  * <p><b>OrderBy_____ASC</b></p>
  *
- * @param <T>  the bean type
+ * @param <T> the bean type
  * @param <K> the K type
  */
-public interface CRUDRepository<T, K> {
+public interface CRUDRepository<T, K> extends DataRepository<T, K> {
 
     /**
      * Saves entity
