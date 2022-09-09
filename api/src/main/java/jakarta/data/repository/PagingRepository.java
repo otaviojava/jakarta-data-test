@@ -23,4 +23,7 @@ package jakarta.data.repository;
  * @see CrudRepository
  */
 public interface PagingRepository<T, K> extends DataRepository<T, K> {
+
+    //https://github.com/spring-projects/spring-data-commons/blob/main/src/main/java/org/springframework/data/repository/PagingAndSortingRepository.java
+
 }
