@@ -16,8 +16,8 @@
 package jakarta.data.repository;
 
 /**
- Interface for generic CRUD operations on a repository for a specific type. This repository follows reactive paradigms.
-
+ * Interface for generic CRUD operations on a repository for a specific type. This repository follows reactive paradigms.
+ *
  * @param <T> the domain type the repository manages
  * @param <K> the type of the id of the entity the repository manages
  */
