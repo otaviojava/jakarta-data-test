@@ -23,7 +23,7 @@ package jakarta.data.repository;
  * @param <K> the type of the id of the entity the repository manages
  * @see CrudRepository
  */
-public interface PagingRepository<T, K> extends DataRepository<T, K> {
+public interface PageableRepository<T, K> extends DataRepository<T, K> {
 
 
 
