@@ -14,5 +14,11 @@
  */
 package jakarta.data.repository;
 
+/**
+ * Parent repository interface for all repositories.
+ * Central repository marker interface. Captures the domain type to manage and the domain type's id type.
+ * @param <T> the domain type the repository manages
+ * @param <K> the type of the id of the entity the repository manages
+ */
 public interface DataRepository<T, K> {
 }
