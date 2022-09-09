@@ -19,7 +19,8 @@ package jakarta.data.repository;
  * Repository fragment to provide methods to retrieve entities using the pagination and sorting abstraction. In many
  * cases this will be combined with {@link CrudRepository} or similar or with manually added methods to provide CRUD
  * functionality.
- *
+ * @param <T> the domain type the repository manages
+ * @param <K> the type of the id of the entity the repository manages
  * @see CrudRepository
  */
 public interface PagingRepository<T, K> extends DataRepository<T, K> {

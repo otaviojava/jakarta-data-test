@@ -21,4 +21,6 @@ package jakarta.data.repository;
  * @param <K> the type of the id of the entity the repository manages
  */
 public interface DataRepository<T, K> {
+
+
 }
