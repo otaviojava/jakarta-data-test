@@ -43,7 +43,7 @@ import java.util.Optional;
  * @param <T> the bean type
  * @param <K> the K type
  */
-public interface CRUDRepository<T, K> extends DataRepository<T, K> {
+public interface CrudRepository<T, K> extends DataRepository<T, K> {
 
     /**
      * Saves entity
