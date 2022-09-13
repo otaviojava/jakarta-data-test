@@ -13,5 +13,5 @@ Portions of this software were originally based on the following:
 
 SPDXVersion: SPDX-2.1
 PackageName: Jakarta Data
-PackageHomePage: http://www.eclipse.org/microprofile
+PackageHomePage: https://projects.eclipse.org/projects/ee4j.data
 PackageLicenseDeclared: Apache-2.0
