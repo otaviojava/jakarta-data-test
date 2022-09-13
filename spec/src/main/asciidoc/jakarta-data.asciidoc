@@ -1,0 +1,39 @@
+= Configuration for MicroProfile
+:authors: Mark Struberg, Emily Jiang, John D. Ament, Roberto Cortez, Jan Bernitt
+:email: struberg@apache.org, emijiang@uk.ibm.com, john.d.ament@gmail.com, radcortez@yahoo.com, jaanbernitt@gmail.com
+:version-label!:
+:sectanchors:
+:doctype: book
+:license: Eclipse Foundation Specification License v1.0
+:source-highlighter: coderay
+:toc: left
+:toclevels: 4
+:sectnumlevels: 4
+ifdef::backend-pdf[]
+:pagenums:
+endif::[]
+
+// == License
+:sectnums!:
+include::license-efsl.adoc[]
+
+:sectnums:
+
+== MicroProfile Config
+
+
+include::architecture.asciidoc[]
+
+include::configexamples.asciidoc[]
+
+include::configprovider.asciidoc[]
+
+include::configsources.asciidoc[]
+
+include::converters.asciidoc[]
+
+include::configprofile.asciidoc[]
+
+include::property-expressions.asciidoc[]
+
+include::release_notes.asciidoc[]
