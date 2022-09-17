@@ -12,6 +12,10 @@
 ifdef::backend-pdf[]
 :pagenums:
 endif::[]
+:doctype: book
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../../main/java]
+
 
 // == License
 :sectnums!:

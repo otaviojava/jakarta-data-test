@@ -85,7 +85,7 @@
                         <revnumber>${project.version}</revnumber>
                         <revremark>${revremark}</revremark>
                         <revdate>${revisiondate}</revdate>
-                        <doctitle>Jakarta NoSQL</doctitle>
+                        <doctitle>Jakarta Data</doctitle>
                     </attributes>
                 </configuration>
             </plugin>
