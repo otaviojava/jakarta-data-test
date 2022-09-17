@@ -1,4 +1,4 @@
-= Jakarta Config Specification
+= Jakarta Data Specification
 
 == Introduction
 
