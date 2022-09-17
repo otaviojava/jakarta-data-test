@@ -21,7 +21,7 @@ include::license-efsl.adoc[]
 
 == Jakarta Data
 
-include::jakarta-data-2.asciidoc[]
+include::jakarta-data-introduction.asciidoc[]
 include::repository.asciidoc[]
 include::architecture.asciidoc[]
 
