@@ -15,4 +15,4 @@ It also becomes very famous in https://www.amazon.com/dp/0321125215/[Domain-Driv
 
 == Repositories
 
-image::02-repositories.png[alt=Repositories types, width=70%, height=70%]
+image::02-repositories.png[alt=Repositories types]
