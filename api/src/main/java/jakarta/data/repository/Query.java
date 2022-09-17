@@ -24,7 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * To run Query in Repository interface
+ * Defines the query string such as SQL, JPA-QL, Cypher etc. that should be executed.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
