@@ -13,3 +13,6 @@ The Repository pattern is a well-documented way of working with a data source. I
 
 It also becomes very famous in https://www.amazon.com/dp/0321125215/[Domain-Driven Design: Tackling Complexity in the Heart of Software] by Eric Evans.
 
+== Repositories
+
+image::02-repositories.png[alt=Repositories types, width=70%, height=70%]
