@@ -1,4 +1,5 @@
-== Repository
+
+= Repository
 
 The repository pattern is a mechanism that allows you to encapsulate storage, retrieval, and search behavior by emulating a collection of objects. In this way, the design further hides the relationship of the persistence mechanism.
 

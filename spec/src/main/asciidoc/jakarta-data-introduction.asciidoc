@@ -1,4 +1,4 @@
-= Jakarta Data Specification
+= Introduction
 
 Jakarta Data provides an API that makes data access easy. A
 Java developer can split the persistence from the model with several features,
