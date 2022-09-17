@@ -19,105 +19,122 @@ package jakarta.data.repository;
 
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * <p>Interface to generic CRUD operations on a repository for a specific type.</p>
- * <p>The interface that extends need to be recovered by CDI, so either the bean-discovery-mode="all" be set in bean.xml
- * or define a scope in the interface.</p>
- * <p><a href="https://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#default_bean_discovery">https://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#default_bean_discovery</a></p>
- * The query builder mechanism built into Jakarta NoSQL Mapping repository infrastructure is useful for building constraining queries
- * over entities of the repository. The mechanism strips the prefixes is defined by:
- * <p>findBy: to select any information T</p>
- * <p>deleteBy: To delete any information T</p>
- * Jakarta NoSQL Mapping has some keywords on method:
- * <p><b>And</b></p>
- * <p><b>Or</b></p>
- * <p><b>Between</b></p>
- * <p><b>LessThan</b></p>
- * <p><b>GreaterThan</b></p>
- * <p><b>LessThanEqual</b></p>
- * <p><b>GreaterThanEqual</b></p>
- * <p><b>Like</b></p>
- * <p><b>In</b></p>
- * <p><b>OrderBy</b></p>
- * <p><b>OrderBy____Desc</b></p>
- * <p><b>OrderBy_____ASC</b></p>
  *
  * @param <T> the bean type
- * @param <K> the K type
+ * @param <K> the key or the ID type
  */
 public interface CrudRepository<T, K> extends DataRepository<T, K> {
 
+
     /**
-     * Saves entity
+     * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
+     * entity instance completely.
      *
-     * @param <S>    the entity type
-     * @param entity entity to be saved
-     * @return the entity saved
-     * @throws NullPointerException when document is null
+     * @param entity the entity to be saved
+     * @return the saved entity; will never be {@literal null}.
+     * @throws NullPointerException when the entity is null
      */
     <S extends T> S save(S entity);
 
     /**
-     * Saves entity
-     * each NoSQL vendor might replace to a more appropriate one.
+     * Saves all given entities.
      *
-     * @param <S>      the entity type
-     * @param entities entities to be saved
-     * @return the entity saved
-     * @throws NullPointerException when entities is null
+     * @param entities an iterable of entities
+     * @return the saved entities;
+     * @throws NullPointerException if either the iterable is null or any element is null
      */
-    <S extends T> Iterable<S> save(Iterable<S> entities);
+    <S extends T> Iterable<S> saveAll(Iterable<S> entities);
 
     /**
-     * Deletes the entity with the given id.
+     * Retrieves an entity by its id.
      *
-     * @param id the id
-     * @throws NullPointerException when id is null
-     */
-    void deleteById(K id);
-
-    /**
-     * Deletes the entity with the given ids.
-     *
-     * @param ids the ids
-     * @throws NullPointerException when either ids or same element is null
-     */
-    void deleteById(Iterable<K> ids);
-
-    /**
-     * Finds an entity given the id
-     *
-     * @param id the id
-     * @return the entity given the K
-     * @throws NullPointerException when id is null
+     * @param id must not be {@literal null}.
+     * @return the entity with the given id or {@literal Optional#empty()} if none found.
+     * @throws NullPointerException when the id is null
      */
     Optional<T> findById(K id);
 
     /**
-     * Finds the entities given ids
-     *
-     * @param ids the ids
-     * @return the entities from ids
-     * @throws NullPointerException when the id is null
-     */
-    Iterable<T> findById(Iterable<K> ids);
-
-    /**
      * Returns whether an entity with the given id exists.
      *
-     * @param id the id
-     * @return if the entity does exist or not
-     * @throws NullPointerException when id is null
+     * @param id must not be {@literal null}.
+     * @return {@literal true} if an entity with the given id exists, {@literal false} otherwise.
+     * @throws NullPointerException when the ID is null
      */
     boolean existsById(K id);
 
     /**
+     * Returns all instances of the type.
+     *
+     * @return all entities
+     */
+    Stream<T> findAll();
+
+    /**
+     * Returns all instances of the type {@code T} with the given IDs.
+     * <p>
+     * If some or all ids are not found, no entities are returned for these IDs.
+     * <p>
+     * Note that the order of elements in the result is not guaranteed.
+     *
+     * @param ids must not be {@literal null} nor contain any {@literal null} values.
+     * @return guaranteed to be not {@literal null}. The size can be equal or less than the number of given
+     * {@literal ids}.
+     * @throws NullPointerException in case the given {@link Iterable ids} or one of its items is {@literal null}.
+     */
+    Stream<T> findAllById(Iterable<K> ids);
+
+    /**
      * Returns the number of entities available.
      *
-     * @return the number of entities
+     * @return the number of entities.
      */
     long count();
+
+    /**
+     * Deletes the entity with the given id.
+     * <p>
+     * If the entity is not found in the persistence store it is silently ignored.
+     *
+     * @param id must not be {@literal null}.
+     * @throws NullPointerException when the id is null
+     */
+    void deleteById(K id);
+
+    /**
+     * Deletes a given entity.
+     *
+     * @param entity must not be {@literal null}.
+     * @throws NullPointerException when the entity is null
+     */
+    void delete(T entity);
+
+    /**
+     * Deletes all instances of the type {@code T} with the given IDs.
+     * <p>
+     * Entities that aren't found in the persistence store are silently ignored.
+     *
+     * @param ids must not be {@literal null}. Must not contain {@literal null} elements.
+     * @throws NullPointerException when either the iterable is null or contains null elements
+     */
+    void deleteAllById(Iterable<? extends K> ids);
+
+    /**
+     * Deletes the given entities.
+     *
+     * @param entities must not be {@literal null}. Must not contain {@literal null} elements.
+     * @throws NullPointerException when either the iterable is null or contains null elements
+     */
+    void deleteAll(Iterable<? extends T> entities);
+
+    /**
+     * Deletes all entities managed by the repository.
+     */
+    void deleteAll();
 
 
 }
