@@ -1,2 +1,5 @@
-[[repository]]
 == Repository
+
+The repository pattern is a mechanism that allows you to encapsulate storage, retrieval, and search behavior by emulating a collection of objects. In this way, the design further hides the relationship of the persistence mechanism.
+
+This pattern focuses on the closest proximity of entities and hides where the data comes from, making it possible for a Repository to use a DAO pattern.
