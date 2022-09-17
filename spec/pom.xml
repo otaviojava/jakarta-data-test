@@ -61,7 +61,7 @@
                         </goals>
                         <configuration>
                             <backend>pdf</backend>
-                            <outputFile>${gen-doc-dir}/jakarta-nosql-${project.version}.pdf</outputFile>
+                            <outputFile>${gen-doc-dir}/jakarta-data-${project.version}.pdf</outputFile>
                         </configuration>
                     </execution>
                     <execution>
@@ -72,12 +72,12 @@
                         </goals>
                         <configuration>
                             <backend>html5</backend>
-                            <outputFile>${gen-doc-dir}/jakarta-nosql-${project.version}.html</outputFile>
+                            <outputFile>${gen-doc-dir}/jakarta-data-${project.version}.html</outputFile>
                         </configuration>
                     </execution>
                 </executions>
                 <configuration>
-                    <sourceDocumentName>jakarta_nosql_spec.adoc</sourceDocumentName>
+                    <sourceDocumentName>jakarta-data.asciidoc</sourceDocumentName>
                     <sourceHighlighter>coderay</sourceHighlighter>
                     <embedAssets>true</embedAssets>
                     <attributes>
