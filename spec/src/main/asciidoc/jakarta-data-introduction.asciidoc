@@ -22,11 +22,7 @@ Jakarta Data works in a tight integration between Java and a persistence layer, 
 
 As with any software component, those decision brings trade-offs and bring those points as a non-goal:
 
-Have specific features of JPA, NoSQL, and so on. Those APIs have their specifications.
-Replace the Jakarta JPA or NoSQL specification. Indeed, the API will work as a component to be an agnostic API.
+* Have specific features of JPA, NoSQL, and so on. Those APIs have their specifications.
+* Replace the Jakarta JPA or NoSQL specification. Indeed, the API will work as a component to be an agnostic API.
 
 === Conventions
-
-=== Terminology
-
-=== Acknowledgements
