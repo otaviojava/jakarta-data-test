@@ -18,9 +18,12 @@ Jakarta Data works in a tight integration between Java and a persistence layer, 
 * Be a persistence agnostic API; therefore, through abstractions, it will connect different types of databases and storage sources.
 * Be a pluggable and extensible API; even when the API won't support a particular behavior of a storage engine, it might provide an extensible API to make it possible.
 
-
-
 === Non-Goals
+
+As with any software component, those decision brings trade-offs and bring those points as a non-goal:
+
+Have specific features of JPA, NoSQL, and so on. Those APIs have their specifications.
+Replace the Jakarta JPA or NoSQL specification. Indeed, the API will work as a component to be an agnostic API.
 
 === Conventions
 
