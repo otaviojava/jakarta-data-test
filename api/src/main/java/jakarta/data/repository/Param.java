@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 
 
 /**
- * Defines a param to a {@link Query} query.
+ * Annotation to bind method parameters to a {@link  Query} via a named parameter.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
