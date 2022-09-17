@@ -3,6 +3,8 @@
 
 The repository pattern is a mechanism that allows you to encapsulate storage, retrieval, and search behavior by emulating a collection of objects. In this way, the design further hides the relationship of the persistence mechanism.
 
+image::01-repository.png[alt=repository structure, width=70%, height=70%]
+
 This pattern focuses on the closest proximity of entities and hides where the data comes from, making it possible for a Repository to use a DAO pattern.
 
 The Repository pattern is a well-documented way of working with a data source. In the book https://www.amazon.com/dp/0321127420/[Patterns of Enterprise Application] Architecture, Martin Fowler describes a repository as follows:
