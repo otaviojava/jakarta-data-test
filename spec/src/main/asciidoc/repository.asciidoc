@@ -123,3 +123,19 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 
 }
 ----
+
+
+Although this should work for most cases, to resolve this ambiguity, you can use ```_``` inside your method name to manually define traversal points.
+
+[source,java]
+----
+@Repository
+public interface OrderRepository extends CrudRepository<Order, Long> {
+
+  Stream<Order> findByAddress_ZipCode(ZipCode zipCode);
+
+}
+----
+
+WARNING: Define as a priority following standard Java naming conventions, camel case,  using underscore as the last instance resource.
+
