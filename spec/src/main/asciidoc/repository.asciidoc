@@ -173,31 +173,31 @@ Jakarta Data often support the following list of predicate keywords. It might no
 |findByNameOrYear
 
 |Between
-|The ```between``` operator.
+|Find results where the property is between the given values
 |findByDateBetween
 
 |LessThan
-|Lesser than condition
+|Find results where the property is less than the given value
 |findByAgeLessThan
 
 |GreaterThan
-|Greater than condition
+|Find results where the property is greater than the given value
 |findByAgeGreaterThan
 
 |LessThanEqual
-|Lesser than equals condition
+|Find results where the property is less than or equal to the given value
 |findByAgeLessThanEqual
 
 |GreaterThanEqual
-|Greater than equals condition
+|Find results where the property is greater than or equal to the given value
 |findByAgeGreaterThanEqual
 
 |Like
-|The like operation
+|Finds string values "like" the given expression
 |findByTitleLike
 
 |In
-|In
+|Find results where the property is that are contained within the given list
 |findByIdIn
 
 |OrderBy
