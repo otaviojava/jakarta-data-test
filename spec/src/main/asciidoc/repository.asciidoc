@@ -57,6 +57,8 @@ On Jakarta Data, besides finding by an ID, it provides custom queries on two mod
 * Through Query annotation: It will create a method annotated with the @Query with the query.
 * Using method by query convention: Using some pattern vocabulary will provide a query.
 
+WARNING: Due to the variety of data sources, those resources might not work; it varies on the Jakarta Data implementation and the database engine, which can provide queries more than a Key or ID or not such as a Key-value database.
+
 ==== Using the Query annotation
 
 The Query's annotation will define a search expression as a String. The specification won't support the query syntax, which might vary to any vendor and data source, such as SQL, JPA-QL, Cypher, CQL, etc.
@@ -78,4 +80,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 Optional<Product> findByName(@Param("name") String name);
 }
 ----
+
+
 ==== Query by Method
