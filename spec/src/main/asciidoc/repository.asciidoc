@@ -40,7 +40,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 ----
 
 
-There is no nomenclature restriction to make mandatory the ```Repository``` suffix. Such as, you might represent the repository of the ``Car's entity as a ```Garage``` instead of ```CarRepository```.
+There is no nomenclature restriction to make mandatory the ```Repository``` suffix. Such as, you might represent the repository of the Car's entity as a ```Garage``` instead of ```CarRepository```.
 
 [source,java]
 ----
