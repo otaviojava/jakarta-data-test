@@ -104,6 +104,6 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 }
 ----
 
-Parsing query method names has two parts: subject and subject value.
+The parsing query method name has two parts: the subject and the property.
 
 The first part defines the query's subject or condition, and the second the condition value; both forms the predicate.
