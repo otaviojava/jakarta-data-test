@@ -198,7 +198,7 @@ Jakarta Data often support the following list of predicate keywords. It might no
 
 |In
 |In
-|
+|findByIdIn
 
 |OrderBy
 |Specify a static sorting order followed by the property path and direction on ascending.
