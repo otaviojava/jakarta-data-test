@@ -59,4 +59,23 @@ On Jakarta Data, besides finding by an ID, it provides custom queries on two mod
 
 ==== Using the Query annotation
 
+The Query's annotation will define a search expression as a String. The specification won't support the query syntax, which might vary to any vendor and data source, such as SQL, JPA-QL, Cypher, CQL, etc.
+
+[source,java]
+----
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Long> {
+ @Query("THE QUERY EXPRESSION")
+ Optional<Product> findByName(String name);
+}
+----
+
+Jakarta Data also brings ```Param``` annotation to define a binder annotation, where such as the query expression, each vendor will express the syntax freely such as ```?```, ```@```, etc..
+
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Long> {
+@Query("THE QUERY EXPRESSION")
+Optional<Product> findByName(@Param("name") String name);
+}
+----
 ==== Query by Method
