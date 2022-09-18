@@ -16,3 +16,7 @@ It also becomes very famous in https://www.amazon.com/dp/0321125215/[Domain-Driv
 == Repositories
 
 image::02-repositories.png[alt=Repositories types]
+
+* Interface to generic CRUD operations on a repository for a specific type. This one we can see more often on several Java implementations.
+* Interface with generic CRUD operations using the pagination feature.
+* Interface for generic CRUD operations on a repository for a specific type. This repository follows reactive paradigms.
