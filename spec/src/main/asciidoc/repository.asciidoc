@@ -1,7 +1,7 @@
 
 = Repository
 
-The repository pattern is a mechanism that allows you to encapsulate storage, retrieval, and search behavior by emulating a collection of objects. In this way, the design further hides the relationship of the persistence mechanism.
+In DDD, the repository pattern encapsulates the logic required to access data sources. They consolidate data access functionality, providing better maintainability and decoupling the infrastructure or technology used to access databases from the domain model layer.
 
 image::01-repository.png[alt=repository structure, width=70%, height=70%]
 
@@ -19,10 +19,27 @@ A repository abstraction aims to significantly reduce the boilerplate code requi
 
 The parent interface in Jakarta Data repository abstraction is DataRepository.
 
-By default, Jakarta Data has support for three interfaces. However, the core is extensible. Therefore a provider might extend one or more interfaces to a specific data target as th
+By default, Jakarta Data has support for three interfaces. However, the core is extensible. Therefore, a provider might extend one or more interfaces to a specific data target as th
 
 image::02-repositories.png[alt=Repositories types]
 
 * Interface to generic CRUD operations on a repository for a specific type. This one we can see more often on several Java implementations.
 * Interface with generic CRUD operations using the pagination feature.
 * Interface for generic CRUD operations on a repository for a specific type. This repository follows reactive paradigms.
+
+From the Java developer perspective, create an interface that extends one of those interfaces besides the Repository annotation.
+
+So, given a Product entity where the ID is a long type, the repository would be:
+
+[source,java]
+----
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Long> {
+
+}
+----
+
+
+=== Query methods
+
+====
