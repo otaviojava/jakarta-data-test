@@ -107,3 +107,19 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 The parsing query method name has two parts: the subject and the property.
 
 The first part defines the query's subject or condition, and the second the condition value; both forms the predicate.
+
+A predicate can refer only to a direct property of the managed entity. We also have the option to handle entities with another class on them.
+
+Assume an Order entity has an Address with a Zipcode. In that case, the access is ```order.address.zipCode```.
+
+The resolution algorithm starts by interpreting the whole part (AddressZipCode) as the property and checks the domain class for a property with that name (uncapitalized). If the algorithm succeeds, it uses that property.
+
+[source,java]
+----
+@Repository
+public interface OrderRepository extends CrudRepository<Order, Long> {
+
+  Stream<Order> findByAddressZipCode(ZipCode zipCode);
+
+}
+----
