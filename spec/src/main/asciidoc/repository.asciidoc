@@ -139,3 +139,79 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 
 WARNING: Define as a priority following standard Java naming conventions, camel case,  using underscore as the last instance resource.
 
+===== Query methods Keywords
+
+The following table lists the subject keywords generally supported by Jakarta Data.
+
+|===
+|Keyword |Description
+
+|findBy
+|General query method returning the repository type.
+
+|deleteBy
+|Delete query method returning either no result (void) or the delete count.
+
+|countBy
+|Count projection returning a numeric result.
+
+|existsBy
+|Exists projection, returning typically a ```boolean``` result.
+|===
+
+Jakarta Data often support the following list of predicate keywords. It might not work because some keywords listed here might not be supported in a particular store.
+
+|===
+|Keyword |Description | Method signature Sample
+
+|And
+|The ```and``` operator.
+|findByNameAndYear
+
+|Or
+|The ```or``` operator.
+|findByNameOrYear
+
+|Between
+|The ```between``` operator.
+|findByDateBetween
+
+|LessThan
+|Lesser than condition
+|findByAgeLessThan
+
+|GreaterThan
+|Greater than condition
+|findByAgeGreaterThan
+
+|LessThanEqual
+|Lesser than equals condition
+|findByAgeLessThanEqual
+
+|GreaterThanEqual
+|Greater than equals condition
+|findByAgeGreaterThanEqual
+
+|Like
+|The like operation
+|findByTitleLike
+
+|In
+|In
+|
+
+|OrderBy
+|Specify a static sorting order followed by the property path and direction on ascending.
+|findByNameOrderByAge
+
+|OrderBy____Desc
+|Specify a static sorting order followed by the property path and direction on descending.
+|findByNameOrderByAgeDesc
+
+|OrderBy____Asc
+|Specify a static sorting order followed by the property path and direction on ascending.
+|findByNameOrderByAgeAsc
+
+|===
+
+
