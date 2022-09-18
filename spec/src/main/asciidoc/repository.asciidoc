@@ -13,7 +13,7 @@ The Repository pattern is a well-documented way of working with a data source. I
 
 It also becomes very famous in https://www.amazon.com/dp/0321125215/[Domain-Driven Design: Tackling Complexity in the Heart of Software] by Eric Evans.
 
-== Repositories
+== Repositories on Jakarta Data
 
 A repository abstraction aims to significantly reduce the boilerplate code required to implement data access layers for various persistence stores.
 
@@ -29,7 +29,7 @@ image::02-repositories.png[alt=Repositories types]
 
 From the Java developer perspective, create an interface that extends one of those interfaces besides the Repository annotation.
 
-So, given a Product entity where the ID is a long type, the repository would be:
+So, given a ```Product``` entity where the ID is a ```long``` type, the repository would be:
 
 [source,java]
 ----
@@ -42,4 +42,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
 === Query methods
 
-====
+On Jakarta Data, besides finding by an ID, it provides custom queries on two modes:
+
+Through Query annotation: It will create a method annotated with the @Query with the query.
+Using method by query convention: Using some pattern vocabulary will provide a query.
+
