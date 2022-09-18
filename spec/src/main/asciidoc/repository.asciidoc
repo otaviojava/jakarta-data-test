@@ -50,7 +50,7 @@ public interface Garage extends CrudRepository<Car, String> {
 }
 ----
 
-=== Query methods
+=== Queries methods
 
 On Jakarta Data, besides finding by an ID, it provides custom queries on two modes:
 
@@ -74,6 +74,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
 Jakarta Data also brings ```Param``` annotation to define a binder annotation, where such as the query expression, each vendor will express the syntax freely such as ```?```, ```@```, etc..
 
+[source,java]
+----
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
 @Query("THE QUERY EXPRESSION")
@@ -83,3 +85,25 @@ Optional<Product> findByName(@Param("name") String name);
 
 
 ==== Query by Method
+
+The Query by method mechanism allows for creating query commands by conventions.
+
+E.g.:
+
+[source,java]
+----
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Long> {
+
+  List<Product> findByName(String name);
+
+  List<Person> findByNameOrderByNameAsc(String name);
+
+  List<Person> findByNameOrderByNameDesc(String name);
+
+}
+----
+
+Parsing query method names has two parts: subject and subject value.
+
+The first part defines the query's subject or condition, and the second the condition value; both forms the predicate.
