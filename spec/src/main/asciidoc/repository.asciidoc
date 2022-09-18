@@ -5,7 +5,7 @@ In DDD, the repository pattern encapsulates the logic required to access data so
 
 image::01-repository.png[alt=repository structure, width=70%, height=70%]
 
-This pattern focuses on the closest proximity of entities and hides where the data comes from, making it possible for a Repository to use a DAO pattern.
+This pattern focuses on the closest proximity of entities and hides where the data comes from.
 
 The Repository pattern is a well-documented way of working with a data source. In the book https://www.amazon.com/dp/0321127420/[Patterns of Enterprise Application] Architecture, Martin Fowler describes a repository as follows:
 
@@ -40,10 +40,23 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 ----
 
 
+There is no nomenclature restriction to make mandatory the ```Repository``` suffix. Such as, you might represent the repository of the ``Car's entity as a ```Garage``` instead of ```CarRepository```.
+
+[source,java]
+----
+@Repository
+public interface Garage extends CrudRepository<Car, String> {
+
+}
+----
+
 === Query methods
 
 On Jakarta Data, besides finding by an ID, it provides custom queries on two modes:
 
-Through Query annotation: It will create a method annotated with the @Query with the query.
-Using method by query convention: Using some pattern vocabulary will provide a query.
+* Through Query annotation: It will create a method annotated with the @Query with the query.
+* Using method by query convention: Using some pattern vocabulary will provide a query.
 
+==== Using the Query annotation
+
+==== Query by Method
