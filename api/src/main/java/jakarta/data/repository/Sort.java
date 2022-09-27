@@ -18,5 +18,17 @@
 
 package jakarta.data.repository;
 
-public class Sort {
+import java.util.List;
+
+/**
+ * Sort option for queries.
+ */
+public interface Sort {
+
+    void order(Order order);
+
+    void order(String property);
+
+    void order(String property, Direction direction);
+    List<Order> getOrderBy();
 }
