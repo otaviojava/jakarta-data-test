@@ -22,6 +22,7 @@ import java.util.List;
 
 /**
  * Sort option for queries.
+ * Sorted instances are immutable and all mutating operations on this interface return a new instance.
  */
 public interface Sort {
 
@@ -30,5 +31,6 @@ public interface Sort {
     void order(String property);
 
     void order(String property, Direction direction);
+
     List<Order> getOrderBy();
 }
