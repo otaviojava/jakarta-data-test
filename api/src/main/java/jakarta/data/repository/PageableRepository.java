@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *  SPDX-License-Identifier: Apache-2.0
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 package jakarta.data.repository;
@@ -26,6 +26,8 @@ package jakarta.data.repository;
  * @param <K> the type of the id of the entity the repository manages
  * @see CrudRepository
  */
-public interface PageableRepository<T, K> extends CrudRepository<T, K> {
+public interface PageableRepository<T, K> extends DataRepository<T, K> {
+
+
 
 }

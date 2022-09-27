@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *  SPDX-License-Identifier: Apache-2.0
+ * SPDX-License-Identifier: Apache-2.0
  */
 package jakarta.data.repository;
 
@@ -22,13 +22,12 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * <p>Interface to generic CRUD operations on a repository for a specific type.</p>
+ * <p>Interface for generic CRUD operations on a repository for a specific type.</p>
  *
  * @param <T> the bean type
- * @param <K> the key or the ID type
+ * @param <K> the key type
  */
 public interface CrudRepository<T, K> extends DataRepository<T, K> {
-
 
     /**
      * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
@@ -121,7 +120,7 @@ public interface CrudRepository<T, K> extends DataRepository<T, K> {
      * @param ids must not be {@literal null}. Must not contain {@literal null} elements.
      * @throws NullPointerException when either the iterable is null or contains null elements
      */
-    void deleteAllById(Iterable<? extends K> ids);
+    void deleteAllById(Iterable<K> ids);
 
     /**
      * Deletes the given entities.
@@ -135,6 +134,5 @@ public interface CrudRepository<T, K> extends DataRepository<T, K> {
      * Deletes all entities managed by the repository.
      */
     void deleteAll();
-
 
 }
