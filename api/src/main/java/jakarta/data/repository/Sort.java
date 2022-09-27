@@ -26,11 +26,34 @@ import java.util.List;
  */
 public interface Sort {
 
-    void order(Order order);
+    /**
+     * Adds an order object.
+     *
+     * @param order The order object
+     * @return A new sort with the order applied
+     * @throws NullPointerException when order is null
+     */
+    Sort order(Order order);
 
-    void order(String property);
+    /**
+     * Orders by the specified property name (defaults to ascending) {@link Direction#ASC}.
+     * @param property The property name to order by
+     * @return A new sort with the order applied
+     * @throws NullPointerException when property is null
+     */
+    Sort order(String property);
 
-    void order(String property, Direction direction);
+    /**
+     * Orders by the specified property name and direction.
+     * @param property The property name to order by
+     * @param direction Either "asc" for ascending or "desc" for descending
+     * @return A new sort with the order applied
+     * @throws NullPointerException when there is null parameter
+     */
+    Sort order(String property, Direction direction);
 
+    /**
+     * @return The order definitions for this sort.
+     */
     List<Order> getOrderBy();
 }
