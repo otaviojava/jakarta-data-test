@@ -36,21 +36,11 @@ public interface Order {
     /**
      * @return Returns whether sorting for this property shall be ascending.
      */
-    boolean	isAscending();
+    boolean isAscending();
 
     /**
      * @return Returns whether sorting for this property shall be descending.
      */
-    boolean	isDescending();
-
-    /**
-     * Creates a new Order instance. Takes a single property. Direction defaults to {@link Direction#ASC}.
-     * @param property  must not be null or empty.
-     * @return an Order instance
-     * @throws NullPointerException when property is not null
-     */
-    static Order by(String property){
-        return null;
-    }
+    boolean isDescending();
 
 }
