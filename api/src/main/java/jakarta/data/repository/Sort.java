@@ -122,4 +122,12 @@ public interface Sort {
      */
     interface SortSupplier<S extends Sort> extends Function<Order, S> {
     }
+
+    /**
+     * The {@link Sort} supplier that the API will use on the method {@link Sort#of(String, Direction)}
+     *
+     * @param <S> the {@link  Sort}  implementation
+     */
+    interface IterableSortSupplier<S extends Sort> extends Function<Iterable<Order>, S> {
+    }
 }
