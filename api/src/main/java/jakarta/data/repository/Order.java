@@ -70,6 +70,29 @@ public interface Order {
     }
 
     /**
+     * Create a {@link Order} instance on ascending direction {@link  Direction#ASC}
+     * @param property the property name to order by
+     * @return the Order type
+     * @return an {@link Order} instance
+     * @param <O> the Order type
+     * @throws NullPointerException when there property is null
+     */
+    static <O extends Order> O asc(String property){
+        return of(property, Direction.ASC);
+    }
+    /**
+     * Create a {@link Order} instance on descending direction {@link  Direction#DESC}
+     * @param property the property name to order by
+     * @return the Order type
+     * @return an {@link Order} instance
+     * @param <O> the Order type
+     * @throws NullPointerException when there property is null
+     */
+    static <O extends Order> O desc(String property){
+        return of(property, Direction.DESC);
+    }
+
+    /**
      * The {@link Order} supplier that the API will use on the method {@link Order#of(String, Direction)}
      * @param <O> the {@link  Order implementation}
      */
