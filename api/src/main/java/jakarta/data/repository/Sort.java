@@ -116,6 +116,35 @@ public interface Sort {
     }
 
     /**
+     * Creates a new Sort for the given Orders
+     *
+     * @param orders an order list
+     * @param <S> the Sort type
+     * @return The sort
+     * @throws NullPointerException when orders is null
+     */
+    static <S extends Sort> S of(Iterable<Order> orders) {
+        Objects.requireNonNull(orders, "orders is required");
+        IterableSortSupplier<S> supplier =
+                ServiceLoader.load(IterableSortSupplier.class)
+                        .findFirst()
+                        .orElseThrow(() -> new DataException("There is no implementation of IterableSortSupplier" +
+                                " on the Class Loader"));
+        return supplier.apply(orders);
+    }
+
+    /**
+     * Creates a new Sort for the given Orders
+     *
+     * @param orders an order list
+     * @param <S> the Sort type
+     * @return The sort
+     */
+    static <S extends Sort> S of(Order... orders) {
+        return of(List.of(orders));
+    }
+
+    /**
      * The {@link Sort} supplier that the API will use on the method {@link Sort#of(String, Direction)}
      *
      * @param <S> the {@link  Sort}  implementation
