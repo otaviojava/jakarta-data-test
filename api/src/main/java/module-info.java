@@ -19,4 +19,5 @@ module jakarta.data.api {
     exports jakarta.data.repository;
     uses jakarta.data.repository.Order.OrderSupplier;
     uses jakarta.data.repository.Sort.SortSupplier;
+    uses jakarta.data.repository.Sort.IterableSortSupplier;
 }
