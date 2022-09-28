@@ -18,5 +18,37 @@
 
 package jakarta.data;
 
-public class DataException {
+/**
+ * Thrown by the data provider when a problem occurs.
+ */
+public class DataException extends RuntimeException {
+
+
+    /**
+     * Constructs a new PersistenceException exception with the specified detail message.
+     *
+     * @param message the detail message.
+     */
+    public DataException(String message) {
+        super(message);
+    }
+
+    /**
+     * Constructs a new PersistenceException exception with the specified detail message and cause.
+     *
+     * @param message the detail message.
+     * @param cause   the cause.
+     */
+    public DataException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    /**
+     * Constructs a new PersistenceException exception with the specified cause.
+     *
+     * @param cause the cause.
+     */
+    public DataException(Throwable cause) {
+        super(cause);
+    }
 }
