@@ -18,7 +18,13 @@
 
 package jakarta.data.repository;
 
+import jakarta.data.DataException;
+
 import java.util.List;
+import java.util.Objects;
+import java.util.ServiceLoader;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Sort option for queries.
@@ -37,6 +43,7 @@ public interface Sort {
 
     /**
      * Orders by the specified property name (defaults to ascending) {@link Direction#ASC}.
+     *
      * @param property The property name to order by
      * @return A new sort with the order applied
      * @throws NullPointerException when property is null
@@ -45,7 +52,8 @@ public interface Sort {
 
     /**
      * Orders by the specified property name and direction.
-     * @param property The property name to order by
+     *
+     * @param property  The property name to order by
      * @param direction Either "asc" for ascending or "desc" for descending
      * @return A new sort with the order applied
      * @throws NullPointerException when there is null parameter
@@ -56,4 +64,56 @@ public interface Sort {
      * @return The order definitions for this sort.
      */
     List<Order> getOrderBy();
+
+
+    /**
+     * Create a {@link Sort} instance
+     *
+     * @param property  the property name to order by
+     * @param direction The direction order by
+     * @param <S>       the Sort type
+     * @return an {@link Sort} instance
+     * @throws NullPointerException when there are null parameter
+     */
+    static <S extends Sort> S of(String property, Direction direction) {
+        Objects.requireNonNull(property, "property is required");
+        Objects.requireNonNull(direction, "direction is required");
+
+        SortSupplier<S> supplier =
+                ServiceLoader.load(SortSupplier.class)
+                        .findFirst()
+                        .orElseThrow(() -> new DataException("There is no implementation of SortSupplier on the class-load"));
+        return supplier.apply(Order.of(property, direction));
+    }
+
+    /**
+     * Create a {@link Sort} instance on ascending direction {@link  Direction#ASC}
+     *
+     * @param property  the property name to order by
+     * @param <S>       the Sort type
+     * @return an {@link Sort} instance
+     * @throws NullPointerException when property is null
+     */
+    static <S extends Sort> S asc(String property) {
+        return of(property, Direction.ASC);
+    }
+    /**
+     * Create a {@link Sort} instance on descending direction {@link  Direction#DESC}
+     *
+     * @param property  the property name to order by
+     * @param <S>       the Sort type
+     * @return an {@link Sort} instance
+     * @throws NullPointerException when property is null
+     */
+    static <S extends Sort> S desc(String property) {
+        return of(property, Direction.DESC);
+    }
+
+    /**
+     * The {@link Sort} supplier that the API will use on the method {@link Sort#of(String, Direction)}
+     *
+     * @param <S> the {@link  Sort}  implementation
+     */
+    interface SortSupplier<S extends Sort> extends Function<Order, S> {
+    }
 }
