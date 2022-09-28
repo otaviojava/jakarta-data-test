@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2022 Otavio Santana and others
  *
@@ -17,4 +18,5 @@ module jakarta.data.api {
     exports jakarta.data;
     exports jakarta.data.repository;
     uses jakarta.data.repository.Order.OrderSupplier;
+    uses jakarta.data.repository.Sort.SortSupplier;
 }
