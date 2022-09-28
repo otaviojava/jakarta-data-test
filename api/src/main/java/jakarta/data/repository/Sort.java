@@ -41,6 +41,15 @@ public interface Sort {
     Sort order(Order order);
 
     /**
+     * Returns a new Sort consisting of the Sort.Orders of the current Sort combined with the given ones.
+     *
+     * @param sort The sort
+     * @return A new sort with the order applied
+     * @throws NullPointerException when sort is null
+     */
+    Sort add(Sort sort);
+
+    /**
      * Orders by the specified property name (defaults to ascending) {@link Direction#ASC}.
      *
      * @param property The property name to order by
