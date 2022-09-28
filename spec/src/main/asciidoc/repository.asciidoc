@@ -237,3 +237,19 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
 }
 ----
+
+You can define simple sorting expressions by using property names.
+
+[source,java]
+----
+Sort name = Sort.asc("name");
+Sort nameAge = Sort.desc("name").add(Sort.asc("age"));
+----
+
+You can combine sorting with start and size by using property names.
+
+[source,java]
+----
+Pageable pageable = Pageable.of(1, 20);
+Pageable pageableSort = Pageable.of(1, 20, Sort.asc("name"));
+----
