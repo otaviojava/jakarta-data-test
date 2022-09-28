@@ -82,7 +82,7 @@ public interface Sort {
         SortSupplier<S> supplier =
                 ServiceLoader.load(SortSupplier.class)
                         .findFirst()
-                        .orElseThrow(() -> new DataException("There is no implementation of SortSupplier on the class-load"));
+                        .orElseThrow(() -> new DataException("There is no implementation of SortSupplier on the Class Loader"));
         return supplier.apply(Order.of(property, direction));
     }
 

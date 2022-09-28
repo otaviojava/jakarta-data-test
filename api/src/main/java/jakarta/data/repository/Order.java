@@ -65,7 +65,7 @@ public interface Order {
         OrderSupplier<O> supplier =
         ServiceLoader.load(OrderSupplier.class)
                 .findFirst()
-                .orElseThrow(() -> new DataException("There is no implementation of OrderSupplier on the class-load"));
+                .orElseThrow(() -> new DataException("There is no implementation of OrderSupplier on the Class Loader"));
         return supplier.apply(property, direction);
     }
 
