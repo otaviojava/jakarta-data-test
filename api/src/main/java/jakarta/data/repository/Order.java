@@ -18,6 +18,8 @@
 
 package jakarta.data.repository;
 
+import jakarta.data.DataException;
+
 import java.util.Objects;
 import java.util.ServiceLoader;
 import java.util.function.BiFunction;
@@ -63,7 +65,7 @@ public interface Order {
         OrderSupplier<O> supplier =
         ServiceLoader.load(OrderSupplier.class)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("There is no implementation of OrderSupplier on the class-load"));
+                .orElseThrow(() -> new DataException("There is no implementation of OrderSupplier on the class-load"));
         return supplier.apply(property, direction);
     }
 
