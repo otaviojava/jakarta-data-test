@@ -20,4 +20,5 @@ module jakarta.data.api {
     uses jakarta.data.repository.Order.OrderSupplier;
     uses jakarta.data.repository.Sort.SortSupplier;
     uses jakarta.data.repository.Sort.IterableSortSupplier;
+    uses jakarta.data.repository.Pageable.PageableSupplier;
 }
