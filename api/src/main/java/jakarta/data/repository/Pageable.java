@@ -18,10 +18,18 @@
 
 package jakarta.data.repository;
 
+import jakarta.data.DataException;
+
+import java.util.Objects;
+import java.util.ServiceLoader;
+
 /**
  * Abstract interface for pagination information.
  */
 public interface Pageable {
+
+    long DEFAULT_SIZE = 10;
+    Sort EMPTY_SORT = Sort.of();
 
     /**
      * Returns the offset to be taken according to the underlying page and page size.
@@ -66,11 +74,11 @@ public interface Pageable {
      * @return The pageable
      */
     static <P extends Pageable> P page(long page) {
-
+        return of(page, DEFAULT_SIZE);
     }
 
     /**
-     * Creates a new Pageable at the given offset with a default size of 10.
+     * Creates a new Pageable at the given offset and page
      *
      * @param page The page
      * @param size The size
@@ -78,7 +86,7 @@ public interface Pageable {
      * @return The pageable
      */
     static <P extends Pageable> P of(long page, long size) {
-
+        return of(page, size, EMPTY_SORT);
     }
 
     /**
@@ -91,7 +99,13 @@ public interface Pageable {
      * @return The pageable
      */
     static <P extends Pageable> P of(long page, long size, Sort sort) {
-
+        Objects.requireNonNull(sort, "sort is required");
+        PageableSupplier<P> supplier =
+                ServiceLoader.load(PageableSupplier.class)
+                        .findFirst()
+                        .orElseThrow(() -> new DataException("There is no implementation of PageableSupplier" +
+                                " on the Class Loader"));
+        return supplier.apply(page, size, sort);
     }
 
     interface PageableSupplier<P extends Pageable> {
