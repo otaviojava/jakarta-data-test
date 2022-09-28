@@ -19,8 +19,42 @@
 package jakarta.data.repository;
 
 /**
- *
+ * Abstract interface for pagination information.
  */
 public interface Pageable {
+
+    /**
+     * Returns the offset to be taken according to the underlying page and page size.
+     *
+     * @return the offset to be taken according to the underlying page and page size.
+     */
     long getOffset();
+
+    /**
+     * Returns the page to be returned.
+     *
+     * @return the page to be returned.
+     */
+    long getPageNumber();
+
+    /**
+     * Returns the Pageable requesting the next Page.
+     *
+     * @return The next pageable.
+     */
+    Pageable next();
+
+    /**
+     * Returns the previous Pageable or the first Pageable if the current one already is the first one.
+     *
+     * @return The previous pageable
+     */
+    Pageable previous();
+
+    /**
+     * Returns the sorting parameters.
+     *
+     * @return The sort definition to use.
+     */
+    Sort getSort();
 }
