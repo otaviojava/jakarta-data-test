@@ -48,6 +48,14 @@ public interface Order {
     boolean isDescending();
 
 
+    /**
+     * Create a {@link Order} instance
+     * @param property the property name to order by
+     * @param direction The direction order by
+     * @return an {@link Order} instance
+     * @param <O> the Order type
+     * @throws NullPointerException when there are null parameter
+     */
     static <O extends Order> O of(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
@@ -58,6 +66,11 @@ public interface Order {
                 .orElseThrow(() -> new RuntimeException("There is no implementation of OrderSupplier on the class-load"));
         return supplier.apply(property, direction);
     }
+
+    /**
+     * The {@link Order} supplier that the API will use on the method {@link Order#of(String, Direction)}
+     * @param <O> the {@link  Order implementation}
+     */
     interface OrderSupplier<O extends Order> extends BiFunction<String, Direction, O>{}
 
 }
