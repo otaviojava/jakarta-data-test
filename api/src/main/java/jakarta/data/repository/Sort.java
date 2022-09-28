@@ -64,6 +64,12 @@ public interface Sort {
      */
     List<Order> getOrderBy();
 
+    /**
+     * Returns whether the current {@link Sort#getOrderBy()} is empty.
+     *
+     * @return the  {@link Sort#getOrderBy()} is empty.
+     */
+    boolean isEmpty();
 
     /**
      * Create a {@link Sort} instance
@@ -88,19 +94,20 @@ public interface Sort {
     /**
      * Create a {@link Sort} instance on ascending direction {@link  Direction#ASC}
      *
-     * @param property  the property name to order by
-     * @param <S>       the Sort type
+     * @param property the property name to order by
+     * @param <S>      the Sort type
      * @return an {@link Sort} instance
      * @throws NullPointerException when property is null
      */
     static <S extends Sort> S asc(String property) {
         return of(property, Direction.ASC);
     }
+
     /**
      * Create a {@link Sort} instance on descending direction {@link  Direction#DESC}
      *
-     * @param property  the property name to order by
-     * @param <S>       the Sort type
+     * @param property the property name to order by
+     * @param <S>      the Sort type
      * @return an {@link Sort} instance
      * @throws NullPointerException when property is null
      */
