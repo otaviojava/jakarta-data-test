@@ -18,8 +18,6 @@
 
 package jakarta.data.repository;
 
-import java.util.function.BiFunction;
-
 /**
  * Abstract interface for pagination information.
  */
@@ -60,14 +58,38 @@ public interface Pageable {
      */
     Sort getSort();
 
+    /**
+     * Creates a new Pageable at the given offset with a default size of 10.
+     *
+     * @param page The page
+     * @param <P>  page type
+     * @return The pageable
+     */
     static <P extends Pageable> P page(long page) {
 
     }
 
+    /**
+     * Creates a new Pageable at the given offset with a default size of 10.
+     *
+     * @param page The page
+     * @param size The size
+     * @param <P>  page type
+     * @return The pageable
+     */
     static <P extends Pageable> P of(long page, long size) {
 
     }
 
+    /**
+     * Creates a new Pageable at the given offset with a default size of 10.
+     *
+     * @param page The page
+     * @param size The size
+     * @param sort the sort
+     * @param <P>  page type
+     * @return The pageable
+     */
     static <P extends Pageable> P of(long page, long size, Sort sort) {
 
     }
