@@ -25,7 +25,7 @@ class DefaultOrder implements Order {
 
     private final Direction direction;
 
-    DefaultOrder(String property, Direction direction) {
+    private DefaultOrder(String property, Direction direction) {
         this.property = property;
         this.direction = direction;
     }
@@ -68,5 +68,9 @@ class DefaultOrder implements Order {
                 "property='" + property + '\'' +
                 ", direction=" + direction +
                 '}';
+    }
+
+    static Order of(String property, Direction direction) {
+        return new DefaultOrder(property, direction);
     }
 }
