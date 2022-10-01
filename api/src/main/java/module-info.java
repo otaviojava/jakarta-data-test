@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-open module jakarta.data.api {
+module jakarta.data.api {
     exports jakarta.data;
     exports jakarta.data.repository;
     uses jakarta.data.repository.Order.OrderSupplier;
     uses jakarta.data.repository.Sort.SortSupplier;
     uses jakarta.data.repository.Pageable.PageableSupplier;
+    opens jakarta.data.repository;
 }
