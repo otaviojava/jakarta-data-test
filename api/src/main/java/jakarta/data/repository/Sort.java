@@ -20,6 +20,7 @@ package jakarta.data.repository;
 
 import jakarta.data.DataException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.ServiceLoader;
@@ -96,7 +97,7 @@ public interface Sort {
                 ServiceLoader.load(SortSupplier.class)
                         .findFirst()
                         .orElseThrow(() -> new DataException("There is no implementation of SortSupplier on the Class Loader"));
-        return supplier.apply(Order.of(property, direction));
+        return supplier.apply(Collections.singletonList(Order.of(property, direction)));
     }
 
     /**
@@ -130,8 +131,8 @@ public interface Sort {
      */
     static Sort of(Iterable<Order> orders) {
         Objects.requireNonNull(orders, "orders is required");
-        IterableSortSupplier supplier =
-                ServiceLoader.load(IterableSortSupplier.class)
+        SortSupplier supplier =
+                ServiceLoader.load(SortSupplier.class)
                         .findFirst()
                         .orElseThrow(() -> new DataException("There is no implementation of IterableSortSupplier" +
                                 " on the Class Loader"));
@@ -148,17 +149,11 @@ public interface Sort {
         return of(List.of(orders));
     }
 
-    /**
-     * The {@link Sort} supplier that the API will use on the method {@link Sort#of(String, Direction)}
-     *
-     */
-    interface SortSupplier extends Function<Order, Sort> {
-    }
 
     /**
      * The {@link Sort} supplier that the API will use on the method {@link Sort#of(String, Direction)}
      *
      */
-    interface IterableSortSupplier extends Function<Iterable<Order>, Sort> {
+    interface SortSupplier extends Function<Iterable<Order>, Sort> {
     }
 }
