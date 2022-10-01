@@ -24,7 +24,7 @@ import java.util.Objects;
  */
 public class Pageable {
 
-    static long DEFAULT_SIZE = 10;
+    private static final long DEFAULT_SIZE = 10;
 
     private final long size;
 
