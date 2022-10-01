@@ -25,8 +25,9 @@ class DefaultSortTest {
     @Test
     public void shouldReturnErrorWhenOrderIsNull() {
         Sort sort = new DefaultSort();
-        Assertions.assertThrows(NullPointerException.class, () -> sort.order((Order) null ));
+        Assertions.assertThrows(NullPointerException.class, () -> sort.order((Order) null));
     }
+
     @Test
     public void shouldAddOrder() {
         Sort sort = new DefaultSort();
@@ -38,16 +39,35 @@ class DefaultSortTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenPropertyIsNull(){
+    public void shouldReturnErrorWhenPropertyIsNull() {
         Sort sort = new DefaultSort();
-        Assertions.assertThrows(NullPointerException.class, () -> sort.order((String) null ));
+        Assertions.assertThrows(NullPointerException.class, () -> sort.order((String) null));
     }
 
     @Test
-    public void shouldAddProperty(){
+    public void shouldAddProperty() {
         Sort sort = new DefaultSort();
         Assertions.assertTrue(sort.isEmpty());
         Sort name = sort.order("name");
+        Assertions.assertNotNull(name);
+        Assertions.assertFalse(name.isEmpty());
+        Assertions.assertNotEquals(sort, name);
+    }
+
+    //
+    @Test
+    public void shouldReturnErrorWhenPropertyDirectionIsNull() {
+        Sort sort = new DefaultSort();
+        Assertions.assertThrows(NullPointerException.class, () -> sort.order(null, null));
+        Assertions.assertThrows(NullPointerException.class, () -> sort.order("name", null));
+        Assertions.assertThrows(NullPointerException.class, () -> sort.order(null, Direction.ASC));
+    }
+
+    @Test
+    public void shouldAddPropertyDirection() {
+        Sort sort = new DefaultSort();
+        Assertions.assertTrue(sort.isEmpty());
+        Sort name = sort.order("name", Direction.ASC);
         Assertions.assertNotNull(name);
         Assertions.assertFalse(name.isEmpty());
         Assertions.assertNotEquals(sort, name);
