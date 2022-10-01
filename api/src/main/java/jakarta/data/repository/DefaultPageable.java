@@ -45,7 +45,7 @@ final class DefaultPageable implements Pageable {
 
     @Override
     public Pageable next() {
-        return null;
+        return DefaultPageable.of(this.size, (pagerNumber + 1), sort);
     }
 
     @Override
