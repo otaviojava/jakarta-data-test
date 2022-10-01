@@ -54,7 +54,6 @@ class DefaultSortTest {
         Assertions.assertNotEquals(sort, name);
     }
 
-    //
     @Test
     public void shouldReturnErrorWhenPropertyDirectionIsNull() {
         Sort sort = new DefaultSort();
