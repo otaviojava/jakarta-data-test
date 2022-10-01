@@ -62,10 +62,9 @@ public interface Pageable {
      * Creates a new Pageable at the given size with a default size of 10.
      *
      * @param page The page
-     * @param <P>  page type
      * @return The pageable
      */
-    static <P extends Pageable> P page(long page) {
+    static Pageable page(long page) {
         return of(page, DEFAULT_SIZE);
     }
 
@@ -74,10 +73,9 @@ public interface Pageable {
      *
      * @param page The page
      * @param size The size
-     * @param <P>  page type
      * @return The pageable
      */
-    static <P extends Pageable> P of(long page, long size) {
+    static Pageable of(long page, long size) {
         return of(page, size, EMPTY_SORT);
     }
 
@@ -87,12 +85,11 @@ public interface Pageable {
      * @param page The page
      * @param size The size
      * @param sort the sort
-     * @param <P>  page type
      * @return The pageable
      */
-    static <P extends Pageable> P of(long page, long size, Sort sort) {
+    static Pageable of(long page, long size, Sort sort) {
         Objects.requireNonNull(sort, "sort is required");
-        PageableSupplier<P> supplier =
+        PageableSupplier supplier =
                 ServiceLoader.load(PageableSupplier.class)
                         .findFirst()
                         .orElseThrow(() -> new DataException("There is no implementation of PageableSupplier" +
@@ -103,10 +100,8 @@ public interface Pageable {
 
     /**
      * The {@link Pageable} supplier that the API will use on the method {@link Pageable#of(long, long, Sort)}
-     *
-     * @param <P> the {@link  Pageable}  implementation
      */
-    interface PageableSupplier<P extends Pageable> {
+    interface PageableSupplier {
         /**
          * Applies this function to the given argument.
          *
@@ -116,6 +111,6 @@ public interface Pageable {
          * @return a {@link Pageable} instance
          * @throws NullPointerException when sort is null
          */
-        P apply(long page, long size, Sort sort);
+        Pageable apply(long page, long size, Sort sort);
     }
 }
