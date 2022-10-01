@@ -22,38 +22,46 @@ import java.util.Objects;
 /**
  * Abstract interface for pagination information.
  */
-public interface Pageable {
+public class Pageable {
 
-    long DEFAULT_SIZE = 10;
-    Sorts EMPTY_SORTS = Sorts.of();
+    static long DEFAULT_SIZE = 10;
+
+    private final long size;
+
+    private final long page;
+
+    private Pageable(long size, long page) {
+        this.size = size;
+        this.page = page;
+    }
 
     /**
      * Returns the size of each page
      *
      * @return the size of each page
      */
-    long getSize();
+    public long getSize() {
+        return size;
+    }
 
     /**
      * Returns the page to be returned.
      *
      * @return the page to be returned.
      */
-    long getPage();
+    public long getPage() {
+        return page;
+    }
 
     /**
      * Returns the Pageable requesting the next Page.
      *
      * @return The next pageable.
      */
-    Pageable next();
+    public Pageable next() {
+        return new Pageable(this.size, (page + 1));
+    }
 
-    /**
-     * Returns the sorting parameters.
-     *
-     * @return The sort definition to use.
-     */
-    Sorts getSort();
 
     /**
      * Creates a new Pageable at the given size with a default size of 10.
@@ -62,7 +70,7 @@ public interface Pageable {
      * @return The pageable
      */
     static Pageable page(long page) {
-        return of(page, DEFAULT_SIZE);
+        return new Pageable(page, DEFAULT_SIZE);
     }
 
     /**
@@ -73,20 +81,7 @@ public interface Pageable {
      * @return The pageable
      */
     static Pageable of(long page, long size) {
-        return of(page, size, EMPTY_SORTS);
-    }
-
-    /**
-     * Creates a new Pageable at the given size with a default size of 10.
-     *
-     * @param page The page
-     * @param size The size
-     * @param sorts the sort
-     * @return The pageable
-     */
-    static Pageable of(long page, long size, Sorts sorts) {
-        Objects.requireNonNull(sorts, "sort is required");
-        return DefaultPageable.of(page, size, sorts);
+        return new Pageable(page, DEFAULT_SIZE);
     }
 
 }
