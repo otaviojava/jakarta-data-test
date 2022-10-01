@@ -17,6 +17,8 @@
  */
 package jakarta.data.repository;
 
+import java.util.Objects;
+
 /**
  * <p>Caps the number of results that can be returned by a single invocation
  * of a repository find method.</p>
@@ -72,6 +74,23 @@ public class Limit {
      */
     public long startAt() {
         return startAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Limit limit = (Limit) o;
+        return maxResults == limit.maxResults && startAt == limit.startAt;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(maxResults, startAt);
     }
 
     /**
