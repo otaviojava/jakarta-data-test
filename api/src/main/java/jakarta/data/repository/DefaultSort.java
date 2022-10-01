@@ -49,12 +49,15 @@ class DefaultSort implements Sort {
 
     @Override
     public Sort order(String property) {
-        return null;
+        Objects.requireNonNull(property, "property is required");
+        return order(Order.asc(property));
     }
 
     @Override
     public Sort order(String property, Direction direction) {
-        return null;
+        Objects.requireNonNull(property, "property is required");
+        Objects.requireNonNull(direction, "direction is required");
+        return order(Order.of(property, direction));
     }
 
     @Override
