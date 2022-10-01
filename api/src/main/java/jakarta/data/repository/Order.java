@@ -17,8 +17,6 @@
  */
 package jakarta.data.repository;
 
-import jakarta.data.DataException;
-
 import java.util.Objects;
 import java.util.ServiceLoader;
 import java.util.function.BiFunction;
