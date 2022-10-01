@@ -93,6 +93,14 @@ public class Limit {
         return Objects.hash(maxResults, startAt);
     }
 
+    @Override
+    public String toString() {
+        return "Limit{" +
+                "maxResults=" + maxResults +
+                ", startAt=" + startAt +
+                '}';
+    }
+
     /**
      * <p>Create a limit that caps the number of results at the
      * specified maximum, starting from the first result.</p>
