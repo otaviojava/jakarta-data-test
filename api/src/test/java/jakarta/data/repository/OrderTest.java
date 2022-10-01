@@ -17,8 +17,47 @@
  */
 package jakarta.data.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class OrderTest {
 
+    @Test
+    public void shouldReturnErrorWhenPropertyDirectionNull() {
+        Assertions.assertThrows(NullPointerException.class, () ->
+                Order.of(null, null));
+
+        Assertions.assertThrows(NullPointerException.class, () ->
+                Order.of("name", null));
+
+        Assertions.assertThrows(NullPointerException.class, () ->
+                Order.of(null, Direction.ASC));
+    }
+
+    @Test
+    public void shouldCreateSort() {
+        Order order = Order.of("name", Direction.ASC);
+        Assertions.assertNotNull(order);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertTrue(order.isAscending());
+        Assertions.assertFalse(order.isDescending());
+    }
+
+    @Test
+    public void shouldCreateAsc(){
+        Order order = Order.asc("name");
+        Assertions.assertNotNull(order);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertTrue(order.isAscending());
+        Assertions.assertFalse(order.isDescending());
+    }
+
+    @Test
+    public void shouldCreateDesc(){
+        Order order = Order.desc("name");
+        Assertions.assertNotNull(order);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertTrue(order.isDescending());
+        Assertions.assertFalse(order.isAscending());
+    }
 }
