@@ -18,5 +18,45 @@
 
 package jakarta.data.repository;
 
-class DefaultSort {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+class DefaultSort implements Sort {
+
+    private final List<Order> orders;
+
+    DefaultSort() {
+        this.orders = new ArrayList<>();
+    }
+
+    @Override
+    public Sort order(Order order) {
+        return null;
+    }
+
+    @Override
+    public Sort add(Sort sort) {
+        return null;
+    }
+
+    @Override
+    public Sort order(String property) {
+        return null;
+    }
+
+    @Override
+    public Sort order(String property, Direction direction) {
+        return null;
+    }
+
+    @Override
+    public List<Order> getOrderBy() {
+        return Collections.unmodifiableList(orders);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.orders.isEmpty();
+    }
 }
