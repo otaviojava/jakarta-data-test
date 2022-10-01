@@ -39,7 +39,7 @@ final class DefaultPageable implements Pageable {
     }
 
     @Override
-    public long getPageNumber() {
+    public long getPage() {
         return pagerNumber;
     }
 

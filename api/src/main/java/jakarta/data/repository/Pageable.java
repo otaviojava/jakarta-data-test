@@ -39,7 +39,7 @@ public interface Pageable {
      *
      * @return the page to be returned.
      */
-    long getPageNumber();
+    long getPage();
 
     /**
      * Returns the Pageable requesting the next Page.
