@@ -28,7 +28,7 @@ import java.util.ServiceLoader;
 public interface Pageable {
 
     long DEFAULT_SIZE = 10;
-    Sort EMPTY_SORT = Sort.of();
+    Sorts EMPTY_SORTS = Sorts.of();
 
     /**
      * Returns the size of each page
@@ -56,7 +56,7 @@ public interface Pageable {
      *
      * @return The sort definition to use.
      */
-    Sort getSort();
+    Sorts getSort();
 
     /**
      * Creates a new Pageable at the given size with a default size of 10.
@@ -76,7 +76,7 @@ public interface Pageable {
      * @return The pageable
      */
     static Pageable of(long page, long size) {
-        return of(page, size, EMPTY_SORT);
+        return of(page, size, EMPTY_SORTS);
     }
 
     /**
@@ -84,17 +84,17 @@ public interface Pageable {
      *
      * @param page The page
      * @param size The size
-     * @param sort the sort
+     * @param sorts the sort
      * @return The pageable
      */
-    static Pageable of(long page, long size, Sort sort) {
-        Objects.requireNonNull(sort, "sort is required");
+    static Pageable of(long page, long size, Sorts sorts) {
+        Objects.requireNonNull(sorts, "sort is required");
         PageableSupplier supplier =
                 ServiceLoader.load(PageableSupplier.class)
                         .findFirst()
                         .orElseThrow(() -> new DataException("There is no implementation of PageableSupplier" +
                                 " on the Class Loader"));
-        return supplier.apply(page, size, sort);
+        return supplier.apply(page, size, sorts);
     }
 
 

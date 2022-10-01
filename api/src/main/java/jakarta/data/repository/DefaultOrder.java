@@ -19,7 +19,7 @@ package jakarta.data.repository;
 
 import java.util.Objects;
 
-final class DefaultOrder implements Order {
+final class DefaultSort implements Sort {
 
     private final String property;
 
@@ -70,7 +70,7 @@ final class DefaultOrder implements Order {
                 '}';
     }
 
-    static Order of(String property, Direction direction) {
+    static Sort of(String property, Direction direction) {
         return new DefaultOrder(property, direction);
     }
 }

@@ -24,49 +24,49 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-final class DefaultSort implements Sort {
+final class DefaultSorts implements Sorts {
 
-    private final List<Order> orders;
+    private final List<Sort> orders;
 
-    DefaultSort() {
+    DefaultSorts() {
         this.orders = Collections.emptyList();
     }
 
-    private DefaultSort(List<Order> orders) {
+    private DefaultSorts(List<Sort> orders) {
         this.orders = orders;
     }
 
     @Override
-    public Sort order(Order order) {
+    public Sorts order(Sort order) {
         Objects.requireNonNull(order, "order is required");
-        return new DefaultSort(new ArrayList<>(orders) {{
+        return new DefaultSorts(new ArrayList<>(orders) {{
             this.add(order);
         }});
     }
 
     @Override
-    public Sort add(Sort sort) {
-        Objects.requireNonNull(sort, "sort is required");
-        return new DefaultSort(new ArrayList<>(orders) {{
-            this.addAll(sort.getOrderBy());
+    public Sorts add(Sorts sorts) {
+        Objects.requireNonNull(sorts, "sort is required");
+        return new DefaultSorts(new ArrayList<>(orders) {{
+            this.addAll(sorts.getOrderBy());
         }});
     }
 
     @Override
-    public Sort order(String property) {
+    public Sorts order(String property) {
         Objects.requireNonNull(property, "property is required");
-        return order(Order.asc(property));
+        return order(Sort.asc(property));
     }
 
     @Override
-    public Sort order(String property, Direction direction) {
+    public Sorts order(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
-        return order(Order.of(property, direction));
+        return order(Sort.of(property, direction));
     }
 
     @Override
-    public List<Order> getOrderBy() {
+    public List<Sort> getOrderBy() {
         return Collections.unmodifiableList(orders);
     }
 
@@ -83,7 +83,7 @@ final class DefaultSort implements Sort {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        DefaultSort that = (DefaultSort) o;
+        DefaultSorts that = (DefaultSorts) o;
         return Objects.equals(orders, that.orders);
     }
 
@@ -99,9 +99,9 @@ final class DefaultSort implements Sort {
                 '}';
     }
 
-    static Sort of(Iterable<Order> orders) {
+    static Sorts of(Iterable<Sort> orders) {
         Objects.requireNonNull(orders, "orders is required");
-        return new DefaultSort(StreamSupport.stream(orders.spliterator(), false)
+        return new DefaultSorts(StreamSupport.stream(orders.spliterator(), false)
                 .peek(o -> Objects.requireNonNull(o, "order element is required"))
                 .collect(Collectors.toUnmodifiableList()));
     }

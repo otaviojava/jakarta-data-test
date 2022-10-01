@@ -17,52 +17,47 @@
  */
 package jakarta.data.repository;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SortTest {
 
     @Test
-    public void shouldCreatePropertyDirector(){
-        Sort sort = Sort.of("name", Direction.ASC);
-        Assertions.assertNotNull(sort);
-        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.asc("name")));
+    public void shouldReturnErrorWhenPropertyDirectionNull() {
+        Assertions.assertThrows(NullPointerException.class, () ->
+                Sort.of(null, null));
+
+        Assertions.assertThrows(NullPointerException.class, () ->
+                Sort.of("name", null));
+
+        Assertions.assertThrows(NullPointerException.class, () ->
+                Sort.of(null, Direction.ASC));
+    }
+
+    @Test
+    public void shouldCreateSort() {
+        Sort order = Sort.of("name", Direction.ASC);
+        Assertions.assertNotNull(order);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertTrue(order.isAscending());
+        Assertions.assertFalse(order.isDescending());
     }
 
     @Test
     public void shouldCreateAsc(){
-        Sort sort = Sort.asc("name");
-        Assertions.assertNotNull(sort);
-        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.asc("name")));
+        Sort order = Sort.asc("name");
+        Assertions.assertNotNull(order);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertTrue(order.isAscending());
+        Assertions.assertFalse(order.isDescending());
     }
 
     @Test
     public void shouldCreateDesc(){
-        Sort sort = Sort.desc("name");
-        Assertions.assertNotNull(sort);
-        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.desc("name")));
+        Sort order = Sort.desc("name");
+        Assertions.assertNotNull(order);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertTrue(order.isDescending());
+        Assertions.assertFalse(order.isAscending());
     }
-
-    @Test
-    public void shouldCreateOfIterable(){
-        Sort sort = Sort.of(List.of(Order.asc("name"), Order.desc("age")));
-        Assertions.assertNotNull(sort);
-        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.asc("name"),
-                Order.desc("age")));
-    }
-
-    @Test
-    public void shouldCreateOfVarArgs(){
-        Sort sort = Sort.of(Order.asc("name"), Order.desc("age"));
-        Assertions.assertNotNull(sort);
-        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.asc("name"),
-                Order.desc("age")));
-    }
-
 }

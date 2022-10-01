@@ -24,15 +24,15 @@ class DefaultPageableTest {
 
     @Test
     public void shouldCreatePageable(){
-        Pageable pageable = DefaultPageable.of(2, 6, Sort.of(Order.asc("name")));
+        Pageable pageable = DefaultPageable.of(2, 6, Sorts.of(Sort.asc("name")));
         Assertions.assertEquals(2L, pageable.getSize());
         Assertions.assertEquals(6L, pageable.getPageNumber());
-        Assertions.assertEquals(Sort.of(Order.asc("name")), pageable.getSort());
+        Assertions.assertEquals(Sorts.of(Sort.asc("name")), pageable.getSort());
     }
 
     @Test
     public void shouldNext(){
-        Pageable pageable = DefaultPageable.of(2, 1, Sort.of(Order.asc("name")));
+        Pageable pageable = DefaultPageable.of(2, 1, Sorts.of(Sort.asc("name")));
         Pageable next = pageable.next();
         Assertions.assertEquals(1L, pageable.getPageNumber());
         Assertions.assertEquals(2L, next.getPageNumber());

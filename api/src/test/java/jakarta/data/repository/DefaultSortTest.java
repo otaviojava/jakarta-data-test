@@ -20,76 +20,28 @@ package jakarta.data.repository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
-
 class DefaultSortTest {
 
     @Test
-    public void shouldReturnErrorWhenOrderIsNull() {
-        Sort sort = new DefaultSort();
-        Assertions.assertThrows(NullPointerException.class, () -> sort.order((Order) null));
+    public void shouldCreateOrder() {
+        Sort order = DefaultOrder.of("name",Direction.ASC);
+        Assertions.assertNotNull(order);
+        Assertions.assertEquals("name", order.getProperty());
     }
 
     @Test
-    public void shouldAddOrder() {
-        Sort sort = new DefaultSort();
-        Assertions.assertTrue(sort.isEmpty());
-        Sort name = sort.order(Order.asc("name"));
-        Assertions.assertNotNull(name);
-        Assertions.assertFalse(name.isEmpty());
-        Assertions.assertNotEquals(sort, name);
-        assertThat(name.getOrderBy(), contains(Order.asc("name")));
+    public void shouldAscending(){
+        Sort order = DefaultOrder.of("name",Direction.ASC);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertTrue(order.isAscending());
+        Assertions.assertFalse(order.isDescending());
     }
 
     @Test
-    public void shouldReturnErrorWhenPropertyIsNull() {
-        Sort sort = new DefaultSort();
-        Assertions.assertThrows(NullPointerException.class, () -> sort.order((String) null));
-    }
-
-    @Test
-    public void shouldAddProperty() {
-        Sort sort = new DefaultSort();
-        Assertions.assertTrue(sort.isEmpty());
-        Sort name = sort.order("name");
-        Assertions.assertNotNull(name);
-        Assertions.assertFalse(name.isEmpty());
-        Assertions.assertNotEquals(sort, name);
-        assertThat(name.getOrderBy(), contains(Order.asc("name")));
-    }
-
-    @Test
-    public void shouldReturnErrorWhenPropertyDirectionIsNull() {
-        Sort sort = new DefaultSort();
-        Assertions.assertThrows(NullPointerException.class, () -> sort.order(null, null));
-        Assertions.assertThrows(NullPointerException.class, () -> sort.order("name", null));
-        Assertions.assertThrows(NullPointerException.class, () -> sort.order(null, Direction.ASC));
-    }
-
-    @Test
-    public void shouldAddPropertyDirection() {
-        Sort sort = new DefaultSort();
-        Assertions.assertTrue(sort.isEmpty());
-        Sort name = sort.order("name", Direction.ASC);
-        Assertions.assertNotNull(name);
-        Assertions.assertFalse(name.isEmpty());
-        Assertions.assertNotEquals(sort, name);
-        assertThat(name.getOrderBy(), contains(Order.asc("name")));
-    }
-
-    @Test
-    public void shouldReturnErrorWhenSortIsNull(){
-        Sort sort = new DefaultSort();
-        Assertions.assertThrows(NullPointerException.class, () -> sort.add(null));
-    }
-    @Test
-    public void shouldAddSort(){
-        Sort sort = new DefaultSort().order("name", Direction.ASC);
-        Sort sorts = sort.add(Sort.of(Order.desc("age")));
-        Assertions.assertNotNull(sorts);
-        Assertions.assertFalse(sorts.isEmpty());
-        Assertions.assertNotEquals(sort, sorts);
-        assertThat(sorts.getOrderBy(), contains(Order.asc("name"), Order.desc("age")));
+    public void shouldDescending(){
+        Sort order = DefaultOrder.of("name",Direction.DESC);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertFalse(order.isAscending());
+        Assertions.assertTrue(order.isDescending());
     }
 }

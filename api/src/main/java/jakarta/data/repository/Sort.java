@@ -17,69 +17,33 @@
  */
 package jakarta.data.repository;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 /**
- * Sort option for queries.
- * Sorted instances are immutable and all mutating operations on this interface return a new instance.
+ * Order implements the pairing of an {@link Direction} and a property. It is used to provide input for Sort
  */
 public interface Sort {
 
-    /**
-     * Adds an order object.
-     *
-     * @param order The order object
-     * @return A new sort with the order applied
-     * @throws NullPointerException when order is null
-     */
-    Sort order(Order order);
 
     /**
-     * Returns a new Sort consisting of the Sort.Orders of the current Sort combined with the given ones.
-     *
-     * @param sort The sort
-     * @return A new sort with the order applied
-     * @throws NullPointerException when sort is null
+     * @return The property name to order by
      */
-    Sort add(Sort sort);
+    String getProperty();
 
     /**
-     * Orders by the specified property name (defaults to ascending) {@link Direction#ASC}.
-     *
-     * @param property The property name to order by
-     * @return A new sort with the order applied
-     * @throws NullPointerException when property is null
+     * @return Returns whether sorting for this property shall be ascending.
      */
-    Sort order(String property);
+    boolean isAscending();
 
     /**
-     * Orders by the specified property name and direction.
-     *
-     * @param property  The property name to order by
-     * @param direction Either "asc" for ascending or "desc" for descending
-     * @return A new sort with the order applied
-     * @throws NullPointerException when there is null parameter
+     * @return Returns whether sorting for this property shall be descending.
      */
-    Sort order(String property, Direction direction);
+    boolean isDescending();
 
-    /**
-     * @return The order definitions for this sort.
-     */
-    List<Order> getOrderBy();
-
-    /**
-     * Returns whether the current {@link Sort#getOrderBy()} is empty.
-     *
-     * @return the  {@link Sort#getOrderBy()} is empty.
-     */
-    boolean isEmpty();
 
     /**
      * Create a {@link Sort} instance
-     *
-     * @param property  the property name to order by
+     * @param property the property name to order by
      * @param direction The direction order by
      * @return an {@link Sort} instance
      * @throws NullPointerException when there are null parameter
@@ -87,52 +51,28 @@ public interface Sort {
     static Sort of(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
-        return DefaultSort.of(Collections.singletonList(Order.of(property, direction)));
+        return DefaultOrder.of(property, direction);
     }
 
     /**
      * Create a {@link Sort} instance on ascending direction {@link  Direction#ASC}
-     *
      * @param property the property name to order by
+     * @return the Order type
      * @return an {@link Sort} instance
-     * @throws NullPointerException when property is null
+     * @throws NullPointerException when there property is null
      */
-    static Sort asc(String property) {
+    static Sort asc(String property){
         return of(property, Direction.ASC);
     }
-
     /**
      * Create a {@link Sort} instance on descending direction {@link  Direction#DESC}
-     *
      * @param property the property name to order by
+     * @return the Order type
      * @return an {@link Sort} instance
-     * @throws NullPointerException when property is null
+     * @throws NullPointerException when there property is null
      */
-    static Sort desc(String property) {
+    static Sort desc(String property){
         return of(property, Direction.DESC);
     }
-
-    /**
-     * Creates a new Sort for the given Orders
-     *
-     * @param orders an order list
-     * @return The sort
-     * @throws NullPointerException when orders is null
-     */
-    static Sort of(Iterable<Order> orders) {
-        Objects.requireNonNull(orders, "orders is required");
-        return DefaultSort.of(orders);
-    }
-
-    /**
-     * Creates a new Sort for the given Orders
-     *
-     * @param orders an order list
-     * @return The sort
-     */
-    static Sort of(Order... orders) {
-        return of(List.of(orders));
-    }
-
 
 }

@@ -25,12 +25,12 @@ final class DefaultPageable implements Pageable {
 
     private final long pagerNumber;
 
-    private final Sort sort;
+    private final Sorts sorts;
 
-    private DefaultPageable(long size, long pagerNumber, Sort sort) {
+    private DefaultPageable(long size, long pagerNumber, Sorts sorts) {
         this.size = size;
         this.pagerNumber = pagerNumber;
-        this.sort = sort;
+        this.sorts = sorts;
     }
 
     @Override
@@ -45,12 +45,12 @@ final class DefaultPageable implements Pageable {
 
     @Override
     public Pageable next() {
-        return DefaultPageable.of(this.size, (pagerNumber + 1), sort);
+        return DefaultPageable.of(this.size, (pagerNumber + 1), sorts);
     }
 
     @Override
-    public Sort getSort() {
-        return sort;
+    public Sorts getSort() {
+        return sorts;
     }
 
     @Override
@@ -64,12 +64,12 @@ final class DefaultPageable implements Pageable {
         DefaultPageable that = (DefaultPageable) o;
         return size == that.size
                 && pagerNumber == that.pagerNumber
-                && Objects.equals(sort, that.sort);
+                && Objects.equals(sorts, that.sorts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(size, pagerNumber, sort);
+        return Objects.hash(size, pagerNumber, sorts);
     }
 
     @Override
@@ -77,11 +77,11 @@ final class DefaultPageable implements Pageable {
         return "DefaultPageable{" +
                 "size=" + size +
                 ", pagerNumber=" + pagerNumber +
-                ", sort=" + sort +
+                ", sort=" + sorts +
                 '}';
     }
 
-    static Pageable of(long size, long pageNumber, Sort sort) {
-        return new DefaultPageable(size, pageNumber, sort);
+    static Pageable of(long size, long pageNumber, Sorts sorts) {
+        return new DefaultPageable(size, pageNumber, sorts);
     }
 }
