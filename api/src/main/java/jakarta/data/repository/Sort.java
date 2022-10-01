@@ -85,15 +85,14 @@ public interface Sort {
      *
      * @param property  the property name to order by
      * @param direction The direction order by
-     * @param <S>       the Sort type
      * @return an {@link Sort} instance
      * @throws NullPointerException when there are null parameter
      */
-    static <S extends Sort> S of(String property, Direction direction) {
+    static Sort of(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
 
-        SortSupplier<S> supplier =
+        SortSupplier supplier =
                 ServiceLoader.load(SortSupplier.class)
                         .findFirst()
                         .orElseThrow(() -> new DataException("There is no implementation of SortSupplier on the Class Loader"));
@@ -104,11 +103,10 @@ public interface Sort {
      * Create a {@link Sort} instance on ascending direction {@link  Direction#ASC}
      *
      * @param property the property name to order by
-     * @param <S>      the Sort type
      * @return an {@link Sort} instance
      * @throws NullPointerException when property is null
      */
-    static <S extends Sort> S asc(String property) {
+    static Sort asc(String property) {
         return of(property, Direction.ASC);
     }
 
@@ -116,11 +114,10 @@ public interface Sort {
      * Create a {@link Sort} instance on descending direction {@link  Direction#DESC}
      *
      * @param property the property name to order by
-     * @param <S>      the Sort type
      * @return an {@link Sort} instance
      * @throws NullPointerException when property is null
      */
-    static <S extends Sort> S desc(String property) {
+    static Sort desc(String property) {
         return of(property, Direction.DESC);
     }
 
@@ -128,13 +125,12 @@ public interface Sort {
      * Creates a new Sort for the given Orders
      *
      * @param orders an order list
-     * @param <S> the Sort type
      * @return The sort
      * @throws NullPointerException when orders is null
      */
-    static <S extends Sort> S of(Iterable<Order> orders) {
+    static Sort of(Iterable<Order> orders) {
         Objects.requireNonNull(orders, "orders is required");
-        IterableSortSupplier<S> supplier =
+        IterableSortSupplier supplier =
                 ServiceLoader.load(IterableSortSupplier.class)
                         .findFirst()
                         .orElseThrow(() -> new DataException("There is no implementation of IterableSortSupplier" +
@@ -146,26 +142,23 @@ public interface Sort {
      * Creates a new Sort for the given Orders
      *
      * @param orders an order list
-     * @param <S> the Sort type
      * @return The sort
      */
-    static <S extends Sort> S of(Order... orders) {
+    static Sort of(Order... orders) {
         return of(List.of(orders));
     }
 
     /**
      * The {@link Sort} supplier that the API will use on the method {@link Sort#of(String, Direction)}
      *
-     * @param <S> the {@link  Sort}  implementation
      */
-    interface SortSupplier<S extends Sort> extends Function<Order, S> {
+    interface SortSupplier extends Function<Order, Sort> {
     }
 
     /**
      * The {@link Sort} supplier that the API will use on the method {@link Sort#of(String, Direction)}
      *
-     * @param <S> the {@link  Sort}  implementation
      */
-    interface IterableSortSupplier<S extends Sort> extends Function<Iterable<Order>, S> {
+    interface IterableSortSupplier extends Function<Iterable<Order>, Sort> {
     }
 }
