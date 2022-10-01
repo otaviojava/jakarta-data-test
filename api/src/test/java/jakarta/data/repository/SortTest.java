@@ -60,4 +60,27 @@ class SortTest {
         Assertions.assertTrue(order.isDescending());
         Assertions.assertFalse(order.isAscending());
     }
+
+    @Test
+    public void shouldCreateOrder() {
+        Sort order = Sort.of("name",Direction.ASC);
+        Assertions.assertNotNull(order);
+        Assertions.assertEquals("name", order.getProperty());
+    }
+
+    @Test
+    public void shouldAscending(){
+        Sort order = Sort.of("name",Direction.ASC);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertTrue(order.isAscending());
+        Assertions.assertFalse(order.isDescending());
+    }
+
+    @Test
+    public void shouldDescending(){
+        Sort order = Sort.of("name",Direction.DESC);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertFalse(order.isAscending());
+        Assertions.assertTrue(order.isDescending());
+    }
 }
