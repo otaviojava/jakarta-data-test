@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-class DefaultSort implements Sort {
+final class DefaultSort implements Sort {
 
     private final List<Order> orders;
 

@@ -19,7 +19,7 @@ package jakarta.data.repository;
 
 import java.util.Objects;
 
-class DefaultOrder implements Order {
+final class DefaultOrder implements Order {
 
     private final String property;
 
