@@ -81,4 +81,19 @@ class DefaultSortTest {
         Assertions.assertNotEquals(sort, name);
         assertThat(name.getOrderBy(), contains(Order.asc("name")));
     }
+
+    @Test
+    public void shouldReturnErrorWhenSortIsNull(){
+        Sort sort = new DefaultSort();
+        Assertions.assertThrows(NullPointerException.class, () -> sort.add(null));
+    }
+    @Test
+    public void shouldAddSort(){
+        Sort sort = new DefaultSort().order("name", Direction.ASC);
+        Sort sorts = sort.add(Sort.of(Order.desc("age")));
+        Assertions.assertNotNull(sorts);
+        Assertions.assertFalse(sorts.isEmpty());
+        Assertions.assertNotEquals(sort, sorts);
+        assertThat(sorts.getOrderBy(), contains(Order.asc("name"), Order.desc("age")));
+    }
 }
