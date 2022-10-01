@@ -27,6 +27,12 @@ final class DefaultPageable implements Pageable {
 
     private final Sort sort;
 
+    private DefaultPageable(long size, long pagerNumber, Sort sort) {
+        this.size = size;
+        this.pagerNumber = pagerNumber;
+        this.sort = sort;
+    }
+
     @Override
     public long getSize() {
         return size;
@@ -71,5 +77,9 @@ final class DefaultPageable implements Pageable {
                 ", pagerNumber=" + pagerNumber +
                 ", sort=" + sort +
                 '}';
+    }
+
+    static Pageable of(long size, long pageNumber, Sort sort) {
+        return new DefaultPageable(size, pageNumber, sort);
     }
 }
