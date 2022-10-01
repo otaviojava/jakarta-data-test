@@ -17,8 +17,52 @@
  */
 package jakarta.data.repository;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SortTest {
+
+    @Test
+    public void shouldCreatePropertyDirector(){
+        Sort sort = Sort.of("name", Direction.ASC);
+        Assertions.assertNotNull(sort);
+        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.asc("name")));
+    }
+
+    @Test
+    public void shouldCreateAsc(){
+        Sort sort = Sort.asc("name");
+        Assertions.assertNotNull(sort);
+        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.asc("name")));
+    }
+
+    @Test
+    public void shouldCreateDesc(){
+        Sort sort = Sort.desc("name");
+        Assertions.assertNotNull(sort);
+        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.desc("name")));
+    }
+
+    @Test
+    public void shouldCreateOfIterable(){
+        Sort sort = Sort.of(List.of(Order.asc("name"), Order.desc("age")));
+        Assertions.assertNotNull(sort);
+        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.asc("name"),
+                Order.desc("age")));
+    }
+
+    @Test
+    public void shouldCreateOfVarArgs(){
+        Sort sort = Sort.of(Order.asc("name"), Order.desc("age"));
+        Assertions.assertNotNull(sort);
+        MatcherAssert.assertThat(sort.getOrderBy(), Matchers.contains(Order.asc("name"),
+                Order.desc("age")));
+    }
 
 }
