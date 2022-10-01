@@ -20,8 +20,6 @@ package jakarta.data.repository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.ServiceLoader;
-import java.util.function.Function;
 
 /**
  * Sort option for queries.
@@ -89,12 +87,7 @@ public interface Sort {
     static Sort of(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
-
-        SortSupplier supplier =
-                ServiceLoader.load(SortSupplier.class)
-                        .findFirst()
-                        .orElse(DefaultSortSupplier.INSTANCE);
-        return supplier.apply(Collections.singletonList(Order.of(property, direction)));
+        return DefaultSort.of(Collections.singletonList(Order.of(property, direction)));
     }
 
     /**
@@ -128,11 +121,7 @@ public interface Sort {
      */
     static Sort of(Iterable<Order> orders) {
         Objects.requireNonNull(orders, "orders is required");
-        SortSupplier supplier =
-                ServiceLoader.load(SortSupplier.class)
-                        .findFirst()
-                        .orElse(DefaultSortSupplier.INSTANCE);
-        return supplier.apply(orders);
+        return DefaultSort.of(orders);
     }
 
     /**

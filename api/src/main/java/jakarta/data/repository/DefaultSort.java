@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 final class DefaultSort implements Sort {
 
@@ -30,7 +32,7 @@ final class DefaultSort implements Sort {
         this.orders = Collections.emptyList();
     }
 
-    DefaultSort(List<Order> orders) {
+    private DefaultSort(List<Order> orders) {
         this.orders = orders;
     }
 
@@ -95,5 +97,12 @@ final class DefaultSort implements Sort {
         return "DefaultSort{" +
                 "orders=" + orders +
                 '}';
+    }
+
+    static Sort of(Iterable<Order> orders) {
+        Objects.requireNonNull(orders, "orders is required");
+        return new DefaultSort(StreamSupport.stream(orders.spliterator(), false)
+                .peek(o -> Objects.requireNonNull(o, "order element is required"))
+                .collect(Collectors.toUnmodifiableList()));
     }
 }

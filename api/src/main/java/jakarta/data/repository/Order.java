@@ -18,8 +18,6 @@
 package jakarta.data.repository;
 
 import java.util.Objects;
-import java.util.ServiceLoader;
-import java.util.function.BiFunction;
 
 /**
  * Order implements the pairing of an {@link Direction} and a property. It is used to provide input for Sort
@@ -53,12 +51,7 @@ public interface Order {
     static Order of(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
-
-        OrderSupplier supplier =
-        ServiceLoader.load(OrderSupplier.class)
-                .findFirst()
-                .orElse(DefaultOrderSupplier.INSTANCE);
-        return supplier.apply(property, direction);
+        return DefaultOrder.of(property, direction);
     }
 
     /**
