@@ -17,8 +17,33 @@
  */
 package jakarta.data.repository;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DefaultOrderTest {
 
+    @Test
+    public void shouldCreateOrder() {
+        Order order = DefaultOrder.of("name",Direction.ASC);
+        Assertions.assertNotNull(order);
+        Assertions.assertEquals("name", order.getProperty());
+    }
+
+    @Test
+    public void shouldAscending(){
+        Order order = DefaultOrder.of("name",Direction.ASC);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertTrue(order.isAscending());
+        Assertions.assertFalse(order.isDescending());
+    }
+
+    @Test
+    public void shouldDescending(){
+        Order order = DefaultOrder.of("name",Direction.DESC);
+        Assertions.assertEquals("name", order.getProperty());
+        Assertions.assertFalse(order.isAscending());
+        Assertions.assertTrue(order.isDescending());
+    }
 }
