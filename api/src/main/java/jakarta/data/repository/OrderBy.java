@@ -57,16 +57,17 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface OrderBy {
     /**
-     * <p>Indicate whether the direction order.</p>
+     * <p>Indicate whether to use descending order
+     * when sorting by this attribute.</p>
      *
-     * <p>The default value of <code>Direction.ASC</code> means ascending sort.</p>
+     * <p>The default value of <code>false</code> means ascending sort.</p>
      *
      * @return whether to use descending (versus ascending) order.
      */
-    Direction direction() default Direction.ASC;
+    boolean descending() default false;
 
     /**
-     * <p>Entity attribute name to sort by.<p>
+     * <p>Entity attribute name to sort by.</p>
      *
      * <p>For example,</p>
      *
@@ -74,6 +75,8 @@ public @interface OrderBy {
      * &#64;OrderBy("age")
      * Stream&lt;Person&gt; findByLastName(String lastName);
      * </pre>
+     *
+     * @return entity attribute name.
      */
     String value();
 

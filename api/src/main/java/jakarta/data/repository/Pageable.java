@@ -32,11 +32,11 @@ public interface Pageable {
     Sort EMPTY_SORT = Sort.of();
 
     /**
-     * Returns the offset to be taken according to the underlying page and page size.
+     * Returns the size of each page
      *
-     * @return the offset to be taken according to the underlying page and page size.
+     * @return the size of each page
      */
-    long getOffset();
+    long getSize();
 
     /**
      * Returns the page to be returned.
@@ -53,13 +53,6 @@ public interface Pageable {
     Pageable next();
 
     /**
-     * Returns the previous Pageable or the first Pageable if the current one already is the first one.
-     *
-     * @return The previous pageable
-     */
-    Pageable previous();
-
-    /**
      * Returns the sorting parameters.
      *
      * @return The sort definition to use.
@@ -67,7 +60,7 @@ public interface Pageable {
     Sort getSort();
 
     /**
-     * Creates a new Pageable at the given offset with a default size of 10.
+     * Creates a new Pageable at the given size with a default size of 10.
      *
      * @param page The page
      * @param <P>  page type
@@ -78,7 +71,7 @@ public interface Pageable {
     }
 
     /**
-     * Creates a new Pageable at the given offset and page
+     * Creates a new Pageable at the given size and page
      *
      * @param page The page
      * @param size The size
@@ -90,7 +83,7 @@ public interface Pageable {
     }
 
     /**
-     * Creates a new Pageable at the given offset with a default size of 10.
+     * Creates a new Pageable at the given size with a default size of 10.
      *
      * @param page The page
      * @param size The size
