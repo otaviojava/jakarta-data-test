@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Sort option for queries.
+ * Sorts option for queries.
+ * It is a {@link Sort} collection
  * Sorted instances are immutable and all mutating operations on this interface return a new instance.
  */
 public interface Sorts {
