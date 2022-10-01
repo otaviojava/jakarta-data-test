@@ -17,12 +17,16 @@
  */
 package jakarta.data.repository;
 
-enum DefaultOrderSupplier implements Order.OrderSupplier<Order> {
-    INSTANCE;
+import java.util.Objects;
 
+enum DefaultOrderSupplier implements Order.OrderSupplier<Order> {
+
+    INSTANCE;
 
     @Override
     public Order apply(String property, Direction direction) {
-        return null;
+        Objects.requireNonNull(property, "property is required");
+        Objects.requireNonNull(direction, "direction is required");
+        return DefaultOrder.of(property, direction);
     }
 }
