@@ -24,14 +24,14 @@ class DefaultSortTest {
 
     @Test
     public void shouldCreateOrder() {
-        Sort order = DefaultOrder.of("name",Direction.ASC);
+        Sort order = DefaultSort.of("name",Direction.ASC);
         Assertions.assertNotNull(order);
         Assertions.assertEquals("name", order.getProperty());
     }
 
     @Test
     public void shouldAscending(){
-        Sort order = DefaultOrder.of("name",Direction.ASC);
+        Sort order = DefaultSort.of("name",Direction.ASC);
         Assertions.assertEquals("name", order.getProperty());
         Assertions.assertTrue(order.isAscending());
         Assertions.assertFalse(order.isDescending());
@@ -39,7 +39,7 @@ class DefaultSortTest {
 
     @Test
     public void shouldDescending(){
-        Sort order = DefaultOrder.of("name",Direction.DESC);
+        Sort order = DefaultSort.of("name",Direction.DESC);
         Assertions.assertEquals("name", order.getProperty());
         Assertions.assertFalse(order.isAscending());
         Assertions.assertTrue(order.isDescending());

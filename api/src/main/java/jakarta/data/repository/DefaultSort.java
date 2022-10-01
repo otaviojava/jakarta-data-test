@@ -25,7 +25,7 @@ final class DefaultSort implements Sort {
 
     private final Direction direction;
 
-    private DefaultOrder(String property, Direction direction) {
+    private DefaultSort(String property, Direction direction) {
         this.property = property;
         this.direction = direction;
     }
@@ -53,7 +53,7 @@ final class DefaultSort implements Sort {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        DefaultOrder that = (DefaultOrder) o;
+        DefaultSort that = (DefaultSort) o;
         return Objects.equals(property, that.property) && direction == that.direction;
     }
 
@@ -71,6 +71,6 @@ final class DefaultSort implements Sort {
     }
 
     static Sort of(String property, Direction direction) {
-        return new DefaultOrder(property, direction);
+        return new DefaultSort(property, direction);
     }
 }
