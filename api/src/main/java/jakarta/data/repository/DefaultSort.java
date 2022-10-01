@@ -27,7 +27,7 @@ class DefaultSort implements Sort {
     private final List<Order> orders;
 
     DefaultSort() {
-        this.orders = new ArrayList<>();
+        this.orders = Collections.emptyList();
     }
 
     DefaultSort(List<Order> orders) {

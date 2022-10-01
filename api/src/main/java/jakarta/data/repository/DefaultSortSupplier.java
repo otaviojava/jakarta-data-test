@@ -17,11 +17,19 @@
  */
 package jakarta.data.repository;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 enum DefaultSortSupplier implements Sort.SortSupplier {
     INSTANCE;
 
     @Override
     public Sort apply(Iterable<Order> orders) {
-        return null;
+        Objects.requireNonNull(orders, "orders is required");
+        return new DefaultSort(StreamSupport.stream(orders.spliterator(), false)
+                .map(o -> Objects.requireNonNull(o, "all order element must not be null"))
+                .collect(Collectors.toUnmodifiableList()));
     }
 }
