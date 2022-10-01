@@ -20,8 +20,6 @@ package jakarta.data.repository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class LimitTest {
 
     @Test
@@ -47,15 +45,15 @@ class LimitTest {
     public void shouldCreateLimitWithDefaultStartAt() {
         Limit limit = Limit.of(10);
         Assertions.assertNotNull(limit);
-        Assertions.assertEquals(10L, limit.maxResults());
-        Assertions.assertEquals(1L, limit.startAt());
+        Assertions.assertEquals(10L, limit.getLimit());
+        Assertions.assertEquals(1L, limit.getSkip());
     }
 
     @Test
     public void shouldCreateLimit() {
         Limit limit = Limit.of(10, 2);
         Assertions.assertNotNull(limit);
-        Assertions.assertEquals(10L, limit.maxResults());
-        Assertions.assertEquals(2L, limit.startAt());
+        Assertions.assertEquals(10L, limit.getLimit());
+        Assertions.assertEquals(2L, limit.getSkip());
     }
 }

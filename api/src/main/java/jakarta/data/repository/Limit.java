@@ -44,16 +44,16 @@ import java.util.Objects;
  * </ul>
  */
 public final class Limit {
-    private final long maxResults;
-    private final long startAt;
+    private final long limit;
+    private final long skip;
 
-    private Limit(long maxResults, long startAt) {
-        if (maxResults < 1) {
-            throw new IllegalArgumentException("maxResults: " + maxResults);
+    private Limit(long limit, long skip) {
+        if (limit < 1) {
+            throw new IllegalArgumentException("limit: " + limit);
         }
 
-        this.maxResults = maxResults;
-        this.startAt = startAt;
+        this.limit = limit;
+        this.skip = skip;
     }
 
     /**
@@ -62,8 +62,8 @@ public final class Limit {
      *
      * @return maximum number of results for a query.
      */
-    public long maxResults() {
-        return maxResults;
+    public long getLimit() {
+        return limit;
     }
 
     /**
@@ -72,8 +72,8 @@ public final class Limit {
      *
      * @return offset of the first result.
      */
-    public long startAt() {
-        return startAt;
+    public long getSkip() {
+        return skip;
     }
 
     @Override
@@ -85,19 +85,19 @@ public final class Limit {
             return false;
         }
         Limit limit = (Limit) o;
-        return maxResults == limit.maxResults && startAt == limit.startAt;
+        return this.limit == limit.limit && skip == limit.skip;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(maxResults, startAt);
+        return Objects.hash(limit, skip);
     }
 
     @Override
     public String toString() {
         return "Limit{" +
-                "maxResults=" + maxResults +
-                ", startAt=" + startAt +
+                "limit=" + limit +
+                ", skip=" + skip +
                 '}';
     }
 
