@@ -83,7 +83,7 @@ public class Limit {
      * or <code>&#64;Query</code> method.
      * @throws IllegalArgumentException if maxResults is less than 1.
      */
-    public Limit of(long maxResults) {
+    public static Limit of(long maxResults) {
         return new Limit(maxResults, 1L);
     }
 
@@ -98,7 +98,7 @@ public class Limit {
      * @throws IllegalArgumentException if maxResults or startAt is
      *                                  less than 1.
      */
-    public Limit of(long maxResults, long startAt) {
+    public static Limit of(long maxResults, long startAt) {
         if (startAt < 1) {
             throw new IllegalArgumentException("startAt: " + startAt);
         }
