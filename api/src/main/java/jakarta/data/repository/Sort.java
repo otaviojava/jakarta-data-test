@@ -17,8 +17,6 @@
  */
 package jakarta.data.repository;
 
-import jakarta.data.DataException;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -133,8 +131,7 @@ public interface Sort {
         SortSupplier supplier =
                 ServiceLoader.load(SortSupplier.class)
                         .findFirst()
-                        .orElseThrow(() -> new DataException("There is no implementation of IterableSortSupplier" +
-                                " on the Class Loader"));
+                        .orElse(DefaultSortSupplier.INSTANCE);
         return supplier.apply(orders);
     }
 
@@ -151,7 +148,6 @@ public interface Sort {
 
     /**
      * The {@link Sort} supplier that the API will use on the method {@link Sort#of(String, Direction)}
-     *
      */
     interface SortSupplier extends Function<Iterable<Order>, Sort> {
     }
