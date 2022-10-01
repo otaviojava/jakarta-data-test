@@ -62,6 +62,30 @@ public class Pageable {
         return new Pageable(this.size, (page + 1));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Pageable pageable = (Pageable) o;
+        return size == pageable.size && page == pageable.page;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(size, page);
+    }
+
+    @Override
+    public String toString() {
+        return "Pageable{" +
+                "size=" + size +
+                ", page=" + page +
+                '}';
+    }
 
     /**
      * Creates a new Pageable at the given size with a default size of 10.
@@ -69,7 +93,7 @@ public class Pageable {
      * @param page The page
      * @return The pageable
      */
-    static Pageable page(long page) {
+    public static Pageable page(long page) {
         return new Pageable(page, DEFAULT_SIZE);
     }
 
@@ -80,7 +104,7 @@ public class Pageable {
      * @param size The size
      * @return The pageable
      */
-    static Pageable of(long page, long size) {
+    public static Pageable of(long page, long size) {
         return new Pageable(page, DEFAULT_SIZE);
     }
 
