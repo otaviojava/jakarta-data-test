@@ -25,9 +25,9 @@ enum DefaultPageableSupplier implements Pageable.PageableSupplier {
     @Override
     public Pageable apply(long page, long size, Sort sort) {
         if (page < 1) {
-            throw new IllegalArgumentException("The page should not be negative: " + page);
+            throw new IllegalArgumentException("The page should not be negative or zero: " + page);
         } else if (size < 1) {
-            throw new IllegalArgumentException("The size should not be negative: " + size);
+            throw new IllegalArgumentException("The size should not be negative or zero: " + size);
         }
         Objects.requireNonNull(sort, "sort is required");
         return DefaultPageable.of(size, page, sort);
