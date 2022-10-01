@@ -44,7 +44,10 @@ class DefaultSort implements Sort {
 
     @Override
     public Sort add(Sort sort) {
-        return null;
+        Objects.requireNonNull(sort, "sort is required");
+        return new DefaultSort(new ArrayList<>(orders) {{
+            this.addAll(sort.getOrderBy());
+        }});
     }
 
     @Override
