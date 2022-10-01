@@ -51,7 +51,7 @@ public interface Sort {
     static Sort of(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
-        return DefaultOrder.of(property, direction);
+        return DefaultSort.of(property, direction);
     }
 
     /**
