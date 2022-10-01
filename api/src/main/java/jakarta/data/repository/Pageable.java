@@ -94,7 +94,7 @@ public class Pageable {
      * @return The pageable
      */
     public static Pageable page(long page) {
-        return new Pageable(page, DEFAULT_SIZE);
+        return of(page, DEFAULT_SIZE);
     }
 
     /**
@@ -105,7 +105,12 @@ public class Pageable {
      * @return The pageable
      */
     public static Pageable of(long page, long size) {
-        return new Pageable(page, DEFAULT_SIZE);
+        if (page < 1) {
+            throw new IllegalArgumentException("page: " + page);
+        } else if (size < 1) {
+            throw new IllegalArgumentException("size: " + size);
+        }
+        return new Pageable(size, page);
     }
 
 }

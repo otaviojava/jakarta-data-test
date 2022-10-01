@@ -33,8 +33,10 @@ class PageableTest {
     public void shouldNext(){
         Pageable pageable = Pageable.of(2, 1);
         Pageable next = pageable.next();
-        Assertions.assertEquals(1L, pageable.getPage());
-        Assertions.assertEquals(2L, next.getPage());
+        Assertions.assertEquals(1L, pageable.getSize());
+        Assertions.assertEquals(2L, pageable.getPage());
+        Assertions.assertEquals(3L, next.getPage());
+        Assertions.assertEquals(1L, next.getSize());
     }
 
 }
