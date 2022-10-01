@@ -17,8 +17,24 @@
  */
 package jakarta.data.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class PageableTest {
+
+    @Test
+    public void shouldCreatePageable(){
+        Pageable pageable = Pageable.of(2, 6);
+        Assertions.assertEquals(2L, pageable.getSize());
+        Assertions.assertEquals(6L, pageable.getPage());
+    }
+
+    @Test
+    public void shouldNext(){
+        Pageable pageable = Pageable.of(2, 1);
+        Pageable next = pageable.next();
+        Assertions.assertEquals(1L, pageable.getPage());
+        Assertions.assertEquals(2L, next.getPage());
+    }
 
 }
