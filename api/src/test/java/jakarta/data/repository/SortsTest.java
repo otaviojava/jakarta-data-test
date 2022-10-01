@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+
 class SortsTest {
 
     @Test
@@ -61,6 +64,74 @@ class SortsTest {
         Assertions.assertNotNull(sorts);
         MatcherAssert.assertThat(sorts.getOrderBy(), Matchers.contains(Sort.asc("name"),
                 Sort.desc("age")));
+    }
+
+    @Test
+    public void shouldReturnErrorWhenOrderIsNull() {
+        Sorts sorts = Sorts.of();
+        Assertions.assertThrows(NullPointerException.class, () -> sorts.sort((Sort) null));
+    }
+
+    @Test
+    public void shouldAddOrder() {
+        Sorts sorts = Sorts.of();
+        Assertions.assertTrue(sorts.isEmpty());
+        Sorts name = sorts.sort(Sort.asc("name"));
+        Assertions.assertNotNull(name);
+        Assertions.assertFalse(name.isEmpty());
+        Assertions.assertNotEquals(sorts, name);
+        assertThat(name.getOrderBy(), contains(Sort.asc("name")));
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPropertyIsNull() {
+        Sorts sorts = Sorts.of();
+        Assertions.assertThrows(NullPointerException.class, () -> sorts.sort((String) null));
+    }
+
+    @Test
+    public void shouldAddProperty() {
+        Sorts sorts = Sorts.of();
+        Assertions.assertTrue(sorts.isEmpty());
+        Sorts name = sorts.sort("name");
+        Assertions.assertNotNull(name);
+        Assertions.assertFalse(name.isEmpty());
+        Assertions.assertNotEquals(sorts, name);
+        assertThat(name.getOrderBy(), contains(Sort.asc("name")));
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPropertyDirectionIsNull() {
+        Sorts sorts = Sorts.of();
+        Assertions.assertThrows(NullPointerException.class, () -> sorts.sort(null, null));
+        Assertions.assertThrows(NullPointerException.class, () -> sorts.sort("name", null));
+        Assertions.assertThrows(NullPointerException.class, () -> sorts.sort(null, Direction.ASC));
+    }
+
+    @Test
+    public void shouldAddPropertyDirection() {
+        Sorts sorts = Sorts.of();
+        Assertions.assertTrue(sorts.isEmpty());
+        Sorts name = sorts.sort("name", Direction.ASC);
+        Assertions.assertNotNull(name);
+        Assertions.assertFalse(name.isEmpty());
+        Assertions.assertNotEquals(sorts, name);
+        assertThat(name.getOrderBy(), contains(Sort.asc("name")));
+    }
+
+    @Test
+    public void shouldReturnErrorWhenSortIsNull(){
+        Sorts sorts = Sorts.of();
+        Assertions.assertThrows(NullPointerException.class, () -> sorts.add(null));
+    }
+    @Test
+    public void shouldAddSort(){
+        Sorts sort = Sorts.of().sort("name", Direction.ASC);
+        Sorts sorts = sort.add(Sorts.of(Sort.desc("age")));
+        Assertions.assertNotNull(sorts);
+        Assertions.assertFalse(sorts.isEmpty());
+        Assertions.assertNotEquals(sort, sorts);
+        assertThat(sorts.getOrderBy(), contains(Sort.asc("name"), Sort.desc("age")));
     }
 
 }
