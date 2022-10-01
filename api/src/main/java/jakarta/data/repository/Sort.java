@@ -95,7 +95,7 @@ public interface Sort {
         SortSupplier supplier =
                 ServiceLoader.load(SortSupplier.class)
                         .findFirst()
-                        .orElseThrow(() -> new DataException("There is no implementation of SortSupplier on the Class Loader"));
+                        .orElse(DefaultSortSupplier.INSTANCE);
         return supplier.apply(Collections.singletonList(Order.of(property, direction)));
     }
 
