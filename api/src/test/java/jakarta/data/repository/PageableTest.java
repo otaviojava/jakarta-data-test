@@ -25,8 +25,8 @@ class PageableTest {
     @Test
     public void shouldCreatePageable(){
         Pageable pageable = Pageable.of(2, 6);
-        Assertions.assertEquals(2L, pageable.getSize());
-        Assertions.assertEquals(6L, pageable.getPage());
+        Assertions.assertEquals(6L, pageable.getSize());
+        Assertions.assertEquals(2L, pageable.getPage());
     }
 
     @Test
@@ -37,6 +37,21 @@ class PageableTest {
         Assertions.assertEquals(2L, pageable.getPage());
         Assertions.assertEquals(3L, next.getPage());
         Assertions.assertEquals(1L, next.getSize());
+    }
+
+    @Test
+    public void shouldReturnErrorWhenThereIsIllegalArgument() {
+        Assertions.assertThrows(IllegalArgumentException.class, ()->
+                Pageable.page(0));
+
+        Assertions.assertThrows(IllegalArgumentException.class, ()->
+                Pageable.page(-1));
+
+        Assertions.assertThrows(IllegalArgumentException.class, ()->
+                Pageable.of(1, -1));
+
+        Assertions.assertThrows(IllegalArgumentException.class, ()->
+                Pageable.of(1, 0));
     }
 
 }
