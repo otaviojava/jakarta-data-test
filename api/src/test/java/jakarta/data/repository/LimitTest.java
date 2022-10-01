@@ -25,13 +25,37 @@ import static org.junit.jupiter.api.Assertions.*;
 class LimitTest {
 
     @Test
-    public void shouldReturnErrorWhenLimitIsNegative() {
+    public void shouldReturnErrorWhenMaxResultsIsNegative() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> Limit.of(-1));
     }
 
     @Test
-    public void shouldReturnErrorWhenLimitIsZero() {
+    public void shouldReturnErrorWhenMaxResultsIsZero() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> Limit.of(0));
     }
 
+    @Test
+    public void shouldReturnErrorWhenStartAtIsNegative(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Limit.of(1, -1));
+    }
+
+    @Test
+    public void shouldReturnErrorWhenStartAtIsZero(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Limit.of(1, 0));
+    }
+    @Test
+    public void shouldCreateLimitWithDefaultStartAt() {
+        Limit limit = Limit.of(10);
+        Assertions.assertNotNull(limit);
+        Assertions.assertEquals(10L, limit.maxResults());
+        Assertions.assertEquals(1L, limit.startAt());
+    }
+
+    @Test
+    public void shouldCreateLimit() {
+        Limit limit = Limit.of(10, 2);
+        Assertions.assertNotNull(limit);
+        Assertions.assertEquals(10L, limit.maxResults());
+        Assertions.assertEquals(2L, limit.startAt());
+    }
 }
