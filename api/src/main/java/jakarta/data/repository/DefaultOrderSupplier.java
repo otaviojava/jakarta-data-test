@@ -19,7 +19,7 @@ package jakarta.data.repository;
 
 import java.util.Objects;
 
-enum DefaultOrderSupplier implements Order.OrderSupplier<Order> {
+enum DefaultOrderSupplier implements Order.OrderSupplier {
 
     INSTANCE;
 

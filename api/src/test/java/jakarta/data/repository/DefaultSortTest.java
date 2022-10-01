@@ -17,8 +17,24 @@
  */
 package jakarta.data.repository;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DefaultSortTest {
 
+
+    @Test
+    public void shouldReturnErrorWhenOrderIsNull() {
+        Sort sort = new DefaultSort();
+        Assertions.assertThrows(NullPointerException.class, () -> sort.order((Order) null ));
+    }
+
+    @Test
+    public void shouldAddOrder() {
+        Sort sort = new DefaultSort();
+        sort.order(Order.asc("name"));
+    }
 }

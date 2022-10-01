@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DefaultOrderSupplierTest {
 
-    private Order.OrderSupplier<Order> supplier;
+    private Order.OrderSupplier supplier;
 
     @BeforeEach
     public void setUp() {

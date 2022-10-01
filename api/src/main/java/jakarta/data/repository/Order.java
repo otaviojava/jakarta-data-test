@@ -50,14 +50,13 @@ public interface Order {
      * @param property the property name to order by
      * @param direction The direction order by
      * @return an {@link Order} instance
-     * @param <O> the Order type
      * @throws NullPointerException when there are null parameter
      */
-    static <O extends Order> O of(String property, Direction direction) {
+    static Order of(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
 
-        OrderSupplier<O> supplier =
+        OrderSupplier supplier =
         ServiceLoader.load(OrderSupplier.class)
                 .findFirst()
                 .orElse(DefaultOrderSupplier.INSTANCE);
@@ -69,10 +68,9 @@ public interface Order {
      * @param property the property name to order by
      * @return the Order type
      * @return an {@link Order} instance
-     * @param <O> the Order type
      * @throws NullPointerException when there property is null
      */
-    static <O extends Order> O asc(String property){
+    static Order asc(String property){
         return of(property, Direction.ASC);
     }
     /**
@@ -80,10 +78,9 @@ public interface Order {
      * @param property the property name to order by
      * @return the Order type
      * @return an {@link Order} instance
-     * @param <O> the Order type
      * @throws NullPointerException when there property is null
      */
-    static <O extends Order> O desc(String property){
+    static Order desc(String property){
         return of(property, Direction.DESC);
     }
 
@@ -91,6 +88,6 @@ public interface Order {
      * The {@link Order} supplier that the API will use on the method {@link Order#of(String, Direction)}
      * @param <O> the {@link  Order implementation}
      */
-    interface OrderSupplier<O extends Order> extends BiFunction<String, Direction, O>{}
+    interface OrderSupplier extends BiFunction<String, Direction, Order>{}
 
 }
