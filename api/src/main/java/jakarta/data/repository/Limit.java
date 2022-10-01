@@ -43,7 +43,7 @@ import java.util.Objects;
  *     with the <code>First</code> keyword.</li>
  * </ul>
  */
-public final class Limit {
+public class Limit {
     private final long limit;
     private final long skip;
 
