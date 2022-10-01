@@ -17,34 +17,56 @@
  */
 package jakarta.data.repository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Sorts option for queries.
  * It is a {@link Sort} collection
  * Sorted instances are immutable and all mutating operations on this interface return a new instance.
  */
-public interface Sorts {
+public class Sorts {
 
+    private final List<Sort> sorts;
+
+    private Sorts() {
+        this.sorts = Collections.emptyList();
+    }
+
+    private Sorts(List<Sort> sorts) {
+        this.sorts = sorts;
+    }
     /**
-     * Adds an order object.
+     * Adds an sort object.
      *
-     * @param order The order object
-     * @return A new sort with the order applied
-     * @throws NullPointerException when order is null
+     * @param sort The sort object
+     * @return A new sort with the sort applied
+     * @throws NullPointerException when sort is null
      */
-    Sorts order(Sort order);
+    public Sorts sort(Sort sort) {
+        Objects.requireNonNull(sort, "sort is required");
+        return new Sorts(new ArrayList<>(sorts) {{
+            this.add(sort);
+        }});
+    }
 
     /**
-     * Returns a new Sort consisting of the Sort.Orders of the current Sort combined with the given ones.
+     * Returns a new Sorts consisting of the Sorts of the current Sort combined with the given ones.
      *
      * @param sorts The sort
      * @return A new sort with the order applied
      * @throws NullPointerException when sort is null
      */
-    Sorts add(Sorts sorts);
+    public Sorts add(Sorts sorts) {
+        Objects.requireNonNull(sorts, "sort is required");
+        return new Sorts(new ArrayList<>(Sorts.this.sorts) {{
+            this.addAll(sorts.getOrderBy());
+        }});
+    }
 
     /**
      * Orders by the specified property name (defaults to ascending) {@link Direction#ASC}.
@@ -53,7 +75,10 @@ public interface Sorts {
      * @return A new sort with the order applied
      * @throws NullPointerException when property is null
      */
-    Sorts order(String property);
+    public Sorts sort(String property) {
+        Objects.requireNonNull(property, "property is required");
+        return sort(Sort.asc(property));
+    }
 
     /**
      * Orders by the specified property name and direction.
@@ -63,19 +88,51 @@ public interface Sorts {
      * @return A new sort with the order applied
      * @throws NullPointerException when there is null parameter
      */
-    Sorts order(String property, Direction direction);
+    public Sorts sort(String property, Direction direction) {
+        Objects.requireNonNull(property, "property is required");
+        Objects.requireNonNull(direction, "direction is required");
+        return sort(Sort.of(property, direction));
+    }
 
     /**
      * @return The order definitions for this sort.
      */
-    List<Sort> getOrderBy();
+    public List<Sort> getOrderBy() {
+        return Collections.unmodifiableList(sorts);
+    }
 
     /**
      * Returns whether the current {@link Sorts#getOrderBy()} is empty.
      *
      * @return the  {@link Sorts#getOrderBy()} is empty.
      */
-    boolean isEmpty();
+    public boolean isEmpty() {
+        return this.sorts.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Sorts sorts = (Sorts) o;
+        return Objects.equals(this.sorts, sorts.sorts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(sorts);
+    }
+
+    @Override
+    public String toString() {
+        return "Sorts{" +
+                "orders=" + sorts +
+                '}';
+    }
 
     /**
      * Create a {@link Sorts} instance
@@ -88,7 +145,7 @@ public interface Sorts {
     static Sorts of(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
-        return DefaultSorts.of(Collections.singletonList(Sort.of(property, direction)));
+        return new Sorts(Collections.singletonList(Sort.of(property, direction)));
     }
 
     /**
@@ -116,23 +173,25 @@ public interface Sorts {
     /**
      * Creates a new Sort for the given Orders
      *
-     * @param orders an order list
+     * @param sorts an order list
      * @return The sort
-     * @throws NullPointerException when orders is null
+     * @throws NullPointerException when sorts is null
      */
-    static Sorts of(Iterable<Sort> orders) {
-        Objects.requireNonNull(orders, "orders is required");
-        return DefaultSorts.of(orders);
+    static Sorts of(Iterable<Sort> sorts) {
+        Objects.requireNonNull(sorts, "sorts is required");
+        return new Sorts(StreamSupport.stream(sorts.spliterator(), false)
+                .peek(s -> Objects.requireNonNull(s, "sort element cannot be null"))
+                .collect(Collectors.toUnmodifiableList()));
     }
 
     /**
      * Creates a new Sort for the given Orders
      *
-     * @param orders an order list
+     * @param sorts an order list
      * @return The sort
      */
-    static Sorts of(Sort... orders) {
-        return of(List.of(orders));
+    static Sorts of(Sort... sorts) {
+        return of(List.of(sorts));
     }
 
 
