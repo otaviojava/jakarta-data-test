@@ -98,19 +98,4 @@ public interface Pageable {
     }
 
 
-    /**
-     * The {@link Pageable} supplier that the API will use on the method {@link Pageable#of(long, long, Sort)}
-     */
-    interface PageableSupplier {
-        /**
-         * Applies this function to the given argument.
-         *
-         * @param page the page
-         * @param size the size
-         * @param sort the sort
-         * @return a {@link Pageable} instance
-         * @throws NullPointerException when sort is null
-         */
-        Pageable apply(long page, long size, Sort sort);
-    }
 }

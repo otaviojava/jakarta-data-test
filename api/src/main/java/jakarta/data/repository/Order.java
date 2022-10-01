@@ -82,9 +82,4 @@ public interface Order {
         return of(property, Direction.DESC);
     }
 
-    /**
-     * The {@link Order} supplier that the API will use on the method {@link Order#of(String, Direction)}
-     */
-    interface OrderSupplier extends BiFunction<String, Direction, Order>{}
-
 }
