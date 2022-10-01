@@ -28,7 +28,7 @@ package jakarta.data.repository;
  * <pre>
  * &#64;Query("SELECT o FROM Products o WHERE o.weight &lt;= ?1 AND o.width * o.length * o.height &lt;= ?2 ORDER BY o.price DESC")
  * Product[] freeShippingEligible(float maxWeight, float maxVolume, Limit maxResults);
- * 
+ *
  * ...
  * found = products.freeShippingEligible(6.0f, 360.0f, Limit.of(50));
  * </pre>
@@ -46,8 +46,9 @@ public class Limit {
     private final long startAt;
 
     private Limit(long maxResults, long startAt) {
-        if (maxResults < 1)
+        if (maxResults < 1) {
             throw new IllegalArgumentException("maxResults: " + maxResults);
+        }
 
         this.maxResults = maxResults;
         this.startAt = startAt;
@@ -79,7 +80,7 @@ public class Limit {
      *
      * @param maxResults maximum number of results.
      * @return limit that can be supplied to a <code>find...By</code>
-     *         or <code>&#64;Query</code> method.
+     * or <code>&#64;Query</code> method.
      * @throws IllegalArgumentException if maxResults is less than 1.
      */
     public Limit of(long maxResults) {
@@ -93,13 +94,14 @@ public class Limit {
      * @param maxResults maximum number of results.
      * @param startAt    position at which to start returning results.
      * @return limit that can be supplied to a <code>find...By</code>
-     *         or <code>&#64;Query</code> method.
+     * or <code>&#64;Query</code> method.
      * @throws IllegalArgumentException if maxResults or startAt is
-     *         less than 1.
+     *                                  less than 1.
      */
     public Limit of(long maxResults, long startAt) {
-        if (startAt < 1)
+        if (startAt < 1) {
             throw new IllegalArgumentException("startAt: " + startAt);
+        }
 
         return new Limit(maxResults, startAt);
     }
