@@ -86,7 +86,6 @@ public interface Order {
 
     /**
      * The {@link Order} supplier that the API will use on the method {@link Order#of(String, Direction)}
-     * @param <O> the {@link  Order implementation}
      */
     interface OrderSupplier extends BiFunction<String, Direction, Order>{}
 
