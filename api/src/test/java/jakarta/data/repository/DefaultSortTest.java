@@ -18,23 +18,38 @@
 package jakarta.data.repository;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class DefaultSortTest {
-
 
     @Test
     public void shouldReturnErrorWhenOrderIsNull() {
         Sort sort = new DefaultSort();
         Assertions.assertThrows(NullPointerException.class, () -> sort.order((Order) null ));
     }
-
     @Test
     public void shouldAddOrder() {
         Sort sort = new DefaultSort();
-        sort.order(Order.asc("name"));
+        Assertions.assertTrue(sort.isEmpty());
+        Sort name = sort.order(Order.asc("name"));
+        Assertions.assertNotNull(name);
+        Assertions.assertFalse(name.isEmpty());
+        Assertions.assertNotEquals(sort, name);
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPropertyIsNull(){
+        Sort sort = new DefaultSort();
+        Assertions.assertThrows(NullPointerException.class, () -> sort.order((String) null ));
+    }
+
+    @Test
+    public void shouldAddProperty(){
+        Sort sort = new DefaultSort();
+        Assertions.assertTrue(sort.isEmpty());
+        Sort name = sort.order("name");
+        Assertions.assertNotNull(name);
+        Assertions.assertFalse(name.isEmpty());
+        Assertions.assertNotEquals(sort, name);
     }
 }

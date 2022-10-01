@@ -30,11 +30,16 @@ class DefaultSort implements Sort {
         this.orders = new ArrayList<>();
     }
 
+    DefaultSort(List<Order> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public Sort order(Order order) {
         Objects.requireNonNull(order, "order is required");
-
-        return null;
+        return new DefaultSort(new ArrayList<>(orders) {{
+            this.add(order);
+        }});
     }
 
     @Override
