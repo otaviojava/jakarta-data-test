@@ -17,8 +17,34 @@
  */
 package jakarta.data.repository;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DefaultOrderSupplierTest {
 
+    private Order.OrderSupplier<Order> supplier;
+
+    @BeforeEach
+    public void setUp() {
+        this.supplier = DefaultOrderSupplier.INSTANCE;
+    }
+
+    @Test
+    public void shouldReturnErrorWhenPropertyIsNull(){
+        Assertions.assertThrows(NullPointerException.class, () -> supplier.apply(null, Direction.ASC));
+    }
+
+    @Test
+    public void shouldReturnErrorWhenDirectionIsNull(){
+        Assertions.assertThrows(NullPointerException.class, () -> supplier.apply("name", null));
+    }
+
+    @Test
+    public void shouldSupplierOrder() {
+        Order order = supplier.apply("name", Direction.ASC);
+        Assertions.assertNotNull(order);
+    }
 }
