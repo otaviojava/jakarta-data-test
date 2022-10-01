@@ -21,6 +21,7 @@ package jakarta.data.repository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 class DefaultSort implements Sort {
 
@@ -32,6 +33,8 @@ class DefaultSort implements Sort {
 
     @Override
     public Sort order(Order order) {
+        Objects.requireNonNull(order, "order is required");
+
         return null;
     }
 
@@ -58,5 +61,29 @@ class DefaultSort implements Sort {
     @Override
     public boolean isEmpty() {
         return this.orders.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        DefaultSort that = (DefaultSort) o;
+        return Objects.equals(orders, that.orders);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(orders);
+    }
+
+    @Override
+    public String toString() {
+        return "DefaultSort{" +
+                "orders=" + orders +
+                '}';
     }
 }
