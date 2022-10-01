@@ -17,10 +17,7 @@
  */
 package jakarta.data.repository;
 
-import jakarta.data.DataException;
-
 import java.util.Objects;
-import java.util.ServiceLoader;
 
 /**
  * Abstract interface for pagination information.
@@ -89,13 +86,7 @@ public interface Pageable {
      */
     static Pageable of(long page, long size, Sorts sorts) {
         Objects.requireNonNull(sorts, "sort is required");
-        PageableSupplier supplier =
-                ServiceLoader.load(PageableSupplier.class)
-                        .findFirst()
-                        .orElseThrow(() -> new DataException("There is no implementation of PageableSupplier" +
-                                " on the Class Loader"));
-        return supplier.apply(page, size, sorts);
+        return DefaultPageable.of(page, size, sorts);
     }
-
 
 }
