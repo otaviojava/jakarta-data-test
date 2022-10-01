@@ -27,13 +27,13 @@ class DefaultSortsTest {
 
     @Test
     public void shouldReturnErrorWhenOrderIsNull() {
-        Sorts sorts = new DefaultSorts();
+        Sorts sorts = Sorts.of();
         Assertions.assertThrows(NullPointerException.class, () -> sorts.sort((Sort) null));
     }
 
     @Test
     public void shouldAddOrder() {
-        Sorts sorts = new DefaultSorts();
+        Sorts sorts = Sorts.of();
         Assertions.assertTrue(sorts.isEmpty());
         Sorts name = sorts.sort(Sort.asc("name"));
         Assertions.assertNotNull(name);
@@ -44,13 +44,13 @@ class DefaultSortsTest {
 
     @Test
     public void shouldReturnErrorWhenPropertyIsNull() {
-        Sorts sorts = new DefaultSorts();
+        Sorts sorts = Sorts.of();
         Assertions.assertThrows(NullPointerException.class, () -> sorts.sort((String) null));
     }
 
     @Test
     public void shouldAddProperty() {
-        Sorts sorts = new DefaultSorts();
+        Sorts sorts = Sorts.of();
         Assertions.assertTrue(sorts.isEmpty());
         Sorts name = sorts.sort("name");
         Assertions.assertNotNull(name);
@@ -61,7 +61,7 @@ class DefaultSortsTest {
 
     @Test
     public void shouldReturnErrorWhenPropertyDirectionIsNull() {
-        Sorts sorts = new DefaultSorts();
+        Sorts sorts = Sorts.of();
         Assertions.assertThrows(NullPointerException.class, () -> sorts.sort(null, null));
         Assertions.assertThrows(NullPointerException.class, () -> sorts.sort("name", null));
         Assertions.assertThrows(NullPointerException.class, () -> sorts.sort(null, Direction.ASC));
@@ -69,7 +69,7 @@ class DefaultSortsTest {
 
     @Test
     public void shouldAddPropertyDirection() {
-        Sorts sorts = new DefaultSorts();
+        Sorts sorts = Sorts.of();
         Assertions.assertTrue(sorts.isEmpty());
         Sorts name = sorts.sort("name", Direction.ASC);
         Assertions.assertNotNull(name);
@@ -80,12 +80,12 @@ class DefaultSortsTest {
 
     @Test
     public void shouldReturnErrorWhenSortIsNull(){
-        Sorts sorts = new DefaultSorts();
+        Sorts sorts = Sorts.of();
         Assertions.assertThrows(NullPointerException.class, () -> sorts.add(null));
     }
     @Test
     public void shouldAddSort(){
-        Sorts sort = new DefaultSorts().order("name", Direction.ASC);
+        Sorts sort = Sorts.of().sort("name", Direction.ASC);
         Sorts sorts = sort.add(Sorts.of(Sort.desc("age")));
         Assertions.assertNotNull(sorts);
         Assertions.assertFalse(sorts.isEmpty());
