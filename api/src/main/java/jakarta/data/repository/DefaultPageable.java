@@ -62,7 +62,9 @@ final class DefaultPageable implements Pageable {
             return false;
         }
         DefaultPageable that = (DefaultPageable) o;
-        return size == that.size && pagerNumber == that.pagerNumber && Objects.equals(sort, that.sort);
+        return size == that.size
+                && pagerNumber == that.pagerNumber
+                && Objects.equals(sort, that.sort);
     }
 
     @Override
