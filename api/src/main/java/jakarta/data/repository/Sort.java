@@ -22,56 +22,98 @@ import java.util.Objects;
 /**
  * Order implements the pairing of an {@link Direction} and a property. It is used to provide input for Sort
  */
-public interface Sort {
+public class Sort {
 
+    private final String property;
+
+    private final Direction direction;
+
+    private Sort(String property, Direction direction) {
+        this.property = property;
+        this.direction = direction;
+    }
 
     /**
      * @return The property name to order by
      */
-    String getProperty();
+    public String getProperty() {
+        return this.property;
+    }
 
     /**
      * @return Returns whether sorting for this property shall be ascending.
      */
-    boolean isAscending();
+    public boolean isAscending() {
+        return Direction.ASC.equals(direction);
+    }
 
     /**
      * @return Returns whether sorting for this property shall be descending.
      */
-    boolean isDescending();
+    public boolean isDescending() {
+        return Direction.DESC.equals(direction);
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Sort sort = (Sort) o;
+        return Objects.equals(property, sort.property) && direction == sort.direction;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(property, direction);
+    }
+
+    @Override
+    public String toString() {
+        return "Sort{" +
+                "property='" + property + '\'' +
+                ", direction=" + direction +
+                '}';
+    }
 
     /**
      * Create a {@link Sort} instance
-     * @param property the property name to order by
+     *
+     * @param property  the property name to order by
      * @param direction The direction order by
      * @return an {@link Sort} instance
      * @throws NullPointerException when there are null parameter
      */
-    static Sort of(String property, Direction direction) {
+    public static Sort of(String property, Direction direction) {
         Objects.requireNonNull(property, "property is required");
         Objects.requireNonNull(direction, "direction is required");
-        return DefaultSort.of(property, direction);
+        return new Sort(property, direction);
     }
 
     /**
      * Create a {@link Sort} instance on ascending direction {@link  Direction#ASC}
+     *
      * @param property the property name to order by
      * @return the Order type
      * @return an {@link Sort} instance
      * @throws NullPointerException when there property is null
      */
-    static Sort asc(String property){
+    public static Sort asc(String property) {
         return of(property, Direction.ASC);
     }
+
     /**
      * Create a {@link Sort} instance on descending direction {@link  Direction#DESC}
+     *
      * @param property the property name to order by
      * @return the Order type
      * @return an {@link Sort} instance
      * @throws NullPointerException when there property is null
      */
-    static Sort desc(String property){
+    public static Sort desc(String property) {
         return of(property, Direction.DESC);
     }
 
