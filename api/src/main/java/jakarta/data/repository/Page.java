@@ -47,4 +47,10 @@ public interface Page<T> {
      * @return the total amount of elements
      */
     long getTotalPages();
+
+    /**
+     * Returns the next page
+     * @return the next page that can return a Page with {@link Stream} or {@link Stream#empty()}
+     */
+    Page<T> next();
 }
