@@ -45,15 +45,15 @@ class LimitTest {
     public void shouldCreateLimitWithDefaultStartAt() {
         Limit limit = Limit.of(10);
         Assertions.assertNotNull(limit);
-        Assertions.assertEquals(10L, limit.getLimit());
-        Assertions.assertEquals(1L, limit.getSkip());
+        Assertions.assertEquals(10L, limit.maxResults());
+        Assertions.assertEquals(1L, limit.startAt());
     }
 
     @Test
     public void shouldCreateLimit() {
         Limit limit = Limit.of(10, 2);
         Assertions.assertNotNull(limit);
-        Assertions.assertEquals(10L, limit.getLimit());
-        Assertions.assertEquals(2L, limit.getSkip());
+        Assertions.assertEquals(10L, limit.maxResults());
+        Assertions.assertEquals(2L, limit.startAt());
     }
 }
