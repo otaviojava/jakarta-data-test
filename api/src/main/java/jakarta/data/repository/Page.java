@@ -28,9 +28,23 @@ import java.util.stream.Stream;
 public interface Page<T> {
 
 
+    /**
+     * Returns the page content as {@link Stream}
+     * @return the page content as {@link Stream}.
+     */
     Stream<T> getContent();
 
+    /**
+     * Returns the number of total pages.
+     *
+     * @return the number of total pages
+     */
     long getTotalElements();
 
-    int	getTotalPages();
+    /**
+     * Returns the total amount of elements.
+     *
+     * @return the total amount of elements
+     */
+    long getTotalPages();
 }
