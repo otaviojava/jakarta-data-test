@@ -17,5 +17,20 @@
  */
 package jakarta.data.repository;
 
+import java.util.stream.Stream;
+
+
+/**
+ * A page is a sublist of a list of objects. It allows gain information about the position of it in the containing entire list.
+ *
+ * @param <T> the entity type
+ */
 public interface Page<T> {
+
+
+    Stream<T> getContent();
+
+    long getTotalElements();
+
+    int	getTotalPages();
 }
