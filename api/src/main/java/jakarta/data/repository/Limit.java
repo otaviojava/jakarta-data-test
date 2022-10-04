@@ -17,8 +17,6 @@
  */
 package jakarta.data.repository;
 
-import java.util.Objects;
-
 /**
  * <p>Caps the number of results that can be returned by a single invocation
  * of a repository find method.</p>
@@ -30,7 +28,7 @@ import java.util.Objects;
  * <pre>
  * &#64;Query("SELECT o FROM Products o WHERE o.weight &lt;= ?1 AND o.width * o.length * o.height &lt;= ?2 ORDER BY o.price DESC")
  * Product[] freeShippingEligible(float maxWeight, float maxVolume, Limit maxResults);
- *
+ * 
  * ...
  * found = products.freeShippingEligible(6.0f, 360.0f, Limit.of(50));
  * </pre>
@@ -39,21 +37,22 @@ import java.util.Objects;
  * <ul>
  * <li>multiple <code>Limit</code> parameters are specified on the
  *     same method.</li>
+ * <li><code>Limit</code> and {@link Pageable} parameters are specified on the
+ *     same method.</li>
  * <li>a <code>Limit</code> parameter is specified in combination
  *     with the <code>First</code> keyword.</li>
  * </ul>
  */
 public class Limit {
-    private final long limit;
-    private final long skip;
+    private final long maxResults;
+    private final long startAt;
 
-    private Limit(long limit, long skip) {
-        if (limit < 1) {
-            throw new IllegalArgumentException("limit: " + limit);
-        }
+    private Limit(long maxResults, long startAt) {
+        if (maxResults < 1)
+            throw new IllegalArgumentException("maxResults: " + maxResults);
 
-        this.limit = limit;
-        this.skip = skip;
+        this.maxResults = maxResults;
+        this.startAt = startAt;
     }
 
     /**
@@ -62,8 +61,8 @@ public class Limit {
      *
      * @return maximum number of results for a query.
      */
-    public long getLimit() {
-        return limit;
+    public long maxResults() {
+        return maxResults;
     }
 
     /**
@@ -72,33 +71,8 @@ public class Limit {
      *
      * @return offset of the first result.
      */
-    public long getSkip() {
-        return skip;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Limit limit = (Limit) o;
-        return this.limit == limit.limit && skip == limit.skip;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(limit, skip);
-    }
-
-    @Override
-    public String toString() {
-        return "Limit{" +
-                "limit=" + limit +
-                ", skip=" + skip +
-                '}';
+    public long startAt() {
+        return startAt;
     }
 
     /**
@@ -107,7 +81,7 @@ public class Limit {
      *
      * @param maxResults maximum number of results.
      * @return limit that can be supplied to a <code>find...By</code>
-     * or <code>&#64;Query</code> method.
+     *         or <code>&#64;Query</code> method.
      * @throws IllegalArgumentException if maxResults is less than 1.
      */
     public static Limit of(long maxResults) {
@@ -121,14 +95,13 @@ public class Limit {
      * @param maxResults maximum number of results.
      * @param startAt    position at which to start returning results.
      * @return limit that can be supplied to a <code>find...By</code>
-     * or <code>&#64;Query</code> method.
+     *         or <code>&#64;Query</code> method.
      * @throws IllegalArgumentException if maxResults or startAt is
-     *                                  less than 1.
+     *         less than 1.
      */
     public static Limit of(long maxResults, long startAt) {
-        if (startAt < 1) {
+        if (startAt < 1)
             throw new IllegalArgumentException("startAt: " + startAt);
-        }
 
         return new Limit(maxResults, startAt);
     }
