@@ -22,6 +22,7 @@ package jakarta.data.repository;
  * Repository fragment to provide methods to retrieve entities using the pagination and sorting abstraction. In many
  * cases this will be combined with {@link CrudRepository} or similar or with manually added methods to provide CRUD
  * functionality.
+ *
  * @param <T> the domain type the repository manages
  * @param <K> the type of the id of the entity the repository manages
  * @see CrudRepository
@@ -29,5 +30,13 @@ package jakarta.data.repository;
 public interface PageableRepository<T, K> extends CrudRepository<T, K> {
 
 
+    /**
+     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@link Pageable} object.
+     *
+     * @param pageable the pageable to request a paged result , must not be null.
+     * @return a page of entities
+     * @throws NullPointerException when pageable is null
+     */
+    Page<T> findAll(Pageable pageable);
 
 }
