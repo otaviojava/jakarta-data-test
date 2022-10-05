@@ -102,8 +102,9 @@ public class Limit {
     public static Limit range(long start, long end) {
         if (start < 1) {
             throw new IllegalArgumentException("start: " + start);
+        } else if (end < 1) {
+            throw new IllegalArgumentException("end: " + start);
         }
-
         return new Limit(start, end);
     }
 }
