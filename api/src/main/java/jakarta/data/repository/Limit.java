@@ -105,6 +105,6 @@ public class Limit {
         } else if (end < 1) {
             throw new IllegalArgumentException("end: " + start);
         }
-        return new Limit(start, end);
+        return new Limit(end, start);
     }
 }
