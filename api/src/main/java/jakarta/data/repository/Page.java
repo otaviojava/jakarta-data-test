@@ -37,6 +37,13 @@ public interface Page<T> {
 
 
     /**
+     * Returns the total amount of elements.
+     *
+     * @return the total amount of elements
+     */
+    long size();
+
+    /**
      * Returns the current page {@link Pageable#getPage()} of the page
      *
      * @return the current page
@@ -45,12 +52,14 @@ public interface Page<T> {
 
     /**
      * Returns the current {@link Pageable}
+     *
      * @return the current Pageable
      */
     Pageable getPageable();
 
     /**
      * Returns the next {@link Pageable#next()}
+     *
      * @return the next pageable
      */
     Pageable next();
