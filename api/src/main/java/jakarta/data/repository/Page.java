@@ -17,7 +17,7 @@
  */
 package jakarta.data.repository;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 
 /**
@@ -29,11 +29,11 @@ public interface Page<T> {
 
 
     /**
-     * Returns the page content as {@link Stream}
+     * Returns the page content as {@link List}
      *
-     * @return the page content as {@link Stream}.
+     * @return the page content as {@link List}.
      */
-    Stream<T> getContent();
+    List<T> getContent();
 
 
     /**
