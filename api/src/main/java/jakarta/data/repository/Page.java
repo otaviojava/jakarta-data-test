@@ -43,10 +43,4 @@ public interface Page<T> {
      */
     long getPage();
 
-    /**
-     * Returns the next page
-     *
-     * @return the next page that can return a Page with {@link Stream} or {@link Stream#empty()}
-     */
-    Page<T> next();
 }
