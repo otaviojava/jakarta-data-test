@@ -43,4 +43,15 @@ public interface Page<T> {
      */
     long getPage();
 
+    /**
+     * Returns the current {@link Pageable}
+     * @return the current Pageable
+     */
+    Pageable getPageable();
+
+    /**
+     * Returns the next {@link Pageable#next()}
+     * @return the next pageable
+     */
+    Pageable next();
 }
