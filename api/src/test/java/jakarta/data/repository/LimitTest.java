@@ -34,12 +34,12 @@ class LimitTest {
 
     @Test
     public void shouldReturnErrorWhenStartAtIsNegative(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Limit.of(1, -1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Limit.range(1, -1));
     }
 
     @Test
     public void shouldReturnErrorWhenStartAtIsZero(){
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Limit.of(1, 0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Limit.range(1, 0));
     }
     @Test
     public void shouldCreateLimitWithDefaultStartAt() {
@@ -50,8 +50,8 @@ class LimitTest {
     }
 
     @Test
-    public void shouldCreateLimit() {
-        Limit limit = Limit.of(10, 2);
+    public void shouldCreateLimitByRange() {
+        Limit limit = Limit.range(2L, 10L);
         Assertions.assertNotNull(limit);
         Assertions.assertEquals(10L, limit.maxResults());
         Assertions.assertEquals(2L, limit.startAt());
