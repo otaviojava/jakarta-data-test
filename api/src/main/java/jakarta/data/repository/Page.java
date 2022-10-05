@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @param <T> the entity type
  */
-public interface Page<T> {
+public interface Page<T> extends Streamable<T> {
 
 
     /**
