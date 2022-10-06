@@ -17,6 +17,8 @@
  */
 package jakarta.data.repository;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -56,9 +58,11 @@ public class Pageable {
 
     private final long page;
 
+    private final List<Sort> sorts;
     private Pageable(long size, long page) {
         this.size = size;
         this.page = page;
+        this.sorts = Collections.emptyList();
     }
 
     /**
