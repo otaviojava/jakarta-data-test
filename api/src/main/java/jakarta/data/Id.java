@@ -24,9 +24,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *This isn't a mandatory field,  but when it define this field is a key.
- *  That gonna be used mainly for key-value operations.
- *  @see Entity
+ *This annotations defines the ID of an entity. Each entity must have one.
+ * @see Entity
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
