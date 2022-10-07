@@ -64,6 +64,11 @@ public class Pageable {
         this.page = page;
         this.sorts = Collections.emptyList();
     }
+    private Pageable(long size, long page, List<Sort> sorts) {
+        this.size = size;
+        this.page = page;
+        this.sorts = sorts;
+    }
 
     /**
      * Returns the size of each page
