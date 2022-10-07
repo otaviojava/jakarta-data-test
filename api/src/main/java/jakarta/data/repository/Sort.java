@@ -97,7 +97,6 @@ public class Sort {
      * Create a {@link Sort} instance with ascending direction {@link  Direction#ASC}
      *
      * @param property the property name to order by
-     * @return the Order type
      * @return an {@link Sort} instance
      * @throws NullPointerException when the property is null
      */
@@ -109,7 +108,6 @@ public class Sort {
      * Create a {@link Sort} instance on descending direction {@link  Direction#DESC}
      *
      * @param property the property name to order by
-     * @return the Order type
      * @return an {@link Sort} instance
      * @throws NullPointerException when the property is null
      */
