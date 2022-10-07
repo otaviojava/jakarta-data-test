@@ -24,7 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *This annotations defines the ID of an entity. Each entity must have one.
+ * Defines the ID of an entity. Each entity must have one.
  * @see Entity
  */
 @Retention(RetentionPolicy.RUNTIME)
