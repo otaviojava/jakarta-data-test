@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * <p>Abstract interface for pagination information.</p>
+ * <p>This class represents pagination information.</p>
  *
  * <p><code>Pageable</code> is optionally specified as a parameter to a
  * repository method in one of the parameter positions after the
