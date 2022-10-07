@@ -89,6 +89,14 @@ public class Pageable {
     }
 
     /**
+     * Return the order collection
+     * @return the order collection
+     */
+    public List<Sort> getSorts() {
+        return Collections.unmodifiableList(sorts);
+    }
+
+    /**
      * Returns the Pageable requesting the next Page.
      *
      * @return The next pageable.
