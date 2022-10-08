@@ -156,4 +156,9 @@ public class Pageable {
         return new Pageable(size, page);
     }
 
+    public static Pageable of(long page, long size, Sort sort) {}
+    public static Pageable of(long page, long size, Sort... sorts) {}
+    public static Pageable of(long page, long size, Iterable<Sort> sorts) {}
+
+
 }
