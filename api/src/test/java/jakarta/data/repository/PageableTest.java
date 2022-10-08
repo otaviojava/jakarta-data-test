@@ -20,6 +20,10 @@ package jakarta.data.repository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 class PageableTest {
 
     @Test
@@ -55,15 +59,38 @@ class PageableTest {
     }
 
     @Test
+    public void shouldReturnNPEWhenSortIsNull() {
+        Assertions.assertThrows(NullPointerException.class, () ->
+                Pageable.of(1L, 2L, (Sort) null));
+        Assertions.assertThrows(NullPointerException.class, () ->
+                Pageable.of(1L, 2L, (Iterable<Sort>) null));
+
+        Assertions.assertThrows(NullPointerException.class, () ->
+                Pageable.of(1L, 2L, Sort.asc("name"), null));
+    }
+
+    @Test
     public void shouldCreatePageableSort() {
+        Pageable pageable = Pageable.of(1L, 3L, Sort.asc("name"));
+        Assertions.assertNotNull(pageable);
+        Assertions.assertEquals(1L, pageable.getPage());
+        Assertions.assertEquals(3L, pageable.getSize());
+        assertThat(pageable.getSorts())
+                .hasSize(1)
+                .contains(Sort.asc("name"));
+    }
+
+    @Test
+    public void shouldNotModifySort() {
+        Pageable pageable = Pageable.of(1L, 3L, Sort.asc("name"));
+        List<Sort> sorts = pageable.getSorts();
+        Assertions.assertThrows(UnsupportedOperationException.class, ()-> sorts.clear());
 
     }
 
     @Test
-    public void shouldNotModifySort() {}
-
-    @Test
     public void shouldNotModifySortOnNextPage() {
+        Pageable pageable = Pageable.of(1L, 3L, Sort.asc("name"), Sort.desc("age"));
 
     }
 
