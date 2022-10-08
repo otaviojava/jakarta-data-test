@@ -146,6 +146,7 @@ public class Pageable {
      * @param page The page
      * @param size The size
      * @return The pageable
+     * @throws IllegalArgumentException when page or size are negative
      */
     public static Pageable of(long page, long size) {
         if (page < 1) {
@@ -156,8 +157,36 @@ public class Pageable {
         return new Pageable(size, page);
     }
 
-    public static Pageable of(long page, long size, Sort sort) {}
+    /**
+     * Creates a new Pageable at the given size, page and Sort
+     * @param page The page
+     * @param size The size
+     * @param sort the sort
+     * @return The pageable
+     * @throws IllegalArgumentException when page or size are negative
+     */
+    public static Pageable of(long page, long size, Sort sort) {
+
+    }
+
+    /**
+     * Creates a new Pageable at the given size, page and Sort
+     * @param page The page
+     * @param size The size
+     * @param sorts the sorts
+     * @return The pageable
+     * @throws IllegalArgumentException when page or size are negative
+     */
     public static Pageable of(long page, long size, Sort... sorts) {}
+
+    /**
+     * Creates a new Pageable at the given size, page and Sort
+     * @param page The page
+     * @param size The size
+     * @param sorts the sorts
+     * @return The pageable
+     * @throws IllegalArgumentException when page or size are negative
+     */
     public static Pageable of(long page, long size, Iterable<Sort> sorts) {}
 
 
