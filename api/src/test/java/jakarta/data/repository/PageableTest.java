@@ -91,6 +91,18 @@ class PageableTest {
     @Test
     public void shouldNotModifySortOnNextPage() {
         Pageable pageable = Pageable.of(1L, 3L, Sort.asc("name"), Sort.desc("age"));
+        Pageable next = pageable.next();
+        Assertions.assertEquals(3L, pageable.getSize());
+        Assertions.assertEquals(1L, pageable.getPage());
+        assertThat(pageable.getSorts())
+                .hasSize(2)
+                .contains(Sort.asc("name"), Sort.desc("age"));
+        Assertions.assertEquals(2L, next.getPage());
+        Assertions.assertEquals(3L, next.getSize());
+
+        assertThat(next.getSorts())
+                .hasSize(2)
+                .contains(Sort.asc("name"), Sort.desc("age"));
 
     }
 
