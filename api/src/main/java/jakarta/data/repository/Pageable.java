@@ -20,6 +20,8 @@ package jakarta.data.repository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * <p>This class represents pagination information.</p>
@@ -59,11 +61,7 @@ public class Pageable {
     private final long page;
 
     private final List<Sort> sorts;
-    private Pageable(long size, long page) {
-        this.size = size;
-        this.page = page;
-        this.sorts = Collections.emptyList();
-    }
+
     private Pageable(long size, long page, List<Sort> sorts) {
         this.size = size;
         this.page = page;
@@ -90,6 +88,7 @@ public class Pageable {
 
     /**
      * Return the order collection
+     *
      * @return the order collection
      */
     public List<Sort> getSorts() {
@@ -102,7 +101,7 @@ public class Pageable {
      * @return The next pageable.
      */
     public Pageable next() {
-        return new Pageable(this.size, (page + 1));
+        return new Pageable(this.size, (page + 1), this.sorts);
     }
 
     @Override
@@ -149,16 +148,12 @@ public class Pageable {
      * @throws IllegalArgumentException when page or size are negative
      */
     public static Pageable of(long page, long size) {
-        if (page < 1) {
-            throw new IllegalArgumentException("page: " + page);
-        } else if (size < 1) {
-            throw new IllegalArgumentException("size: " + size);
-        }
-        return new Pageable(size, page);
+        return of(page, size, Collections.emptyList());
     }
 
     /**
      * Creates a new Pageable at the given size, page and Sort
+     *
      * @param page The page
      * @param size The size
      * @param sort the sort
@@ -166,28 +161,44 @@ public class Pageable {
      * @throws IllegalArgumentException when page or size are negative
      */
     public static Pageable of(long page, long size, Sort sort) {
-
+        Objects.requireNonNull(sort, "sort is required");
+        return of(page, size, Collections.singletonList(sort));
     }
 
     /**
      * Creates a new Pageable at the given size, page and Sort
-     * @param page The page
-     * @param size The size
+     *
+     * @param page  The page
+     * @param size  The size
      * @param sorts the sorts
      * @return The pageable
      * @throws IllegalArgumentException when page or size are negative
      */
-    public static Pageable of(long page, long size, Sort... sorts) {}
+    public static Pageable of(long page, long size, Sort... sorts) {
+        return of(page, size, List.of(sorts));
+    }
 
     /**
      * Creates a new Pageable at the given size, page and Sort
-     * @param page The page
-     * @param size The size
+     *
+     * @param page  The page
+     * @param size  The size
      * @param sorts the sorts
      * @return The pageable
      * @throws IllegalArgumentException when page or size are negative
+     * @throws NullPointerException     when sorts is null
      */
-    public static Pageable of(long page, long size, Iterable<Sort> sorts) {}
+    public static Pageable of(long page, long size, Iterable<Sort> sorts) {
+        if (page < 1) {
+            throw new IllegalArgumentException("page: " + page);
+        } else if (size < 1) {
+            throw new IllegalArgumentException("size: " + size);
+        }
+        Objects.requireNonNull(sorts, "sorts is required");
+        return new Pageable(size, page, StreamSupport.stream(sorts.spliterator(), false)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toUnmodifiableList()));
+    }
 
 
 }
