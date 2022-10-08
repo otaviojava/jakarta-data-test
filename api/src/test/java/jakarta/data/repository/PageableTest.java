@@ -54,4 +54,17 @@ class PageableTest {
                 Pageable.of(1, 0));
     }
 
+    @Test
+    public void shouldCreatePageableSort() {
+
+    }
+
+    @Test
+    public void shouldNotModifySort() {}
+
+    @Test
+    public void shouldNotModifySortOnNextPage() {
+
+    }
+
 }
