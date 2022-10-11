@@ -113,12 +113,12 @@ public class Pageable {
             return false;
         }
         Pageable pageable = (Pageable) o;
-        return size == pageable.size && page == pageable.page;
+        return size == pageable.size && page == pageable.page && sorts.equals(pageable.sorts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(size, page);
+        return Objects.hash(size, page, sorts);
     }
 
     @Override
