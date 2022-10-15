@@ -37,4 +37,11 @@ public interface Slice<T> extends Streamable<T> {
      * @return whether the {@link Slice} has content at all.
      */
     boolean hasContent();
+
+    /**
+     * Returns the number of elements currently on this Slice.
+     *
+     * @return the number of elements currently on this Slice.
+     */
+    int getNumberOfElements();
 }
