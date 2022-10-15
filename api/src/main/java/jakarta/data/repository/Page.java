@@ -25,15 +25,9 @@ import java.util.List;
  *
  * @param <T> the entity type
  */
-public interface Page<T> extends Streamable<T> {
+public interface Page<T> extends Slice<T> {
 
 
-    /**
-     * Returns the page content as {@link List}
-     *
-     * @return the page content as {@link List}.
-     */
-    List<T> getContent();
 
 
     /**
