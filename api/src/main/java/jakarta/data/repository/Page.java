@@ -27,9 +27,6 @@ import java.util.List;
  */
 public interface Page<T> extends Slice<T> {
 
-
-
-
     /**
      * Returns the total amount of elements.
      *
