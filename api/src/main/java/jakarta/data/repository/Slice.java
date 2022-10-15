@@ -17,5 +17,24 @@
  */
 package jakarta.data.repository;
 
+import java.util.List;
+
+/**
+ * A slice of data that indicates whether there's a next or previous slice available.
+ */
 public interface Slice<T> extends Streamable<T> {
+
+    /**
+     * Returns the page content as {@link List}.
+     *
+     * @return the page content as {@link List}.
+     */
+    List<T> getContent();
+
+    /**
+     * Returns whether the {@link Slice} has content at all.
+     *
+     * @return whether the {@link Slice} has content at all.
+     */
+    boolean hasContent();
 }
