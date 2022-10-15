@@ -56,7 +56,7 @@ public interface Streamable<T> extends Iterable<T>, Supplier<Stream<T>> {
     /**
      * Returns whether the current {@link Streamable} is empty.
      *
-     * @return
+     * @return whether the current {@link Streamable} is empty.
      */
     default boolean isEmpty() {
         return !iterator().hasNext();
