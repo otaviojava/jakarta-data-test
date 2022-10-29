@@ -53,7 +53,7 @@ class LimitTest {
     public void shouldCreateLimitByRange() {
         Limit limit = Limit.range(2L, 10L);
         Assertions.assertNotNull(limit);
-        Assertions.assertEquals(10L, limit.maxResults());
+        Assertions.assertEquals(9L, limit.maxResults());
         Assertions.assertEquals(2L, limit.startAt());
     }
 }
