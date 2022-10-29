@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * A slice of data that indicates whether there's a next or previous slice available.
  */
-public interface Slice<T> extends Streamable<T> {
+public interface Slice<T>  {
 
     /**
      * Returns the page content as {@link List}.
@@ -53,9 +53,9 @@ public interface Slice<T> extends Streamable<T> {
     Pageable getPageable();
 
     /**
-     * Returns the next {@link Pageable#next()}
+     * Returns the next {@link Pageable#next()}, or <code>null</code> if it is known that there is no next page.
      *
      * @return the next pageable
      */
-    Pageable next();
+  Pageable nextPageable();
 }

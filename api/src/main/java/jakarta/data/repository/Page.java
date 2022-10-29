@@ -19,7 +19,7 @@ package jakarta.data.repository;
 
 
 /**
- * A page is a sublist of a list of objects. It allows gain information about the position of it in the containing entire list.
+ * A page is a sublist of a list of objects. It provides information about its position relative to the entire list.
  *
  * @param <T> the entity type
  */
@@ -32,8 +32,8 @@ public interface Page<T> extends Slice<T> {
     long getTotalElements();
 
     /**
-     * Returns the number of total pages.
-     * @return the number of total pages
+     * Returns the total number of pages.
+     * @return the total number of pages
      */
     long getTotalPages();
 }

@@ -32,6 +32,7 @@ public @interface Query {
 
     /**
      * Defines the query to be executed when the annotated method is called.
+     *
      * @return the query to be executed when the annotated method is called.
      */
     String value();

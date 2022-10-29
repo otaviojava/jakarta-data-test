@@ -87,12 +87,12 @@ public class Pageable {
     }
 
     /**
-     * Return the order collection
+     * Return the order collection if it was specified on this <code>Pageable</code>, otherwise an empty list.
      *
      * @return the order collection
      */
     public List<Sort> getSorts() {
-        return Collections.unmodifiableList(sorts);
+        return sorts;
     }
 
     /**
@@ -130,7 +130,7 @@ public class Pageable {
     }
 
     /**
-     * Creates a new Pageable at the given size with a default size of 10.
+     * Creates a new Pageable at the given page with a default size of 10.
      *
      * @param page The page
      * @return The pageable
@@ -145,7 +145,7 @@ public class Pageable {
      * @param page The page
      * @param size The size
      * @return The pageable
-     * @throws IllegalArgumentException when page or size are negative
+     * @throws IllegalArgumentException when page or size are negative or zero
      */
     public static Pageable of(long page, long size) {
         return of(page, size, Collections.emptyList());
@@ -158,7 +158,7 @@ public class Pageable {
      * @param size The size
      * @param sort the sort
      * @return The pageable
-     * @throws IllegalArgumentException when page or size are negative
+     * @throws IllegalArgumentException when page or size are negative or zero
      */
     public static Pageable of(long page, long size, Sort sort) {
         Objects.requireNonNull(sort, "sort is required");
@@ -172,7 +172,7 @@ public class Pageable {
      * @param size  The size
      * @param sorts the sorts
      * @return The pageable
-     * @throws IllegalArgumentException when page or size are negative
+     * @throws IllegalArgumentException when page or size are negative or zero
      */
     public static Pageable of(long page, long size, Sort... sorts) {
         return of(page, size, List.of(sorts));
@@ -200,5 +200,14 @@ public class Pageable {
                 .collect(Collectors.toUnmodifiableList()));
     }
 
-
+    /**
+     * Creates a new <code>Pageable</code> for requesting pages of the
+     * specified size, starting with the first page number, which is 1.
+     *
+     * @param pageSize number of query results in a full page.
+     * @return The pageable.
+     */
+    public static Pageable size(long pageSize) {
+        return of(1, pageSize);
+    }
 }
