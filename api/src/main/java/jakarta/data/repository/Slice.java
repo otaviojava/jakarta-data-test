@@ -20,7 +20,7 @@ package jakarta.data.repository;
 import java.util.List;
 
 /**
- * A slice of data that indicates whether there's a next or previous slice available.
+ * This is interface and can therefore be used as the assignment target for a lambda expression or method reference.
  */
 public interface Slice<T> extends Streamable<T>   {
 
