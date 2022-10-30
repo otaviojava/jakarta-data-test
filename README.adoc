@@ -1,9 +1,46 @@
-= Jakarta data
+Asciidoc cheatsheet for GitHub
+==============================
+:toc:
+:toc-placement: preamble
+:toclevels: 1
+:showtitle:
+:Some attr: Some value
 
-Jakarta Data provides an API that makes data access easy. A
-Java developer can split the persistence from the model with several features,
-such as the ability to compose custom query methods on a Repository interface where the framework
-will implement it.
+// Need some preamble to get TOC:
+{empty}
+
+
+== GitHub limitations
+
+This cheatsheet contains small part of Asciidoc markup which works and
+looks fine on GitHub. There is also link:full.adoc[full cheatsheet], but
+for now it's main use is to show bugs, design issues, GitHub limitations
+and other differences from http://powerman.name/doc/asciidoc[how Asciidoc
+cheatsheet should really looks like].
+
+You can try these browser add-ons to fix some issues:
+
+- https://github.com/powerman/userjs-github-asciidoc[UserJS for GitHub: fix Asciidoc rendering]
+- https://userstyles.org/styles/113008/github-compact-markdown-asciidoc-lists[UserCSS for GitHub: compact Markdown/Asciidoc lists]
+
+[NOTE]
+====
+This is copy of https://github.com/powerman/asciidoc-cheatsheet to
+see limitations of GitHub Gist. Here is current list:
+
+- Gist must have a file name with one of asciidoc's extensions.
+- Document title is not rendered without `:showtitle:` attribute.
+- "Table of Contents" contains extra bullets, which makes more than 1 level toc too ugly.
+- Link in "Table of Contents" doesn't work because generated links start with extra `_`.
+- No syntax highlight for `[source]`.
+- Custom anchors doesn't work.
+- Relative/absolute links works in different way.
+====
+
+== Attributes
+
+----
+// Header of this document:
 
 Asciidoc cheatsheet for GitHub
 ==============================
@@ -12,3 +49,1411 @@ Asciidoc cheatsheet for GitHub
 :toclevels: 1
 :showtitle:
 :Some attr: Some value
+
+// Need some preamble to get TOC:
+{empty}
+----
+
+++++
+<table class=cheatsheet>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+Some attr's value is {someattr}.
+Escaped: \{someattr} and +++{someattr}+++.
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+Some attr's value is {someattr}.
+Escaped: \{someattr} and +++{someattr}+++.
+
+++++
+</td></tr>
+++++
+
+++++
+</table>
+++++
+
+
+== Headers
+
+++++
+<table class=cheatsheet>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+== Level 1
+Text.
+
+=== Level 2
+Text.
+
+==== Level 3
+Text.
+
+===== Level 4
+Text.
+
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+== Level 1
+Text.
+
+=== Level 2
+Text.
+
+==== Level 3
+Text.
+
+===== Level 4
+Text.
+
+++++
+</td></tr>
+++++
+
+++++
+</table>
+++++
+
+
+== Paragraphs
+
+++++
+<table class=cheatsheet>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Optional Title
+Usual
+paragraph.
+
+Second paragraph.
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+Usual
+paragraph.
+
+Second paragraph.
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Optional Title
+
+ Literal paragraph.
+  Must be indented.
+
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+
+ Literal paragraph.
+  Must be indented.
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Optional Title
+[source,perl]
+die 'connect: '.$dbh->errstr;
+
+Not a code in next paragraph.
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+[source,perl]
+die 'connect: '.$dbh->errstr;
+
+Not a code in next paragraph.
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Optional Title
+NOTE: This is an example
+      single-paragraph note.
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+NOTE: This is an example
+      single-paragraph note.
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Optional Title
+[NOTE]
+This is an example
+single-paragraph note.
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+[NOTE]
+This is an example
+single-paragraph note.
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+TIP: Some tip text.
+
+IMPORTANT: Some important text.
+
+WARNING: Some warning text.
+
+CAUTION: Some caution text.
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+TIP: Some tip text.
+
+IMPORTANT: Some important text.
+
+WARNING: Some warning text.
+
+CAUTION: Some caution text.
+
+++++
+</td></tr>
+++++
+
+++++
+</table>
+++++
+
+
+== Blocks
+
+++++
+<table class=cheatsheet>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Optional Title
+----
+*Listing* Block
+
+Use: code or file listings
+----
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+----
+*Listing* Block
+
+Use: code or file listings
+----
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Optional Title
+[source,perl]
+----
+# *Source* block
+# Use: highlight code listings
+use DBI;
+
+my $dbh = DBI->connect('...',$u,$p)
+    or die "connect: $dbh->errstr";
+----
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+[source,perl]
+----
+# *Source* block
+# Use: highlight code listings
+use DBI;
+
+my $dbh = DBI->connect('...',$u,$p)
+    or die "connect: $dbh->errstr";
+----
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Optional Title
+[NOTE]
+====
+*NOTE* Block
+
+Use: multi-paragraph notes.
+====
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+[NOTE]
+====
+*NOTE* Block
+
+Use: multi-paragraph notes.
+====
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Optional Title
+[quote, cite author, cite source]
+____
+*Quote* Block
+
+Use: cite somebody
+____
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+[quote, cite author, cite source]
+____
+*Quote* Block
+
+Use: cite somebody
+____
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+////
+*Comment* block
+
+Use: hide comments
+////
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+////
+*Comment* block
+
+Use: hide comments
+////
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+++++
+*Passthrough* Block
+<p>
+Use: GitHub-restricted subset of HTML markup
+<table border="1">
+<tr><td>1</td><td>2</td></tr>
+</table>
+++++
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+++++
+*Passthrough* Block
+<p>
+Use: <a href="https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/sanitization_filter.rb">GitHub-restricted subset of HTML</a> markup
+<table border="1">
+<tr><td>1</td><td>2</td></tr>
+</table>
+++++
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+ .Optional Title
+ ....
+ *Literal* Block
+
+ Use: workaround when literal
+ paragraph (indented) like
+   1. First.
+   2. Second.
+ incorrectly processed as list.
+ ....
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Optional Title
+....
+*Literal* Block
+
+Use: workaround when literal
+paragraph (indented) like
+  1. First.
+  2. Second.
+incorrectly processed as list.
+....
+
+++++
+</td></tr>
+++++
+
+++++
+</table>
+++++
+
+
+== Text
+
+++++
+<table class=cheatsheet>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+forced +
+line break
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+forced +
+line break
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+normal, 'italic', _italic_, *bold*.
+
++mono *bold*+, `mono pass thru *bold*`
+
+``double quoted'', `single quoted'.
+
+normal, ^super^, ~sub~.
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+normal, 'italic', _italic_, *bold*.
+
++mono *bold*+, `mono pass thru *bold*`
+
+``double quoted'', `single quoted'.
+
+normal, ^super^, ~sub~.
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+Chars: n__i__**b**++m++n
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+Chars: n__i__**b**++m++n
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+// Comment
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+// Comment
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+(C) (R) (TM) -- ... -> <- => <= &#182;
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+(C) (R) (TM) -- ... -> <- => <= &#182;
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+''''
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+''''
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+Escaped:
+\_italic_, +++_italic_+++,
+t\__e__st, +++t__e__st+++,
+\&#182;
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+Escaped:
+\_italic_, +++_italic_+++,
+t\__e__st, +++t__e__st+++,
+\&#182;
+
+++++
+</td></tr>
+++++
+
+++++
+</table>
+++++
+
+
+== Macros: links, images
+
+++++
+<table class=cheatsheet>
+++++
+
+If you'll need to use space in url/path you should replace it with %20.
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+[[anchor-1]]
+Paragraph or block 1.
+
+<<anchor-1>>,
+<<anchor-1,First anchor>>,
+xref:anchor-1[],
+xref:anchor-1[First anchor].
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+[[anchor-1]]
+Paragraph or block 1.
+
+<<anchor-1>>,
+<<anchor-1,First anchor>>,
+xref:anchor-1[],
+xref:anchor-1[First anchor].
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+link:README.adoc[This document]
+link:/README.adoc[]
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+link:README.adoc[This document]
+link:/README.adoc[]
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+http://google.com
+http://google.com[Google Search]
+mailto:root@localhost[email admin]
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+http://google.com
+http://google.com[Google Search]
+mailto:root@localhost[email admin]
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+// Use attribute to shorten urls
+:repo: https://github.com/powerman/asciidoc-cheatsheet 
+:img: {repo}/raw/master/images
+
+First home
+image:{img}/icons/home.png[]
+, second home
+image:{img}/icons/home.png[Alt text]
+.
+
+.Block image
+image::{img}/icons/home.png[]
+image::{img}/icons/home.png[Alt text]
+
+.Thumbnail linked to full image
+image:{img}/font/640-screen2.gif[
+"My screenshot",width=128,
+link="{img}/font/640-screen2.gif"]
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+// Use attribute to shorten urls
+:repo: https://github.com/powerman/asciidoc-cheatsheet 
+:img: {repo}/raw/master/images
+
+First home
+image:{img}/icons/home.png[]
+, second home
+image:{img}/icons/home.png[Alt text]
+.
+
+.Block image
+image::{img}/icons/home.png[]
+image::{img}/icons/home.png[Alt text]
+
+.Thumbnail linked to full image
+image:{img}/font/640-screen2.gif[
+"My screenshot",width=128,
+link="{img}/font/640-screen2.gif"]
+
+++++
+</td></tr>
+++++
+
+++++
+</table>
+++++
+
+
+== Lists
+
+++++
+<table class=cheatsheet>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Bulleted
+* bullet
+* bullet
+  - bullet
+  - bullet
+* bullet
+** bullet
+** bullet
+*** bullet
+*** bullet
+**** bullet
+**** bullet
+***** bullet
+***** bullet
+**** bullet
+*** bullet
+** bullet
+* bullet
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Bulleted
+* bullet
+* bullet
+  - bullet
+  - bullet
+* bullet
+** bullet
+** bullet
+*** bullet
+*** bullet
+**** bullet
+**** bullet
+***** bullet
+***** bullet
+**** bullet
+*** bullet
+** bullet
+* bullet
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Bulleted 2
+- bullet
+  * bullet
+  ** bullet
+     *** bullet
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Bulleted 2
+- bullet
+  * bullet
+  ** bullet
+     *** bullet
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Ordered
+. number
+. number
+  .. lower roman
+  .. lower roman
+. number
+.. lower roman
+.. lower roman
+... lower alpha
+... lower alpha
+.... lower alpha
+.... lower alpha
+..... lower alpha
+..... lower alpha
+.... lower alpha
+... lower alpha
+.. lower roman
+. number
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Ordered
+. number
+. number
+  .. lower roman
+  .. lower roman
+. number
+.. lower roman
+.. lower roman
+... lower alpha
+... lower alpha
+.... lower alpha
+.... lower alpha
+..... lower alpha
+..... lower alpha
+.... lower alpha
+... lower alpha
+.. lower roman
+. number
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Ordered 2
+a. lower alpha
+b. lower alpha
+   .. lower roman
+   .. lower roman
+       .  lower alpha
+       .  lower alpha
+           1. lower alpha
+           2. lower alpha
+           3. lower alpha
+           4. lower alpha
+       .  lower alpha
+   .. lower roman
+c. lower alpha
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Ordered 2
+a. lower alpha
+b. lower alpha
+   .. lower roman
+   .. lower roman
+       .  lower alpha
+       .  lower alpha
+           1. lower alpha
+           2. lower alpha
+           3. lower alpha
+           4. lower alpha
+       .  lower alpha
+   .. lower roman
+c. lower alpha
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Labeled
+Term 1::
+    Definition 1
+Term 2::
+    Definition 2
+    Term 2.1;;
+        Definition 2.1
+    Term 2.2;;
+        Definition 2.2
+Term 3::
+    Definition 3
+Term 4:: Definition 4
+Term 4.1::: Definition 4.1
+Term 4.2::: Definition 4.2
+Term 4.2.1:::: Definition 4.2.1
+Term 4.2.2:::: Definition 4.2.2
+Term 4.3::: Definition 4.3
+Term 5:: Definition 5
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Labeled
+Term 1::
+    Definition 1
+Term 2::
+    Definition 2
+    Term 2.1;;
+        Definition 2.1
+    Term 2.2;;
+        Definition 2.2
+Term 3::
+    Definition 3
+Term 4:: Definition 4
+Term 4.1::: Definition 4.1
+Term 4.2::: Definition 4.2
+Term 4.2.1:::: Definition 4.2.1
+Term 4.2.2:::: Definition 4.2.2
+Term 4.3::: Definition 4.3
+Term 5:: Definition 5
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Labeled 2
+Term 1;;
+    Definition 1
+    Term 1.1::
+        Definition 1.1
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Labeled 2
+Term 1;;
+    Definition 1
+    Term 1.1::
+        Definition 1.1
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+[horizontal]
+.Labeled horizontal
+Term 1:: Definition 1
+Term 2:: Definition 2
+
+Term 3::
+    Definition 3
+
+Term 4:: Definition 4
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+[horizontal]
+.Labeled horizontal
+Term 1:: Definition 1
+Term 2:: Definition 2
+
+Term 3::
+    Definition 3
+
+Term 4:: Definition 4
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+[qanda]
+.Q&A
+Question 1::
+    Answer 1
+Question 2:: Answer 2
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+[qanda]
+.Q&A
+Question 1::
+    Answer 1
+Question 2:: Answer 2
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Break two lists
+. number
+. number
+
+Independent paragraph break list.
+
+. number
+
+.Header break list too
+. number
+
+--
+. List block define list boundary too
+. number
+. number
+--
+
+. number
+. number
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Break two lists
+. number
+. number
+
+Independent paragraph break list.
+
+. number
+
+.Header break list too
+. number
+
+--
+. List block define list boundary too
+. number
+. number
+--
+
+. number
+. number
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Continuation
+- bullet
+continuation
+. number
+  continuation
+* bullet
+
+  literal continuation
+
+.. letter
++
+Non-literal continuation.
++
+----
+any block can be
+
+included in list
+----
++
+Last continuation.
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Continuation
+- bullet
+continuation
+. number
+  continuation
+* bullet
+
+  literal continuation
+
+.. letter
++
+Non-literal continuation.
++
+----
+any block can be
+
+included in list
+----
++
+Last continuation.
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.List block allow sublist inclusion
+- bullet
+  * bullet
++
+--
+    - bullet
+      * bullet
+--
+  * bullet
+- bullet
+  . number
+    .. lower alpha
++
+--
+      . number
+        .. lower alpha
+--
+    .. lower alpha
+  . number
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.List block allow sublist inclusion
+- bullet
+  * bullet
++
+--
+    - bullet
+      * bullet
+--
+  * bullet
+- bullet
+  . number
+    .. lower alpha
++
+--
+      . number
+        .. lower alpha
+--
+    .. lower alpha
+  . number
+
+++++
+</td></tr>
+++++
+
+++++
+</table>
+++++
+
+
+== Tables
+
+++++
+<table class=cheatsheet>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.An example table
+[options="header,footer"]
+|=======================
+|Col 1|Col 2      |Col 3
+|1    |Item 1     |a
+|2    |Item 2     |b
+|3    |Item 3     |c
+|6    |Three items|d
+|=======================
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.An example table
+[options="header,footer"]
+|=======================
+|Col 1|Col 2      |Col 3
+|1    |Item 1     |a
+|2    |Item 2     |b
+|3    |Item 3     |c
+|6    |Three items|d
+|=======================
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.CSV data
+[format="csv",cols="4"]
+|======
+1,2,3,4
+a,b,c,d
+A,B,C,D
+|======
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.CSV data
+[format="csv",cols="4"]
+|======
+1,2,3,4
+a,b,c,d
+A,B,C,D
+|======
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+[format="csv"]
+[options="header",cols=",,s,,m"]
+|===========================
+ID,FName,LName,Address,Phone
+1,Vasya,Pupkin,London,+123
+2,X,Y,"A,B",45678
+|===========================
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+// Table column align doesn't work.
+[format="csv"]
+[options="header",cols=",,s,,m"]
+|===========================
+ID,FName,LName,Address,Phone
+1,Vasya,Pupkin,London,+123
+2,X,Y,"A,B",45678
+|===========================
+
+++++
+</td></tr><tr><td></td><td></td></tr>
+++++
+
+++++
+<tr><td class=cheatsheet-source>
+++++
+
+....
+.Multiline cells, row/col span
+|====
+|Date |Duration |Avg HR |Notes
+
+|22-Aug-08 .2+^.^|10:24 | 157 |
+Worked out MSHR (max sustainable
+heart rate) by going hard
+for this interval.
+
+|22-Aug-08 | 152 |
+Back-to-back with previous interval.
+
+|24-Aug-08 3+^|none
+
+|====
+....
+
+++++
+</td><td class=cheatsheet-render>
+++++
+
+.Multiline cells, row/col span
+|====
+|Date |Duration |Avg HR |Notes
+
+|22-Aug-08 .2+^.^|10:24 | 157 |
+Worked out MSHR (max sustainable
+heart rate) by going hard
+for this interval.
+
+|22-Aug-08 | 152 |
+Back-to-back with previous interval.
+
+|24-Aug-08 3+^|none
+
+|====
+
+++++
+</td></tr>
+++++
+
+++++
+</table>
+++++
