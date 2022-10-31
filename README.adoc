@@ -1,7 +1,5 @@
 = Example asciidoc
-
 :toc: auto
-...
 
 ==== Title 1
 ==== Title 2
