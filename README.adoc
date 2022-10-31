@@ -19,7 +19,13 @@ will implement it.
 ==== Calendar:
 Europe
 
-link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org_e9ki8t2gc75sh07qdh95c8ofvc@group.calendar.google.com&ctz=Europe/Athens++[Test]
+link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org_e9ki8t2gc75sh07qdh95c8ofvc@group.calendar.google.com&ctz=Europe/Athens++[Eastern],
+link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org_e9ki8t2gc75sh07qdh95c8ofvc@group.calendar.google.com&ctz=Europe/Berlin++[Central],
+link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org_e9ki8t2gc75sh07qdh95c8ofvc@group.calendar.google.com&ctz=Europe/Lisbon++[Western]
 
-This URL has repeating underscores link:++https://asciidoctor.org/now_this__link_works.html++[].
+
+link:++++[]
+link:++++[]
+link:++++[]
+
 
