@@ -51,6 +51,11 @@ Add the Maven dependency:
 This project is governed by the Eclipse Foundation of Conduct. By participating, you are expected to uphold this code of conduct. Please report unacceptable behavior to codeofconduct@eclipse.org.
 
 == Getting Help
+
+Having trouble with Jakarta Data? We’d love to help!
+
+Report bugs with Jakarta Data at https://github.com/otaviojava/jakarta-data/issues.
+
 == Building from Source
 
 
