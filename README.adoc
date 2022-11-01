@@ -31,6 +31,17 @@ Car ferrari = Car.id(10L).name("Ferrari").type(Type.SPORT);
 repository.save(ferrari);
 ----
 
+==== Pagination
+
+Jakarta Data also supports particular parameters to define pagination and sorting.
+
+
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Long> {
+
+  Page<Product> findByName(String name, Pageable pageable);
+
+}
 
 === Maven
 
