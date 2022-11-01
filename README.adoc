@@ -8,8 +8,30 @@ The Jakarta Data specification provides an API for easier data access. A Java de
 Jakarta Data’s goal is to provide a familiar and consistent, Jakarta-based programming model for data access while still retaining the particular traits of the underlying data store.
 
 == Getting Started
-=== API
+
+
+[source,java]
+----
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Long> {
+
+}
+----
+
 === Maven
+
+Add the Maven dependency:
+
+[source,xml]
+----
+<dependency>
+  <artifactId>jakarta-data-api</artifactId>
+  <groupId>jakarta.data</groupId>
+  <version>1.0.0-SNAPSHOT</version>
+</dependency>
+----
+
+
 == Code of Conduct
 == Getting Help
 == Building from Source
