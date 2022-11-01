@@ -41,10 +41,11 @@ Jakarta Data also supports particular parameters to define pagination and sortin
 @Repository
 public interface ProductRepository extends PageableRepository<Product, Long> {
 
- Page<Car> findByTypeOrderByName(Type type);
+ Page<Car> findByTypeOrderByName(Type type, Pageable pageable);
 
 }
 ----
+
 
 === Maven
 
