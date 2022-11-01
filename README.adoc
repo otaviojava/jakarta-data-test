@@ -58,6 +58,12 @@ Report bugs with Jakarta Data at https://github.com/otaviojava/jakarta-data/issu
 
 == Building from Source
 
+You don’t need to build from source to use the project, but if you want to try, you can make it using Maven and Java 11 or higher.
+[source]
+----
+mvn clean install
+----
+
 
 == Meetings
 
