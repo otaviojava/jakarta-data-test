@@ -27,7 +27,7 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 [source,java]
 ----
 CarRepository repository ==//instance
-Car ferrari = Car.of(10L).name("Ferrari").type(Type.SPORT);
+Car ferrari = Car.id(10L).name("Ferrari").type(Type.SPORT);
 repository.save(ferrari);
 ----
 
