@@ -7,16 +7,30 @@ The Jakarta Data specification provides an API for easier data access. A Java de
 
 Jakarta Data’s goal is to provide a familiar and consistent, Jakarta-based programming model for data access while still retaining the particular traits of the underlying data store.
 
-== Getting Started
+=== Repository
 
+A repository abstraction aims to significantly reduce the boilerplate code required to implement data access layers for various persistence stores.
 
 [source,java]
 ----
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface CarRepository extends CrudRepository<Car, Long> {
+
+  List<Car> findByType(Type type);
+
+  Optional<Car> findByName(String name);
 
 }
 ----
+
+
+[source,java]
+----
+CarRepository repository ==//instance
+Car ferrari = Car.of(10L).name("Ferrari").type(Type.SPORT);
+repository.save(ferrari);
+----
+
 
 === Maven
 
