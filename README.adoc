@@ -7,6 +7,15 @@ The Jakarta Data specification provides an API for easier data access. A Java de
 
 Jakarta Data’s goal is to provide a familiar and consistent, Jakarta-based programming model for data access while still retaining the particular traits of the underlying data store.
 
+== Introduction
+== Getting Started
+=== API
+=== Maven
+== Code of Conduct
+== Getting Help
+== Building from Source
+
+
 == Meetings
 
 === Calendar
