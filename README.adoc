@@ -3,10 +3,9 @@
 
 == Introduction
 
-The Jakarta Data specification provides an API that allows easy access to database technologies. A
-Java developer can split the persistence from the model with several features,
-such as the ability to compose custom query methods on a `Repository` interface where the framework
-will implement it.
+The Jakarta Data specification provides an API for easier data access. A Java developer can split the persistence from the model with several features, such as the ability to compose custom query methods on a Repository interface.
+
+Jakarta Data’s goal is to provide a familiar and consistent, Jakarta-based programming model for data access while still retaining the particular traits of the underlying data store.
 
 == Meetings
 
