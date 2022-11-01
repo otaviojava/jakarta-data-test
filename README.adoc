@@ -35,13 +35,16 @@ repository.save(ferrari);
 
 Jakarta Data also supports particular parameters to define pagination and sorting.
 
+[source,java]
+----
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface ProductRepository extends PageableRepository<Product, Long> {
 
-  Page<Product> findByName(String name, Pageable pageable);
+ Page<Car> findByTypeOrderByName(Type type);
 
 }
+----
 
 === Maven
 
