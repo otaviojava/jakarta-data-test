@@ -16,7 +16,7 @@ A repository abstraction aims to significantly reduce the boilerplate code requi
 @Repository
 public interface CarRepository extends CrudRepository<Car, Long> {
 
-  List<Car> findByType(Type type);
+  List<Car> findByType(CarType type);
 
   Optional<Car> findByName(String name);
 
@@ -26,8 +26,10 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 
 [source,java]
 ----
-CarRepository repository ==//instance
-Car ferrari = Car.id(10L).name("Ferrari").type(Type.SPORT);
+@Inject
+CarRepository repository;
+...
+Car ferrari = Car.id(10L).name("Ferrari").type(CarType.SPORT);
 repository.save(ferrari);
 ----
 
@@ -41,7 +43,7 @@ Jakarta Data also supports particular parameters to define pagination and sortin
 @Repository
 public interface ProductRepository extends PageableRepository<Product, Long> {
 
- Page<Car> findByTypeOrderByName(Type type, Pageable pageable);
+ Page<Car> findByTypeOrderByName(CarType type, Pageable pageable);
 
 }
 ----
@@ -63,17 +65,17 @@ Add the Maven dependency:
 
 == Code of Conduct
 
-This project is governed by the Eclipse Foundation of Conduct. By participating, you are expected to uphold this code of conduct. Please report unacceptable behavior to codeofconduct@eclipse.org.
+This project is governed by the Eclipse Foundation Community Code of Conduct. By participating, you are expected to uphold this code of conduct. Please report unacceptable behavior to codeofconduct@eclipse.org.
 
 == Getting Help
 
 Having trouble with Jakarta Data? We’d love to help!
 
-Report bugs with Jakarta Data at https://github.com/otaviojava/jakarta-data/issues.
+Report bugs with Jakarta Data at https://github.com/jakartaee/data/issues.
 
 == Building from Source
 
-You don’t need to build from source to use the project, but if you want to try, you can make it using Maven and Java 11 or higher.
+You don’t need to build from source to use the project, but you can do so with Maven and Java 11 or higher.
 
 [source, Bash]
 ----
@@ -92,7 +94,7 @@ link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org
 * America: 
 link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org_e9ki8t2gc75sh07qdh95c8ofvc@group.calendar.google.com&ctz=America/Toronto++[Eastern],
 link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org_e9ki8t2gc75sh07qdh95c8ofvc@group.calendar.google.com&ctz=America/Chicago++[Central],
-link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org_e9ki8t2gc75sh07qdh95c8ofvc@group.calendar.google.com&ctz=America/Denver++[Western],
+link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org_e9ki8t2gc75sh07qdh95c8ofvc@group.calendar.google.com&ctz=America/Denver++[Mountain],
 link:++https://calendar.google.com/calendar/u/0/embed?src=eclipse-foundation.org_e9ki8t2gc75sh07qdh95c8ofvc@group.calendar.google.com&ctz=America/Los_Angeles++[Pacific]
 
 * https://docs.google.com/document/d/1MQbwPpbEBHiAHes1NaYTJQzEBGUYXxaJYw5K-yj053U/edit[Meetings Notes]
