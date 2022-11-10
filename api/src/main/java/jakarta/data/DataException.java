@@ -34,10 +34,9 @@ public class DataException extends RuntimeException {
     }
 
     /**
-     * Constructs a new DataException exception with the specified detail message and cause.
+     * Constructs a new DataException exception with the specified detail message.
      *
      * @param message the detail message.
-     * @param cause   the cause.
      */
     public DataException(String message, Throwable cause) {
         super(message, cause);
