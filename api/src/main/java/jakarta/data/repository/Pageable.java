@@ -17,10 +17,10 @@
  */
 package jakarta.data.repository;
 
+import jakarta.data.repository.KeysetPageable.Cursor;
+
 import java.util.Collections;
 import java.util.List;
-
-import jakarta.data.repository.KeysetPageable.Cursor;
 
 /**
  * <p>This class represents pagination information.</p>
