@@ -18,7 +18,8 @@
 package jakarta.data;
 
 /**
- * Exception thrown if a query produces no result and the result type is not nullable.
+ * Data access exception thrown when a result was expected to have at least one row (or element)
+ * but zero rows (or elements) were actually returned.
  */
 public class EmptyResultException extends DataException {
 
