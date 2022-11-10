@@ -209,6 +209,9 @@ public interface Pageable {
      */
     Pageable sortBy(Iterable<Sort> sorts);
 
+    Pageable asc(String name);
+    Pageable desc(String desc);
+
     /**
      * <p>Creates a new <code>Pageable</code> instance representing the same
      * pagination information, except using the specified sort criteria.
