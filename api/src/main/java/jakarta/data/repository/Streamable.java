@@ -17,58 +17,25 @@
  */
 package jakarta.data.repository;
 
-import java.util.List;
-import java.util.Set;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 /**
  * Simple interface to ease streamability of {@link Iterable}s.
- * This is interface and can therefore be used as the assignment target for a lambda expression or method reference.
+ * This is an interface and can therefore be used as the assignment target for a lambda expression or method reference.
  */
 @FunctionalInterface
-public interface Streamable<T> extends Iterable<T>, Supplier<Stream<T>> {
+public interface Streamable<T> extends Iterable<T> {
 
     /**
-     * Creates a non-parallel {@link Stream} of the underlying {@link Iterable}.
+     * Returns a sequential stream of results, which follow the order of the sort criteria if specified.
+     * This method does not cause data to be re-fetched from the database when used with {@link Pageable pagination}.
      *
-     * @return a non-parallel Stream
+     * @return a stream of results.
      */
     default Stream<T> stream() {
         return StreamSupport.stream(spliterator(), false);
     }
 
-    /**
-     * Creates a new, unmodifiable {@link Set}.
-     *
-     * @return a Set
-     */
-    default Set<T> toSet() {
-        return stream().collect(Collectors.toUnmodifiableSet());
-    }
 
-    @Override
-    default Stream<T> get() {
-        return stream();
-    }
-
-    /**
-     * Returns whether the current {@link Streamable} is empty.
-     *
-     * @return whether the current {@link Streamable} is empty.
-     */
-    default boolean isEmpty() {
-        return !iterator().hasNext();
-    }
-
-    /**
-     * Creates a new, unmodifiable {@link List}.
-     *
-     * @return will never be {@literal null}.
-     */
-    default List<T> toList() {
-        return stream().collect(Collectors.toUnmodifiableList());
-    }
 }

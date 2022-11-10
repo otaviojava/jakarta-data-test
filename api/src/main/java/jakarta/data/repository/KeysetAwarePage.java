@@ -17,22 +17,11 @@
  */
 package jakarta.data.repository;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-
 /**
- * Annotation to bind method parameters to a {@link  Query} via a named parameter.
+ * <p>A page of results from a repository query that performs
+ * {@link KeysetPageable keyset pagination}.</p>
+ *
+ * @param <T> the type of elements in this page 
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
-public @interface Param {
-
-    /**
-     * Defines the name of the parameter to bind to.
-     * @return the parameter name
-     */
-    String value();
+public interface KeysetAwarePage<T> extends KeysetAwareSlice<T>, Page<T> {
 }

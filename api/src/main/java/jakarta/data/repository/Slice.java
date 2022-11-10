@@ -20,16 +20,18 @@ package jakarta.data.repository;
 import java.util.List;
 
 /**
- * This is interface and can therefore be used as the assignment target for a lambda expression or method reference.
+ * A slice of data that indicates whether there's a next or previous slice available.
+ *
+ * @param <T> the type of elements in this slice 
  */
-public interface Slice<T> extends Streamable<T>   {
+public interface Slice<T> extends Streamable<T> {
 
     /**
      * Returns the page content as {@link List}.
      *
-     * @return the page content as {@link List}.
+     * @return the page content as {@link List}; will never be {@literal null}.
      */
-    List<T> getContent();
+    List<T> content();
 
     /**
      * Returns whether the {@link Slice} has content at all.
@@ -43,19 +45,19 @@ public interface Slice<T> extends Streamable<T>   {
      *
      * @return the number of elements currently on this Slice.
      */
-    int getNumberOfElements();
+    int numberOfElements();
 
     /**
      * Returns the current {@link Pageable}
      *
-     * @return the current Pageable
+     * @return the current Pageable; will never be {@literal null}.
      */
-    Pageable getPageable();
+    Pageable pageable();
 
     /**
      * Returns the next {@link Pageable#next()}, or <code>null</code> if it is known that there is no next page.
      *
-     * @return the next pageable
+     * @return the next pageable.
      */
-  Pageable nextPageable();
+    Pageable nextPageable();
 }
