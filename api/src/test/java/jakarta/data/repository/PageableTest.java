@@ -104,7 +104,6 @@ class PageableTest {
     @Test
     public void shouldHaveEmptySortListWhenSortIsNullOrEmpty() {
         Pageable p = Pageable.ofSize(2).sortBy(Sort.asc("Id"));
-
         assertSoftly(softly -> {
             softly.assertThat(p.sorts()).isEqualTo(List.of(Sort.asc("Id")));
             softly.assertThat(p.sortBy().sorts()).isEqualTo(Collections.EMPTY_LIST);

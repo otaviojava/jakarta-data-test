@@ -21,6 +21,7 @@ import jakarta.data.repository.KeysetPageable.Cursor;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>This class represents pagination information.</p>
@@ -81,11 +82,11 @@ public interface Pageable {
      * starting after the specified keyset values.</p>
      *
      * @param keyset keyset values, the order and number of which must match the
-     *        {@link OrderBy} annotations, {@link Sort} parameters, or
-     *        <code>OrderBy</code> name pattern of the repository method to which
-     *        this pagination will be supplied.
+     *               {@link OrderBy} annotations, {@link Sort} parameters, or
+     *               <code>OrderBy</code> name pattern of the repository method to which
+     *               this pagination will be supplied.
      * @return a new instance of <code>KeysetPageable</code> with forward keyset pagination.
-     *         This method never returns <code>null</code>.
+     * This method never returns <code>null</code>.
      * @throws IllegalArgumentException if no keyset values are provided.
      */
     KeysetPageable afterKeyset(Object... keyset);
@@ -95,11 +96,11 @@ public interface Pageable {
      * starting after the specified keyset values.</p>
      *
      * @param keyset keyset values, the order and number of which must match the
-     *        {@link OrderBy} annotations, {@link Sort} parameters, or
-     *        <code>OrderBy</code> name pattern of the repository method to which
-     *        this pagination will be supplied.
+     *               {@link OrderBy} annotations, {@link Sort} parameters, or
+     *               <code>OrderBy</code> name pattern of the repository method to which
+     *               this pagination will be supplied.
      * @return a new instance of <code>KeysetPageable</code> with reverse keyset pagination.
-     *         This method never returns <code>null</code>.
+     * This method never returns <code>null</code>.
      * @throws IllegalArgumentException if no keyset values are provided.
      */
     KeysetPageable beforeKeyset(Object... keyset);
@@ -109,11 +110,11 @@ public interface Pageable {
      * starting after the specified keyset values.</p>
      *
      * @param keysetCursor cursor with keyset values, the order and number of which must match the
-     *        {@link OrderBy} annotations, {@link Sort} parameters, or
-     *        <code>OrderBy</code> name pattern of the repository method to which
-     *        this pagination will be supplied.
+     *                     {@link OrderBy} annotations, {@link Sort} parameters, or
+     *                     <code>OrderBy</code> name pattern of the repository method to which
+     *                     this pagination will be supplied.
      * @return a new instance of <code>KeysetPageable</code> with forward keyset pagination.
-     *         This method never returns <code>null</code>.
+     * This method never returns <code>null</code>.
      * @throws IllegalArgumentException if no keyset values are provided.
      */
     KeysetPageable afterKeysetCursor(Cursor keysetCursor);
@@ -123,11 +124,11 @@ public interface Pageable {
      * starting after the specified keyset values.</p>
      *
      * @param keysetCursor cursor with keyset values, the order and number of which must match the
-     *        {@link OrderBy} annotations, {@link Sort} parameters, or
-     *        <code>OrderBy</code> name pattern of the repository method to which
-     *        this pagination will be supplied.
+     *                     {@link OrderBy} annotations, {@link Sort} parameters, or
+     *                     <code>OrderBy</code> name pattern of the repository method to which
+     *                     this pagination will be supplied.
      * @return a new instance of <code>KeysetPageable</code> with reverse keyset pagination.
-     *         This method never returns <code>null</code>.
+     * This method never returns <code>null</code>.
      * @throws IllegalArgumentException if no keyset values are provided.
      */
     KeysetPageable beforeKeysetCursor(Cursor keysetCursor);
@@ -137,7 +138,7 @@ public interface Pageable {
      * pagination information.
      *
      * @return true if both instances are of the same class and
-     *         represent the same pagination information. Otherwise false.
+     * represent the same pagination information. Otherwise false.
      */
     @Override
     boolean equals(Object o);
@@ -209,8 +210,15 @@ public interface Pageable {
      */
     Pageable sortBy(Iterable<Sort> sorts);
 
-    Pageable asc(String name);
-    Pageable desc(String desc);
+    default Pageable asc(String name) {
+        Objects.requireNonNull(name, "name is required");
+        return this.sortBy(Sort.asc(name));
+    }
+
+    default Pageable desc(String name) {
+        Objects.requireNonNull(name, "name is required");
+        return this.sortBy(Sort.desc(name));
+    }
 
     /**
      * <p>Creates a new <code>Pageable</code> instance representing the same
@@ -229,7 +237,7 @@ public interface Pageable {
      * </ul>
      *
      * @param sorts sort criteria to use. This method can be invoked without parameters
-     *        to request a <code>Pageable</code> that does not specify sort criteria.
+     *              to request a <code>Pageable</code> that does not specify sort criteria.
      * @return a new instance of <code>Pageable</code>. This method never returns <code>null</code>.
      */
     Pageable sortBy(Sort... sorts);
