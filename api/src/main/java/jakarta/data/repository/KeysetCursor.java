@@ -62,8 +62,7 @@ class KeysetCursor implements Pageable.Cursor {
 
     @Override
     public String toString() {
-        return new StringBuilder(27).append("Cursor@").append(Integer.toHexString(hashCode()))
-                        .append(" with ").append(keyset.length).append(" keys")
-                        .toString();
+        return "Cursor@" + Integer.toHexString(hashCode()) +
+                " with " + keyset.length + " keys";
     }
 }
