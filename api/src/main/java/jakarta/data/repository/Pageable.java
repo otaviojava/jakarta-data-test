@@ -19,6 +19,7 @@ package jakarta.data.repository;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>This class represents pagination information.</p>
@@ -253,9 +254,15 @@ public interface Pageable {
      */
     Pageable sortBy(Sort... sorts);
 
-    Pageable asc(Sort... sorts);
+    default Pageable asc(String name) {
+        Objects.requireNonNull(name, "name is required");
+        return sortBy(Sort.asc(name));
+    }
 
-    Pageable desc(Sort... sorts);
+    default Pageable desc(String name) {
+        Objects.requireNonNull(name, "name is required");
+        return sortBy(Sort.desc(name));
+    }
 
     /**
      * The type of pagination, which can be offset pagination or
