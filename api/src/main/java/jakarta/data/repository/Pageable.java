@@ -253,6 +253,10 @@ public interface Pageable {
      */
     Pageable sortBy(Sort... sorts);
 
+    Pageable asc(Sort... sorts);
+
+    Pageable desc(Sort... sorts);
+
     /**
      * The type of pagination, which can be offset pagination or
      * keyset cursor pagination which includes a direction.
