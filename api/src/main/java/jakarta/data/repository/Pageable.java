@@ -254,11 +254,49 @@ public interface Pageable {
      */
     Pageable sortBy(Sort... sorts);
 
+    /**
+     * <p>Creates a new <code>Pageable</code> instance representing the same
+     * pagination information, except using the specified sort criteria.
+     * The order of precedence of sort criteria is the order of the
+     * {@link Iterable} that is supplied to this method.</p>
+     *
+     * <p>A repository method will fail if a sort criteria is specified on a
+     * <code>Pageable</code> in combination with any of:</p>
+     * <ul>
+     * <li>an <code>OrderBy</code> keyword</li>
+     * <li>an {@link OrderBy} annotation</li>
+     * <li>a {@link Query} annotation that contains an <code>ORDER BY</code> clause.</li>
+     * <li>{@link Sort} parameters that are specified independently of
+     *     <code>Pageable</code> on a repository method</li>
+     * </ul>
+     *
+     * @param name sort ascending criteria to use.
+     * @return a new instance of <code>Pageable</code>. This method never returns <code>null</code>.
+     */
     default Pageable asc(String name) {
         Objects.requireNonNull(name, "name is required");
         return sortBy(Sort.asc(name));
     }
 
+    /**
+     * <p>Creates a new <code>Pageable</code> instance representing the same
+     * pagination information, except using the specified sort criteria.
+     * The order of precedence of sort criteria is the order of the
+     * {@link Iterable} that is supplied to this method.</p>
+     *
+     * <p>A repository method will fail if a sort criteria is specified on a
+     * <code>Pageable</code> in combination with any of:</p>
+     * <ul>
+     * <li>an <code>OrderBy</code> keyword</li>
+     * <li>an {@link OrderBy} annotation</li>
+     * <li>a {@link Query} annotation that contains an <code>ORDER BY</code> clause.</li>
+     * <li>{@link Sort} parameters that are specified independently of
+     *     <code>Pageable</code> on a repository method</li>
+     * </ul>
+     *
+     * @param name sort descending criteria to use.
+     * @return a new instance of <code>Pageable</code>. This method never returns <code>null</code>.
+     */
     default Pageable desc(String name) {
         Objects.requireNonNull(name, "name is required");
         return sortBy(Sort.desc(name));
