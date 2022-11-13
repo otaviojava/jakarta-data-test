@@ -18,34 +18,37 @@
 package jakarta.data.exceptions;
 
 /**
- * A mapping exception is one thrown if an issue exists at runtime or build time in the data mapping.
+ * Indicates a connection-related failure that might be intermittent in nature.
+ * The operation might succeed if reattempted by the application.
+ * If the data access resource is enlisted in a transaction,
+ * the application must ensure that the transaction is rolled back before retrying the operation under a new transaction.
  */
-public class MappingException extends DataException {
+public class DataConnectionException extends DataException {
 
     /**
-     * Constructs a new MappingException exception with the specified detail message.
+     * Constructs a new DataConnectionException exception with the specified detail message.
      *
      * @param message the detail message.
      */
-    public MappingException(String message) {
+    public DataConnectionException(String message) {
         super(message);
     }
 
     /**
-     * Constructs a new MappingException exception with the specified detail message.
+     * Constructs a new DataConnectionException exception with the specified detail message.
      *
      * @param message the detail message.
      */
-    public MappingException(String message, Throwable cause) {
+    public DataConnectionException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * Constructs a new MappingException exception with the specified cause.
+     * Constructs a new DataConnectionException exception with the specified cause.
      *
      * @param cause the cause.
      */
-    public MappingException(Throwable cause) {
+    public DataConnectionException(Throwable cause) {
         super(cause);
     }
 }
