@@ -198,7 +198,14 @@ class PageableTest {
         });
     }
 
-    
+    @Test
+    public void shouldUseAscAlias() {
 
+    }
+
+    @Test
+    public void shouldUseDescAlias() {
+
+    }
 }
 
