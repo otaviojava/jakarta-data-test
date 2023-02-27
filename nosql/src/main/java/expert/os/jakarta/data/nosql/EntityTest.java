@@ -16,7 +16,7 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 
-package ee.jakarta.tck.data;
+package expert.os.jakarta.data.nosql;
 
 /**
  * Test sample
