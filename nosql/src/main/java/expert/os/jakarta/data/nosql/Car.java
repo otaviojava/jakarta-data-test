@@ -17,3 +17,23 @@
  */
 
 package expert.os.jakarta.data.nosql;
+
+import jakarta.nosql.Column;
+import jakarta.nosql.Entity;
+import jakarta.nosql.Id;
+
+@Entity
+public class Car {
+
+    @Id
+    private Long id;
+
+    @Column
+    private String plate;
+
+    @Column
+    private String model;
+
+    @Column
+    private int year;
+}
