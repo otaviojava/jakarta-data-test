@@ -32,7 +32,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Jakarta Data</name>
+    <name>Data-TCK</name>
     <description>Create the specification in Jakarta EE to help Jakarta EE developers create enterprise-grade applications applying Java® and data engine technologies. It helps them create scalable applications while maintaining low coupling with the underlying persistence technology.</description>
     <url>www.eclipse.org/ee4j/data</url>
     
