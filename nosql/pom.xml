@@ -35,13 +35,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>jakarta.data</groupId>
-        <artifactId>jakarta-data-parent</artifactId>
+        <groupId>expert.os.jakarta.data</groupId>
+        <artifactId>data-tck</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>jakarta-data-tck</artifactId>
-    <name>Jakarta Data TCK</name>
+    <artifactId>nosql</artifactId>
+    <name>nosql</name>
 
     <dependencies>
     </dependencies>
