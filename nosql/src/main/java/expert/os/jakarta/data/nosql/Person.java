@@ -10,7 +10,7 @@ public class Person {
 
 
     @Id
-    private String id;
+    private Long id;
 
 
     @Column
