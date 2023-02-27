@@ -18,7 +18,14 @@
 
 package expert.os.jakarta.data.nosql;
 
+import java.util.ServiceLoader;
 import java.util.function.Supplier;
 
 public interface GarageSupplier extends Supplier<Garage> {
+
+    static GarageSupplier supplier() {
+        return ServiceLoader.load(GarageSupplier.class)
+                .findFirst().orElseThrow(() -> new IllegalStateException(
+                "No GarageSupplier implementation found!"));
+    }
 }
