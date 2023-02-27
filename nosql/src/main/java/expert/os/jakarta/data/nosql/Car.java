@@ -36,4 +36,20 @@ public class Car {
 
     @Column
     private int year;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getPlate() {
+        return plate;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getYear() {
+        return year;
+    }
 }
