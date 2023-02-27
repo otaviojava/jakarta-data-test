@@ -44,21 +44,6 @@
         </license>
     </licenses>
 
-    <scm>
-        <connection>scm:git:git://github.com/jakartaee/data.git</connection>
-        <developerConnection>scm:git:ssh://github.com:jakartaee/data.git</developerConnection>
-        <url>https://github.com/jakartaee/data</url>
-    </scm>
-
-    <developers>
-        <developer>
-            <name>Jakarta Data Developers</name>
-            <email>data-dev@eclipse.org</email>
-            <organization>Eclipse JakartaData</organization>
-            <organizationUrl>https://accounts.eclipse.org/mailing-list/data-dev</organizationUrl>
-        </developer>
-    </developers>
-
     <properties>
         <apache.rat.version>0.12</apache.rat.version>
         <checkstyle.excludes></checkstyle.excludes>
@@ -387,8 +372,6 @@
     </distributionManagement>
 
   <modules>
-        <module>api</module>
-        <module>tck</module>
-        <module>spec</module>
+        <module>nosql</module>
    </modules>
 </project>
