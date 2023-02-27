@@ -19,6 +19,9 @@
 package expert.os.jakarta.data.nosql;
 
 import jakarta.data.repository.CrudRepository;
+import jakarta.data.repository.Repository;
 
+
+@Repository
 public interface CarRepository extends CrudRepository<Car, Long> {
 }
