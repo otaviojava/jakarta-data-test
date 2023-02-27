@@ -18,8 +18,17 @@
 package expert.os.jakarta.data.nosql;
 
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
 @DisplayName("This test case will check the common tests on the repository")
 public class GarageTest {
+
+    private GarageSupplier supplier = GarageSupplier.supplier();
+    private Garage garage;
+
+    @BeforeEach
+    public void setUp() {
+        this.garage = supplier.get();
+    }
 }
