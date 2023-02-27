@@ -23,5 +23,5 @@ import jakarta.data.repository.Repository;
 
 
 @Repository
-public interface CarRepository extends CrudRepository<Car, Long> {
+public interface Garage extends CrudRepository<Car, Long> {
 }
